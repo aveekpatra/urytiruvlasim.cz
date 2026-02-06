@@ -12,7 +12,6 @@ interface ScrollRevealProps {
   delay?: number;
   direction?: "up" | "down" | "left" | "right" | "none";
   duration?: number;
-  stagger?: number;
   once?: boolean;
 }
 
@@ -21,7 +20,7 @@ export function ScrollReveal({
   className = "",
   delay = 0,
   direction = "up",
-  duration = 0.8,
+  duration = 0.5,
   once = true,
 }: ScrollRevealProps) {
   const elementRef = useRef<HTMLDivElement>(null);
@@ -30,23 +29,22 @@ export function ScrollReveal({
     const element = elementRef.current;
     if (!element) return;
 
-    // Set initial state based on direction
     const initialState: gsap.TweenVars = {
       opacity: 0,
     };
 
     switch (direction) {
       case "up":
-        initialState.y = 60;
+        initialState.y = 24;
         break;
       case "down":
-        initialState.y = -60;
+        initialState.y = -24;
         break;
       case "left":
-        initialState.x = 60;
+        initialState.x = 24;
         break;
       case "right":
-        initialState.x = -60;
+        initialState.x = -24;
         break;
     }
 
@@ -58,11 +56,11 @@ export function ScrollReveal({
       y: 0,
       duration,
       delay,
-      ease: "power3.out",
+      ease: "power2.out",
+      force3D: true,
       scrollTrigger: {
         trigger: element,
-        start: "top 85%",
-        end: "bottom 15%",
+        start: "top 90%",
         toggleActions: once ? "play none none none" : "play reverse play reverse",
       },
     });
@@ -78,13 +76,12 @@ export function ScrollReveal({
   }, [delay, direction, duration, once]);
 
   return (
-    <div ref={elementRef} className={className}>
+    <div ref={elementRef} className={className} style={{ willChange: "transform, opacity" }}>
       {children}
     </div>
   );
 }
 
-// Stagger animation for lists/grids
 interface ScrollRevealGroupProps {
   children: React.ReactNode;
   className?: string;
@@ -96,9 +93,9 @@ interface ScrollRevealGroupProps {
 export function ScrollRevealGroup({
   children,
   className = "",
-  stagger = 0.1,
+  stagger = 0.05,
   direction = "up",
-  duration = 0.8,
+  duration = 0.4,
 }: ScrollRevealGroupProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -108,23 +105,22 @@ export function ScrollRevealGroup({
 
     const elements = container.children;
 
-    // Set initial state
     const initialState: gsap.TweenVars = {
       opacity: 0,
     };
 
     switch (direction) {
       case "up":
-        initialState.y = 50;
+        initialState.y = 20;
         break;
       case "down":
-        initialState.y = -50;
+        initialState.y = -20;
         break;
       case "left":
-        initialState.x = 50;
+        initialState.x = 20;
         break;
       case "right":
-        initialState.x = -50;
+        initialState.x = -20;
         break;
     }
 
@@ -136,10 +132,11 @@ export function ScrollRevealGroup({
       y: 0,
       duration,
       stagger,
-      ease: "power3.out",
+      ease: "power2.out",
+      force3D: true,
       scrollTrigger: {
         trigger: container,
-        start: "top 80%",
+        start: "top 88%",
         toggleActions: "play none none none",
       },
     });

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
@@ -15,22 +15,30 @@ const navLinks = [
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > 80) {
+        setIsScrolled(true);
+      } else if (currentScrollY < 40) {
+        setIsScrolled(false);
+      }
+      lastScrollY.current = currentScrollY;
     };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <>
-      {/* Top Bar */}
+    <header className="fixed top-0 left-0 right-0 z-50">
+      {/* Top Bar - fades out on scroll */}
       <div
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-500 hidden lg:block",
-          isScrolled ? "opacity-0 -translate-y-full" : "opacity-100"
+          "hidden lg:block overflow-hidden transition-all duration-300 ease-out",
+          isScrolled ? "max-h-0 opacity-0" : "max-h-12 opacity-100"
         )}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-2">
@@ -39,7 +47,7 @@ export function Navigation() {
             <div className="flex items-center gap-6">
               <a
                 href="mailto:info@ublanickychrytiru.cz"
-                className="text-white/70 hover:text-white transition-colors flex items-center gap-2"
+                className="text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-2"
               >
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -48,7 +56,7 @@ export function Navigation() {
               </a>
               <a
                 href="tel:+420123456789"
-                className="text-white/70 hover:text-white transition-colors flex items-center gap-2"
+                className="text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-2"
               >
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -63,7 +71,7 @@ export function Navigation() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/70 hover:text-white transition-colors"
+                className="text-white/70 hover:text-white transition-colors duration-200"
                 aria-label="Instagram"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -74,7 +82,7 @@ export function Navigation() {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/70 hover:text-white transition-colors"
+                className="text-white/70 hover:text-white transition-colors duration-200"
                 aria-label="Facebook"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -87,117 +95,117 @@ export function Navigation() {
       </div>
 
       {/* Main Navigation */}
-      <header
+      <div
         className={cn(
-          "fixed left-0 right-0 z-50 transition-all duration-500",
+          "transition-all duration-300 ease-out",
           isScrolled
-            ? "top-0 bg-[var(--color-cream)]/95 backdrop-blur-sm py-4 shadow-sm"
-            : "top-0 lg:top-9 bg-transparent py-6"
+            ? "bg-[var(--color-cream)]/95 backdrop-blur-sm shadow-sm py-4"
+            : "bg-transparent py-5"
         )}
       >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="relative z-10">
-            <div className="text-center">
-              <span
-                className={cn(
-                  "block text-[10px] tracking-[0.3em] uppercase transition-colors duration-300",
-                  isScrolled ? "text-[var(--color-text-muted)]" : "text-white/80"
-                )}
-              >
-                Restaurace
-              </span>
-              <span
-                className={cn(
-                  "block font-serif text-2xl lg:text-3xl italic transition-colors duration-300",
-                  isScrolled ? "text-[var(--color-charcoal)]" : "text-white"
-                )}
-              >
-                U Blanických rytířů
-              </span>
-            </div>
-          </Link>
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <Link href="/" className="relative z-10">
+              <div className="text-center">
+                <span
+                  className={cn(
+                    "block text-[10px] tracking-[0.3em] uppercase transition-colors duration-200",
+                    isScrolled ? "text-[var(--color-text-muted)]" : "text-white/80"
+                  )}
+                >
+                  Restaurace
+                </span>
+                <span
+                  className={cn(
+                    "block font-serif text-2xl lg:text-3xl italic transition-colors duration-200",
+                    isScrolled ? "text-[var(--color-charcoal)]" : "text-white"
+                  )}
+                >
+                  U Blanických rytířů
+                </span>
+              </div>
+            </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-10">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "text-[11px] tracking-[0.2em] uppercase font-medium transition-colors duration-300 hover:text-[var(--color-gold)]",
-                  isScrolled ? "text-[var(--color-text)]" : "text-white"
-                )}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center gap-10">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    "text-[11px] tracking-[0.2em] uppercase font-medium transition-colors duration-200 hover:text-[var(--color-gold)]",
+                    isScrolled ? "text-[var(--color-text)]" : "text-white"
+                  )}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
 
-          {/* Book Button */}
-          <Link
-            href="#rezervace"
-            className={cn(
-              "hidden lg:flex items-center justify-center px-6 py-3 text-[11px] tracking-[0.15em] uppercase font-medium border transition-all duration-300",
-              isScrolled
-                ? "border-[var(--color-charcoal)] text-[var(--color-charcoal)] hover:bg-[var(--color-charcoal)] hover:text-white"
-                : "border-white text-white hover:bg-white hover:text-[var(--color-charcoal)]"
-            )}
-          >
-            Rezervace
-          </Link>
+            {/* Book Button */}
+            <Link
+              href="#rezervace"
+              className={cn(
+                "hidden lg:flex items-center justify-center px-6 py-3 text-[11px] tracking-[0.15em] uppercase font-medium border transition-colors duration-200",
+                isScrolled
+                  ? "border-[var(--color-charcoal)] text-[var(--color-charcoal)] hover:bg-[var(--color-charcoal)] hover:text-white"
+                  : "border-white text-white hover:bg-white hover:text-[var(--color-charcoal)]"
+              )}
+            >
+              Rezervace
+            </Link>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={cn(
-              "lg:hidden relative z-10 p-2 transition-colors",
-              isScrolled || isMobileMenuOpen ? "text-[var(--color-charcoal)]" : "text-white"
-            )}
-            aria-label="Menu"
-          >
-            <div className="w-6 h-5 flex flex-col justify-between">
-              <span
-                className={cn(
-                  "w-full h-[1px] bg-current transition-transform duration-300",
-                  isMobileMenuOpen && "rotate-45 translate-y-2"
-                )}
-              />
-              <span
-                className={cn(
-                  "w-full h-[1px] bg-current transition-opacity duration-300",
-                  isMobileMenuOpen && "opacity-0"
-                )}
-              />
-              <span
-                className={cn(
-                  "w-full h-[1px] bg-current transition-transform duration-300",
-                  isMobileMenuOpen && "-rotate-45 -translate-y-2"
-                )}
-              />
-            </div>
-          </button>
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className={cn(
+                "lg:hidden relative z-10 p-2 transition-colors duration-200",
+                isScrolled || isMobileMenuOpen ? "text-[var(--color-charcoal)]" : "text-white"
+              )}
+              aria-label="Menu"
+            >
+              <div className="w-6 h-5 flex flex-col justify-between">
+                <span
+                  className={cn(
+                    "w-full h-px bg-current transition-transform duration-200 origin-center",
+                    isMobileMenuOpen && "rotate-45 translate-y-2"
+                  )}
+                />
+                <span
+                  className={cn(
+                    "w-full h-px bg-current transition-opacity duration-200",
+                    isMobileMenuOpen && "opacity-0"
+                  )}
+                />
+                <span
+                  className={cn(
+                    "w-full h-px bg-current transition-transform duration-200 origin-center",
+                    isMobileMenuOpen && "-rotate-45 -translate-y-2"
+                  )}
+                />
+              </div>
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Mobile Menu */}
       <div
         className={cn(
-          "lg:hidden fixed inset-0 bg-[var(--color-cream)] transition-all duration-500",
+          "lg:hidden fixed inset-0 bg-[var(--color-cream)] transition-opacity duration-300 ease-out",
           isMobileMenuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         )}
       >
         <nav className="flex flex-col items-center justify-center h-full gap-8">
-          {navLinks.map((link, index) => (
+          {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="text-2xl font-serif text-[var(--color-charcoal)] hover:text-[var(--color-gold)] transition-colors"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="text-2xl font-serif text-[var(--color-charcoal)] hover:text-[var(--color-gold)] transition-colors duration-200"
             >
               {link.label}
             </Link>
@@ -205,13 +213,12 @@ export function Navigation() {
           <Link
             href="#rezervace"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="mt-4 px-8 py-4 border border-[var(--color-charcoal)] text-[11px] tracking-[0.2em] uppercase font-medium hover:bg-[var(--color-charcoal)] hover:text-white transition-all"
+            className="mt-4 px-8 py-4 border border-[var(--color-charcoal)] text-[11px] tracking-[0.2em] uppercase font-medium hover:bg-[var(--color-charcoal)] hover:text-white transition-colors duration-200"
           >
             Rezervace
           </Link>
         </nav>
       </div>
     </header>
-    </>
   );
 }
