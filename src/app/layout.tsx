@@ -71,7 +71,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="cs">
+    <html lang="cs" className="overflow-x-hidden">
       <head>
         <script
           type="application/ld+json"
