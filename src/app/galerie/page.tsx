@@ -13,21 +13,21 @@ export const metadata: Metadata = {
 };
 
 const pivnicePhotos = [
-  { src: "/images/JHK09458-Enhanced-NR.jpg", alt: "Pivnice — slavnostní tabule u okna" },
-  { src: "/images/JHK09452-Enhanced-NR.jpg", alt: "Pivnice — dlouhý stůl pod klenbou" },
-  { src: "/images/JHK09486-Enhanced-NR.jpg", alt: "Pivnice — intimní stůl pro dva" },
-  { src: "/images/JHK09487.jpg", alt: "Pivnice — květiny a hosté v pozadí" },
-  { src: "/images/JHK09490.jpg", alt: "Pivnice — atmosféra s hosty" },
+  { src: "/images/JHK09458-Enhanced-NR.jpg", alt: "Restaurace — slavnostní tabule u okna" },
+  { src: "/images/JHK09452-Enhanced-NR.jpg", alt: "Restaurace — dlouhý stůl pod klenbou" },
+  { src: "/images/JHK09486-Enhanced-NR.jpg", alt: "Restaurace — intimní stůl pro dva" },
+  { src: "/images/JHK09487.jpg", alt: "Restaurace — květiny a hosté v pozadí" },
+  { src: "/images/JHK09490.jpg", alt: "Restaurace — atmosféra s hosty" },
   { src: "/images/JHK09493.jpg", alt: "Nástěnná malba vlašimského zámku" },
 ];
 
 const salonekPhotos = [
-  { src: "/images/JHK09411-Enhanced-NR.jpg", alt: "Salonek — interiér s klenbou a rostlinami" },
-  { src: "/images/JHK09408-Enhanced-NR-Edit.jpg", alt: "Salonek — lavice podél stěny" },
-  { src: "/images/JHK09424-Enhanced-NR.jpg", alt: "Salonek — pohled do hloubky sálu" },
-  { src: "/images/JHK09343.jpg", alt: "Salonek — pohled s obsluhou" },
-  { src: "/images/JHK09380.jpg", alt: "Salonek — bar s květinami a logem" },
-  { src: "/images/JHK09415-Enhanced-NR.jpg", alt: "Salonek — detail prostření" },
+  { src: "/images/JHK09411-Enhanced-NR.jpg", alt: "Pivnice — interiér s klenbou a rostlinami" },
+  { src: "/images/JHK09408-Enhanced-NR-Edit.jpg", alt: "Pivnice — lavice podél stěny" },
+  { src: "/images/JHK09424-Enhanced-NR.jpg", alt: "Pivnice — pohled do hloubky sálu" },
+  { src: "/images/JHK09343.jpg", alt: "Pivnice — pohled s obsluhou" },
+  { src: "/images/JHK09380.jpg", alt: "Pivnice — bar s květinami a logem" },
+  { src: "/images/JHK09415-Enhanced-NR.jpg", alt: "Pivnice — detail prostření" },
 ];
 
 const terasaPhotos = [
@@ -97,7 +97,7 @@ export default function GaleriePage() {
         </div>
       </section>
 
-      {/* Pivnice */}
+      {/* Restaurace */}
       <section className="bg-[var(--color-cream)] py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <FadeIn>
@@ -106,7 +106,7 @@ export default function GaleriePage() {
               Hlavní prostor
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl text-[var(--color-charcoal)] mb-4">
-              Pivnice
+              Restaurace
             </h2>
             <div className="w-12 h-px bg-[var(--color-gold)] mx-auto mb-6" />
             <p className="text-[var(--color-text-muted)] text-sm max-w-lg mx-auto">
@@ -119,7 +119,7 @@ export default function GaleriePage() {
         </div>
       </section>
 
-      {/* Salonek */}
+      {/* Pivnice */}
       <section className="bg-[var(--color-ivory)] py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <FadeIn>
@@ -128,7 +128,7 @@ export default function GaleriePage() {
               Nekuřácký salonek
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl text-[var(--color-charcoal)] mb-4">
-              Salonek
+              Pivnice
             </h2>
             <div className="w-12 h-px bg-[var(--color-gold)] mx-auto mb-6" />
             <p className="text-[var(--color-text-muted)] text-sm max-w-lg mx-auto">

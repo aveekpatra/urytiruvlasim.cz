@@ -95,7 +95,7 @@ const features = [
 const galleryImages = [
   {
     src: "/images/JHK09452-Enhanced-NR.jpg",
-    alt: "Salonek — dlouhý stůl pod klenbou",
+    alt: "Restaurace — dlouhý stůl pod klenbou",
   },
   {
     src: "/images/JHK09524.jpg",
@@ -107,7 +107,7 @@ const galleryImages = [
   },
   {
     src: "/images/JHK09490.jpg",
-    alt: "Salonek — hosté při oslavě",
+    alt: "Restaurace — hosté při oslavě",
   },
   {
     src: "/images/JHK09378.jpg",
@@ -192,7 +192,7 @@ export default function SvatbyPage() {
                 <div className="relative aspect-[4/5] overflow-hidden">
                   <AnimatedImage
                     src="/images/JHK09458-Enhanced-NR.jpg"
-                    alt="Salonek — slavnostní tabule"
+                    alt="Restaurace — slavnostní tabule"
                     fill
                     className="object-cover"
                   />

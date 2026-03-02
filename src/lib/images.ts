@@ -19,10 +19,10 @@ export const IMAGES = {
   wedding: {
     background: "/images/JHK09458-Enhanced-NR.jpg",
     gallery: [
-      "/images/JHK09452-Enhanced-NR.jpg", // Pivnice — reserved long table
+      "/images/JHK09452-Enhanced-NR.jpg", // Restaurace — reserved long table
       "/images/JHK09524.jpg", // Terrace — wide shot
-      "/images/JHK09458-Enhanced-NR.jpg", // Pivnice — reserved table by window
-      "/images/JHK09408-Enhanced-NR-Edit.jpg", // Salonek — banquette seating
+      "/images/JHK09458-Enhanced-NR.jpg", // Restaurace — reserved table by window
+      "/images/JHK09408-Enhanced-NR-Edit.jpg", // Pivnice — banquette seating
     ],
   },
 
@@ -30,12 +30,12 @@ export const IMAGES = {
   gallery: [
     {
       src: "/images/JHK09411-Enhanced-NR.jpg",
-      alt: "Salonek — interiér",
+      alt: "Pivnice — interiér",
       span: "col-span-2 row-span-2",
     },
     {
       src: "/images/JHK09458-Enhanced-NR.jpg",
-      alt: "Pivnice — slavnostní tabule",
+      alt: "Restaurace — slavnostní tabule",
       span: "col-span-1",
     },
     {
