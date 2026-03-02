@@ -28,8 +28,8 @@ const spaces = [
     image: "/images/JHK09524.jpg",
   },
   {
-    name: "Rytířský salonek",
-    capacity: "10–18 hostů",
+    name: "Pivnice",
+    capacity: "20–40 hostů",
     description:
       "Komorní nekuřácký prostor pro menší oslavy, zásnuby, narozeniny nebo intimní posezení v naprostém soukromí.",
     image: "/images/JHK09424-Enhanced-NR.jpg",
