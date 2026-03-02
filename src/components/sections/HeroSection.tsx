@@ -45,7 +45,7 @@ export function HeroSection() {
       </div>
 
       {/* Bottom Booking Bar */}
-      <SlideUp delay={1.0} className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm">
+      <SlideUp delay={1.0} className="absolute bottom-0 left-0 right-0 z-20 bg-white/95 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-5">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-12">
             <div className="hidden sm:block text-center sm:text-left">
@@ -61,13 +61,13 @@ export function HeroSection() {
 
             <div className="flex gap-3 sm:gap-4">
               <Link
-                href="#menu"
+                href="/menu"
                 className="px-6 sm:px-8 py-3 bg-[var(--color-charcoal)] text-white text-[11px] tracking-[0.15em] uppercase font-medium hover:bg-[var(--color-gold)] transition-colors duration-300"
               >
                 Menu
               </Link>
               <Link
-                href="tel:+420732878238"
+                href="/rezervace"
                 className="px-6 sm:px-8 py-3 border border-[var(--color-charcoal)] text-[var(--color-charcoal)] text-[11px] tracking-[0.15em] uppercase font-medium hover:bg-[var(--color-charcoal)] hover:text-white transition-all duration-300"
               >
                 Rezervovat stůl

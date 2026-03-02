@@ -61,7 +61,7 @@ export function WeddingsSection() {
             {/* CTA */}
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                href="#kontakt"
+                href="/kontakt"
                 className="inline-block px-10 py-4 bg-[var(--color-gold)] text-[var(--color-charcoal)] text-[11px] tracking-[0.2em] uppercase font-semibold hover:bg-white transition-colors duration-300 text-center"
               >
                 Nezávazná poptávka

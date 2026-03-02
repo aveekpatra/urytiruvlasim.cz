@@ -6,7 +6,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { label: "Restaurace", href: "#restaurace", homeOnly: true },
+  { label: "Domů", href: "/", homeOnly: false },
   { label: "Menu", href: "/menu", homeOnly: false },
   { label: "Svatby", href: "/svatby", homeOnly: false },
   { label: "Galerie", href: "/galerie", homeOnly: false },
