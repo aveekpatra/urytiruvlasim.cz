@@ -111,22 +111,22 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-6">
               <a
-                href="https://facebook.com/ublanickychrytiru"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/40 hover:text-[var(--color-gold)] transition-colors"
-                aria-label="Facebook"
-              >
-                <HugeiconsIcon icon={Facebook01Icon} size={20} strokeWidth={1.5} />
-              </a>
-              <a
                 href="https://www.instagram.com/restaurace_u_blanickych_rytiru"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/40 hover:text-[var(--color-gold)] transition-colors"
-                aria-label="Instagram"
+                className="flex items-center gap-2 text-white/40 hover:text-[var(--color-gold)] transition-colors text-xs"
               >
-                <HugeiconsIcon icon={InstagramIcon} size={20} strokeWidth={1.5} />
+                <HugeiconsIcon icon={InstagramIcon} size={18} strokeWidth={1.5} />
+                Instagram
+              </a>
+              <a
+                href="https://facebook.com/ublanickychrytiru"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-white/40 hover:text-[var(--color-gold)] transition-colors text-xs"
+              >
+                <HugeiconsIcon icon={Facebook01Icon} size={18} strokeWidth={1.5} />
+                Facebook
               </a>
             </div>
           </div>
