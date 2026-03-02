@@ -30,7 +30,7 @@ export default function KontaktPage() {
 
         <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center">
           <FadeIn delay={0.2}>
-            <span className="text-[var(--color-gold)] text-[10px] tracking-[0.4em] uppercase mb-6 block">
+            <span className="text-white/60 text-[10px] tracking-[0.4em] uppercase mb-6 block">
               Zámecká restaurace
             </span>
           </FadeIn>

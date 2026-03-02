@@ -161,7 +161,7 @@ export function Navigation() {
 
             {/* Book Button */}
             <Link
-              href="#rezervace"
+              href="/rezervace"
               className={cn(
                 "hidden lg:flex items-center justify-center px-6 py-3 text-[11px] tracking-[0.15em] uppercase font-medium border transition-colors duration-200",
                 isScrolled
@@ -227,7 +227,7 @@ export function Navigation() {
             </Link>
           ))}
           <Link
-            href="#rezervace"
+            href="/rezervace"
             onClick={() => setIsMobileMenuOpen(false)}
             className="mt-4 px-8 py-4 border border-[var(--color-charcoal)] text-[11px] tracking-[0.2em] uppercase font-medium hover:bg-[var(--color-charcoal)] hover:text-white transition-colors duration-200"
           >
