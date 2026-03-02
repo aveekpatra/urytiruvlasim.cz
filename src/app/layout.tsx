@@ -78,7 +78,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${inter.variable} ${playfair.variable} antialiased`}>
+      <body className={`${inter.variable} ${playfair.variable} antialiased overflow-x-hidden`}>
         <MotionProvider>{children}</MotionProvider>
       </body>
     </html>

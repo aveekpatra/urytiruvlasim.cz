@@ -8,7 +8,7 @@ import { Clock01Icon, Restaurant01Icon, Calendar03Icon } from "@hugeicons/core-f
 
 export function HeroSection() {
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section className="relative h-dvh w-full overflow-hidden">
       {/* Video Background */}
       <video
         autoPlay
