@@ -5,6 +5,8 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/sections/Footer";
 import { RESTAURANT_INFO } from "@/lib/constants";
 import { FadeIn, SlideIn, AnimatedImage, StaggerContainer, StaggerItem } from "@/components/motion";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Facebook01Icon, InstagramIcon, Location01Icon, CallIcon, Mail01Icon, Clock01Icon, ParkingAreaSquareIcon, MapsLocation01Icon } from "@hugeicons/core-free-icons";
 
 export const metadata: Metadata = {
   title: "Kontakt | U Blanických rytířů",
@@ -62,7 +64,8 @@ export default function KontaktPage() {
               {/* Address */}
               <div className="space-y-8">
                 <div>
-                  <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-3">
+                  <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-3 flex items-center gap-2">
+                    <HugeiconsIcon icon={Location01Icon} size={14} strokeWidth={1.5} />
                     Adresa
                   </h3>
                   <p className="text-[var(--color-text)] leading-relaxed">
@@ -79,7 +82,8 @@ export default function KontaktPage() {
 
                 {/* Phone */}
                 <div>
-                  <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-3">
+                  <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-3 flex items-center gap-2">
+                    <HugeiconsIcon icon={CallIcon} size={14} strokeWidth={1.5} />
                     Telefon
                   </h3>
                   <a
@@ -92,7 +96,8 @@ export default function KontaktPage() {
 
                 {/* Email */}
                 <div>
-                  <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-3">
+                  <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-3 flex items-center gap-2">
+                    <HugeiconsIcon icon={Mail01Icon} size={14} strokeWidth={1.5} />
                     E-mail
                   </h3>
                   <a
@@ -108,21 +113,26 @@ export default function KontaktPage() {
                   <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-3">
                     Sociální sítě
                   </h3>
-                  <a
-                    href="https://facebook.com/ublanickychrytiru"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-[var(--color-text)] hover:text-[var(--color-gold-dark)] transition-colors"
-                  >
-                    <svg
-                      className="w-5 h-5"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
+                  <div className="flex items-center gap-4">
+                    <a
+                      href="https://facebook.com/ublanickychrytiru"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-[var(--color-text)] hover:text-[var(--color-gold-dark)] transition-colors"
                     >
-                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                    </svg>
-                    Facebook
-                  </a>
+                      <HugeiconsIcon icon={Facebook01Icon} size={20} strokeWidth={1.5} />
+                      Facebook
+                    </a>
+                    <a
+                      href="https://www.instagram.com/restaurace_u_blanickych_rytiru"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-[var(--color-text)] hover:text-[var(--color-gold-dark)] transition-colors"
+                    >
+                      <HugeiconsIcon icon={InstagramIcon} size={20} strokeWidth={1.5} />
+                      Instagram
+                    </a>
+                  </div>
                 </div>
               </div>
             </SlideIn>
@@ -152,7 +162,8 @@ export default function KontaktPage() {
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
             {/* Opening Hours */}
             <StaggerItem>
-              <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-6">
+              <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-6 flex items-center gap-2">
+                <HugeiconsIcon icon={Clock01Icon} size={14} strokeWidth={1.5} />
                 Otevírací doba — Restaurace
               </h3>
               <div className="space-y-3">
@@ -180,7 +191,8 @@ export default function KontaktPage() {
 
             {/* Parking */}
             <StaggerItem>
-              <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-6">
+              <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-6 flex items-center gap-2">
+                <HugeiconsIcon icon={ParkingAreaSquareIcon} size={14} strokeWidth={1.5} />
                 Parkování
               </h3>
               <p className="text-[var(--color-text-muted)] text-sm leading-relaxed">
@@ -191,7 +203,8 @@ export default function KontaktPage() {
 
             {/* Getting There */}
             <StaggerItem>
-              <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-6">
+              <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-6 flex items-center gap-2">
+                <HugeiconsIcon icon={MapsLocation01Icon} size={14} strokeWidth={1.5} />
                 Jak se k nám dostanete
               </h3>
               <p className="text-[var(--color-text-muted)] text-sm leading-relaxed">
@@ -222,14 +235,16 @@ export default function KontaktPage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href={`tel:${RESTAURANT_INFO.phone.replace(/\s/g, "")}`}
-              className="px-10 py-4 bg-[var(--color-gold)] text-[var(--color-charcoal)] text-[11px] tracking-[0.2em] uppercase font-semibold hover:bg-white transition-colors duration-300"
+              className="inline-flex items-center gap-2 px-10 py-4 bg-[var(--color-gold)] text-[var(--color-charcoal)] text-[11px] tracking-[0.2em] uppercase font-semibold hover:bg-white transition-colors duration-300"
             >
+              <HugeiconsIcon icon={CallIcon} size={14} strokeWidth={1.5} />
               {RESTAURANT_INFO.phone}
             </Link>
             <Link
               href={`mailto:${RESTAURANT_INFO.email}`}
-              className="px-10 py-4 border border-white/30 text-white text-[11px] tracking-[0.2em] uppercase font-medium hover:bg-white hover:text-[var(--color-charcoal)] transition-all duration-300"
+              className="inline-flex items-center gap-2 px-10 py-4 border border-white/30 text-white text-[11px] tracking-[0.2em] uppercase font-medium hover:bg-white hover:text-[var(--color-charcoal)] transition-all duration-300"
             >
+              <HugeiconsIcon icon={Mail01Icon} size={14} strokeWidth={1.5} />
               Napsat e-mail
             </Link>
           </div>

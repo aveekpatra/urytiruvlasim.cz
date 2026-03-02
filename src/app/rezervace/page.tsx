@@ -6,6 +6,8 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/sections/Footer";
 import { RESTAURANT_INFO } from "@/lib/constants";
 import { FadeIn, SlideIn, AnimatedImage } from "@/components/motion";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Tick01Icon, CallIcon } from "@hugeicons/core-free-icons";
 
 const timeSlots = [
   "11:00", "11:30", "12:00", "12:30", "13:00", "13:30",
@@ -80,9 +82,7 @@ export default function ReservacePage() {
                 {submitted ? (
                   <div className="text-center py-12">
                     <div className="w-16 h-16 mx-auto mb-6 rounded-full border-2 border-[var(--color-gold)] flex items-center justify-center">
-                      <svg className="w-8 h-8 text-[var(--color-gold)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                      </svg>
+                      <HugeiconsIcon icon={Tick01Icon} size={32} color="var(--color-gold)" strokeWidth={1.5} />
                     </div>
                     <h2 className="font-serif text-2xl sm:text-3xl text-[var(--color-charcoal)] mb-4">
                       Děkujeme za váš zájem
@@ -354,9 +354,7 @@ export default function ReservacePage() {
                     href={`tel:${RESTAURANT_INFO.phone.replace(/\s/g, "")}`}
                     className="inline-flex items-center gap-2 text-[var(--color-charcoal)] text-lg font-medium hover:text-[var(--color-gold-dark)] transition-colors duration-200"
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
+                    <HugeiconsIcon icon={CallIcon} size={16} strokeWidth={1.5} />
                     {RESTAURANT_INFO.phone}
                   </a>
                 </div>

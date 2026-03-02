@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { IMAGES } from "@/lib/images";
 import { FadeIn, SlideUp } from "@/components/motion";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Clock01Icon, Restaurant01Icon, Calendar03Icon } from "@hugeicons/core-free-icons";
 
 export function HeroSection() {
   return (
@@ -18,7 +20,7 @@ export function HeroSection() {
       />
 
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-black/60" />
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-end pb-32 lg:pb-40 px-6">
@@ -48,8 +50,9 @@ export function HeroSection() {
       <SlideUp delay={1.0} className="absolute bottom-0 left-0 right-0 z-20 bg-white/95 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-5">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-12">
-            <div className="hidden sm:block text-center sm:text-left">
-              <span className="text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)]">
+            <div className="hidden sm:block text-left">
+              <span className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)]">
+                <HugeiconsIcon icon={Clock01Icon} size={14} strokeWidth={1.5} className="text-[var(--color-gold-dark)]" />
                 Otevírací doba
               </span>
               <p className="text-[var(--color-charcoal)] font-medium">
@@ -62,14 +65,16 @@ export function HeroSection() {
             <div className="flex gap-3 sm:gap-4">
               <Link
                 href="/menu"
-                className="px-6 sm:px-8 py-3 bg-[var(--color-charcoal)] text-white text-[11px] tracking-[0.15em] uppercase font-medium hover:bg-[var(--color-gold)] transition-colors duration-300"
+                className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 bg-[var(--color-charcoal)] text-white text-[11px] tracking-[0.15em] uppercase font-medium hover:bg-[var(--color-gold)] transition-colors duration-300"
               >
+                <HugeiconsIcon icon={Restaurant01Icon} size={14} strokeWidth={1.5} />
                 Menu
               </Link>
               <Link
                 href="/rezervace"
-                className="px-6 sm:px-8 py-3 border border-[var(--color-charcoal)] text-[var(--color-charcoal)] text-[11px] tracking-[0.15em] uppercase font-medium hover:bg-[var(--color-charcoal)] hover:text-white transition-all duration-300"
+                className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 border border-[var(--color-charcoal)] text-[var(--color-charcoal)] text-[11px] tracking-[0.15em] uppercase font-medium hover:bg-[var(--color-charcoal)] hover:text-white transition-all duration-300"
               >
+                <HugeiconsIcon icon={Calendar03Icon} size={14} strokeWidth={1.5} />
                 Rezervovat stůl
               </Link>
             </div>

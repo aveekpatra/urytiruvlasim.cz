@@ -5,6 +5,8 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/sections/Footer";
 import { IMAGES } from "@/lib/images";
 import { FadeIn, SlideIn, StaggerContainer, StaggerItem, AnimatedImage } from "@/components/motion";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { CallIcon, Mail01Icon } from "@hugeicons/core-free-icons";
 
 export const metadata: Metadata = {
   title: "Svatby & Oslavy | U Blanických rytířů",
@@ -392,14 +394,16 @@ export default function SvatbyPage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="tel:+420732878238"
-              className="px-10 py-4 bg-[var(--color-gold)] text-[var(--color-charcoal)] text-[11px] tracking-[0.2em] uppercase font-semibold hover:bg-white transition-colors duration-300"
+              className="inline-flex items-center gap-2 px-10 py-4 bg-[var(--color-gold)] text-[var(--color-charcoal)] text-[11px] tracking-[0.2em] uppercase font-semibold hover:bg-white transition-colors duration-300"
             >
+              <HugeiconsIcon icon={CallIcon} size={14} strokeWidth={1.5} />
               +420 732 878 238
             </Link>
             <Link
               href="mailto:ublanickychrytiru@seznam.cz?subject=Poptávka%20pronájmu%20prostor"
-              className="px-10 py-4 border border-white/40 text-white text-[11px] tracking-[0.2em] uppercase font-medium hover:bg-white hover:text-[var(--color-charcoal)] transition-all duration-300"
+              className="inline-flex items-center gap-2 px-10 py-4 border border-white/40 text-white text-[11px] tracking-[0.2em] uppercase font-medium hover:bg-white hover:text-[var(--color-charcoal)] transition-all duration-300"
             >
+              <HugeiconsIcon icon={Mail01Icon} size={14} strokeWidth={1.5} />
               Napsat e-mail
             </Link>
           </div>

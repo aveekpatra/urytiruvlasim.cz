@@ -2,6 +2,8 @@
 
 import { IMAGES } from "@/lib/images";
 import { SlideIn, FadeIn, AnimatedImage } from "@/components/motion";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Tree01Icon, CastleIcon } from "@hugeicons/core-free-icons";
 
 export function AboutSection() {
   return (
@@ -32,15 +34,21 @@ export function AboutSection() {
               </p>
             </div>
             <FadeIn delay={0.3}>
-              <div className="mt-12 flex flex-col sm:flex-row gap-8">
+              <div className="mt-12 flex flex-col sm:flex-row gap-10">
                 <div>
-                  <span className="block font-serif text-4xl text-[var(--color-gold)]">75</span>
+                  <span className="flex items-center gap-2 font-serif text-4xl text-[var(--color-gold)]">
+                    <HugeiconsIcon icon={Tree01Icon} size={36} strokeWidth={1.5} />
+                    75
+                  </span>
                   <span className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-text-muted)]">
                     Hektarů zámeckého parku
                   </span>
                 </div>
                 <div>
-                  <span className="block font-serif text-4xl text-[var(--color-gold)]">1850</span>
+                  <span className="flex items-center gap-2 font-serif text-4xl text-[var(--color-gold)]">
+                    <HugeiconsIcon icon={CastleIcon} size={36} strokeWidth={1.5} />
+                    1850
+                  </span>
                   <span className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-text-muted)]">
                     Historie zámku
                   </span>

@@ -29,8 +29,8 @@ export const IMAGES = {
   // Home page gallery grid
   gallery: [
     {
-      src: "/images/JHK09411-Enhanced-NR.jpg",
-      alt: "Pivnice — interiér",
+      src: "/images/castle-2.jpeg",
+      alt: "Zámek Vlašim — panorama",
       span: "col-span-2 row-span-2",
     },
     {
