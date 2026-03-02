@@ -77,19 +77,19 @@ export function Navigation() {
                 href="https://www.instagram.com/restaurace_u_blanickych_rytiru"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/70 hover:text-white transition-colors duration-200"
-                aria-label="Instagram"
+                className="flex items-center gap-1.5 text-white/70 hover:text-white transition-colors duration-200"
               >
-                <HugeiconsIcon icon={InstagramIcon} size={16} strokeWidth={1.5} />
+                <HugeiconsIcon icon={InstagramIcon} size={14} strokeWidth={1.5} />
+                Instagram
               </a>
               <a
                 href="https://facebook.com/ublanickychrytiru"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/70 hover:text-white transition-colors duration-200"
-                aria-label="Facebook"
+                className="flex items-center gap-1.5 text-white/70 hover:text-white transition-colors duration-200"
               >
-                <HugeiconsIcon icon={Facebook01Icon} size={16} strokeWidth={1.5} />
+                <HugeiconsIcon icon={Facebook01Icon} size={14} strokeWidth={1.5} />
+                Facebook
               </a>
             </div>
           </div>
