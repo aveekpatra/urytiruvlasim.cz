@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { IMAGES } from "@/lib/images";
-import { FadeIn, SlideUp } from "@/components/motion";
+import { FadeIn } from "@/components/motion";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Clock01Icon, Restaurant01Icon, Calendar03Icon } from "@hugeicons/core-free-icons";
 
@@ -47,7 +47,7 @@ export function HeroSection() {
       </div>
 
       {/* Bottom Booking Bar */}
-      <SlideUp delay={1.0} className="absolute bottom-0 left-0 right-0 z-20 bg-white/95 backdrop-blur-sm">
+      <div className="absolute bottom-0 left-0 right-0 z-20 bg-white/95 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-5">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-12">
             <div className="hidden sm:block text-left">
@@ -80,7 +80,7 @@ export function HeroSection() {
             </div>
           </div>
         </div>
-      </SlideUp>
+      </div>
     </section>
   );
 }
