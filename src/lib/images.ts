@@ -6,7 +6,7 @@
 export const IMAGES = {
   // Hero Section - Local video
   hero: {
-    video: "/bg.mov",
+    video: "/bg.mp4",
     fallback: "/images/JHK09411-Enhanced-NR.jpg",
   },
 
