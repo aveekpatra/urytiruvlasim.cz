@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/sections/Footer";
+import { FadeIn, AnimatedImage } from "@/components/motion";
 
 export const metadata: Metadata = {
   title: "Jídelní lístek | U Blanických rytířů",
@@ -267,7 +268,7 @@ export default function MenuPage() {
 
       {/* Hero Banner */}
       <section className="relative h-[50vh] min-h-[400px] w-full overflow-hidden">
-        <Image
+        <AnimatedImage
           src="/images/menu/JHK09462.jpg"
           alt="Jídelní lístek U Blanických rytířů"
           fill
@@ -277,13 +278,19 @@ export default function MenuPage() {
         <div className="absolute inset-0 bg-black/60" />
 
         <div className="relative z-10 h-full flex flex-col items-center justify-center px-6">
-          <span className="text-white/60 text-[10px] tracking-[0.4em] uppercase mb-6">
-            Zámecká restaurace
-          </span>
-          <h1 className="font-serif text-white text-4xl sm:text-5xl lg:text-6xl italic mb-6">
-            Jídelní lístek
-          </h1>
-          <div className="w-16 h-px bg-[var(--color-gold)]" />
+          <FadeIn delay={0.2}>
+            <span className="text-white/60 text-[10px] tracking-[0.4em] uppercase mb-6 block">
+              Zámecká restaurace
+            </span>
+          </FadeIn>
+          <FadeIn delay={0.4}>
+            <h1 className="font-serif text-white text-4xl sm:text-5xl lg:text-6xl italic mb-6">
+              Jídelní lístek
+            </h1>
+          </FadeIn>
+          <FadeIn delay={0.6}>
+            <div className="w-16 h-px bg-[var(--color-gold)]" />
+          </FadeIn>
         </div>
       </section>
 
@@ -291,15 +298,18 @@ export default function MenuPage() {
       <section className="bg-[var(--color-ivory)] py-20 lg:py-32">
         <div className="max-w-3xl mx-auto px-6 lg:px-12">
           {/* Introduction */}
-          <div className="text-center mb-16 lg:mb-24">
-            <p className="text-[var(--color-text-muted)] text-sm leading-relaxed max-w-xl mx-auto">
-              Naše kuchyně staví na poctivých surovinách od lokálních dodavatelů
-              z Podblanicka. Každý pokrm připravujeme s úctou k české
-              gastronomické tradici.
-            </p>
-          </div>
+          <FadeIn>
+            <div className="text-center mb-16 lg:mb-24">
+              <p className="text-[var(--color-text-muted)] text-sm leading-relaxed max-w-xl mx-auto">
+                Naše kuchyně staví na poctivých surovinách od lokálních dodavatelů
+                z Podblanicka. Každý pokrm připravujeme s úctou k české
+                gastronomické tradici.
+              </p>
+            </div>
+          </FadeIn>
 
           {/* Menu Card */}
+          <FadeIn>
           <div
             className="bg-[#FFFEF9] px-6 py-12 sm:px-12 sm:py-16 lg:px-16 lg:py-20 shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-[var(--color-stone)]/30"
             style={{
@@ -379,8 +389,10 @@ export default function MenuPage() {
               </p>
             </div>
           </div>
+          </FadeIn>
 
           {/* CTA Section */}
+          <FadeIn delay={0.2}>
           <div className="mt-16 lg:mt-20 text-center">
             <p className="text-[var(--color-text-muted)] text-sm mb-8">
               Chcete rezervovat stůl?
@@ -400,6 +412,7 @@ export default function MenuPage() {
               </Link>
             </div>
           </div>
+          </FadeIn>
         </div>
       </section>
 

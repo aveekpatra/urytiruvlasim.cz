@@ -1,5 +1,7 @@
-import Image from "next/image";
+"use client";
+
 import { IMAGES } from "@/lib/images";
+import { SlideIn, FadeIn, AnimatedImage } from "@/components/motion";
 
 export function AboutSection() {
   return (
@@ -7,7 +9,7 @@ export function AboutSection() {
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* Text Content */}
-          <div className="order-2 lg:order-1">
+          <SlideIn direction="left" className="order-2 lg:order-1">
             <span className="text-[11px] tracking-[0.3em] uppercase text-[var(--color-gold)] mb-6 block">
               O restauraci
             </span>
@@ -29,26 +31,28 @@ export function AboutSection() {
                 pokrmu — to je filozofie, která nás definuje.
               </p>
             </div>
-            <div className="mt-12 flex flex-col sm:flex-row gap-8">
-              <div>
-                <span className="block font-serif text-4xl text-[var(--color-gold)]">75</span>
-                <span className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-text-muted)]">
-                  Hektarů zámeckého parku
-                </span>
+            <FadeIn delay={0.3}>
+              <div className="mt-12 flex flex-col sm:flex-row gap-8">
+                <div>
+                  <span className="block font-serif text-4xl text-[var(--color-gold)]">75</span>
+                  <span className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-text-muted)]">
+                    Hektarů zámeckého parku
+                  </span>
+                </div>
+                <div>
+                  <span className="block font-serif text-4xl text-[var(--color-gold)]">1850</span>
+                  <span className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-text-muted)]">
+                    Historie zámku
+                  </span>
+                </div>
               </div>
-              <div>
-                <span className="block font-serif text-4xl text-[var(--color-gold)]">1850</span>
-                <span className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-text-muted)]">
-                  Historie zámku
-                </span>
-              </div>
-            </div>
-          </div>
+            </FadeIn>
+          </SlideIn>
 
           {/* Image */}
-          <div className="order-1 lg:order-2 relative">
+          <SlideIn direction="right" className="order-1 lg:order-2 relative">
             <div className="relative aspect-4/5 overflow-hidden">
-              <Image
+              <AnimatedImage
                 src={IMAGES.about.interior}
                 alt="Interiér restaurace"
                 fill
@@ -58,7 +62,7 @@ export function AboutSection() {
             </div>
             {/* Decorative frame */}
             <div className="absolute -bottom-6 -right-6 w-full h-full border border-[var(--color-gold)]/30 -z-10" />
-          </div>
+          </SlideIn>
         </div>
       </div>
     </section>

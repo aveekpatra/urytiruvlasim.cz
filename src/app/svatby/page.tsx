@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/sections/Footer";
 import { IMAGES } from "@/lib/images";
+import { FadeIn, SlideIn, StaggerContainer, StaggerItem, AnimatedImage } from "@/components/motion";
 
 export const metadata: Metadata = {
   title: "Svatby & Oslavy | U Blanických rytířů",
@@ -125,7 +126,7 @@ export default function SvatbyPage() {
 
       {/* Hero Banner */}
       <section className="relative h-[60vh] min-h-[500px] w-full overflow-hidden">
-        <Image
+        <AnimatedImage
           src={IMAGES.wedding.background}
           alt="Oslavy v zámeckém prostředí"
           fill
@@ -135,16 +136,24 @@ export default function SvatbyPage() {
         <div className="absolute inset-0 bg-black/50" />
 
         <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center">
-          <span className="text-[var(--color-gold)] text-[10px] tracking-[0.4em] uppercase mb-6">
-            Zámecká restaurace
-          </span>
-          <h1 className="font-serif text-white text-4xl sm:text-5xl lg:text-6xl xl:text-7xl italic mb-6">
-            Svatby & Oslavy
-          </h1>
-          <div className="w-16 h-px bg-[var(--color-gold)] mb-6" />
-          <p className="text-white/70 text-sm sm:text-base max-w-lg tracking-wide">
-            Pronájem prostor pro vaši akci v historickém zámku
-          </p>
+          <FadeIn delay={0.2}>
+            <span className="text-[var(--color-gold)] text-[10px] tracking-[0.4em] uppercase mb-6 block">
+              Zámecká restaurace
+            </span>
+          </FadeIn>
+          <FadeIn delay={0.4}>
+            <h1 className="font-serif text-white text-4xl sm:text-5xl lg:text-6xl xl:text-7xl italic mb-6">
+              Svatby & Oslavy
+            </h1>
+          </FadeIn>
+          <FadeIn delay={0.6}>
+            <div className="w-16 h-px bg-[var(--color-gold)] mb-6" />
+          </FadeIn>
+          <FadeIn delay={0.8}>
+            <p className="text-white/70 text-sm sm:text-base max-w-lg tracking-wide">
+              Pronájem prostor pro vaši akci v historickém zámku
+            </p>
+          </FadeIn>
         </div>
       </section>
 
@@ -153,7 +162,7 @@ export default function SvatbyPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             {/* Text */}
-            <div>
+            <SlideIn direction="left">
               <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4 block">
                 Oslavy na zámku
               </span>
@@ -174,20 +183,22 @@ export default function SvatbyPage() {
                 Dekorace i menu připravíme přesně podle vašich přání.
                 Stačí nás kontaktovat a domluvit si nezávaznou schůzku.
               </p>
-            </div>
+            </SlideIn>
 
             {/* Image with gold frame */}
-            <div className="relative">
-              <div className="absolute -inset-4 border border-[var(--color-gold)]/20" />
-              <div className="relative aspect-[4/5] overflow-hidden">
-                <Image
-                  src="/images/JHK09458-Enhanced-NR.jpg"
-                  alt="Salonek — slavnostní tabule"
-                  fill
-                  className="object-cover"
-                />
+            <SlideIn direction="right">
+              <div className="relative">
+                <div className="absolute -inset-4 border border-[var(--color-gold)]/20" />
+                <div className="relative aspect-[4/5] overflow-hidden">
+                  <AnimatedImage
+                    src="/images/JHK09458-Enhanced-NR.jpg"
+                    alt="Salonek — slavnostní tabule"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
               </div>
-            </div>
+            </SlideIn>
           </div>
         </div>
       </section>
@@ -196,33 +207,34 @@ export default function SvatbyPage() {
       <section className="bg-[var(--color-ivory)] py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           {/* Section Header */}
-          <div className="text-center mb-16 lg:mb-20">
-            <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4 block">
-              Příležitosti
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl text-[var(--color-charcoal)] mb-4">
-              Jakou akci plánujete?
-            </h2>
-            <div className="w-12 h-px bg-[var(--color-gold)] mx-auto" />
-          </div>
+          <FadeIn>
+            <div className="text-center mb-16 lg:mb-20">
+              <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4 block">
+                Příležitosti
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl text-[var(--color-charcoal)] mb-4">
+                Jakou akci plánujete?
+              </h2>
+              <div className="w-12 h-px bg-[var(--color-gold)] mx-auto" />
+            </div>
+          </FadeIn>
 
           {/* Event Types Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-4xl mx-auto">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-4xl mx-auto">
             {eventTypes.map((event, index) => (
-              <div
-                key={index}
-                className="bg-white border border-[var(--color-stone)]/40 p-8 hover:shadow-lg transition-shadow duration-500"
-              >
-                <h3 className="font-serif text-xl text-[var(--color-charcoal)] mb-3">
-                  {event.title}
-                </h3>
-                <div className="w-8 h-px bg-[var(--color-gold)] mb-4" />
-                <p className="text-[var(--color-text-muted)] text-sm leading-relaxed">
-                  {event.description}
-                </p>
-              </div>
+              <StaggerItem key={index}>
+                <div className="bg-white border border-[var(--color-stone)]/40 p-8 hover:shadow-lg transition-shadow duration-500">
+                  <h3 className="font-serif text-xl text-[var(--color-charcoal)] mb-3">
+                    {event.title}
+                  </h3>
+                  <div className="w-8 h-px bg-[var(--color-gold)] mb-4" />
+                  <p className="text-[var(--color-text-muted)] text-sm leading-relaxed">
+                    {event.description}
+                  </p>
+                </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -230,32 +242,32 @@ export default function SvatbyPage() {
       <section className="bg-[var(--color-cream)] py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           {/* Section Header */}
-          <div className="text-center mb-16 lg:mb-20">
-            <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4 block">
-              Prostory k pronájmu
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl text-[var(--color-charcoal)] mb-4">
-              Vyberte si prostor
-            </h2>
-            <div className="w-12 h-px bg-[var(--color-gold)] mx-auto" />
-          </div>
+          <FadeIn>
+            <div className="text-center mb-16 lg:mb-20">
+              <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4 block">
+                Prostory k pronájmu
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl text-[var(--color-charcoal)] mb-4">
+                Vyberte si prostor
+              </h2>
+              <div className="w-12 h-px bg-[var(--color-gold)] mx-auto" />
+            </div>
+          </FadeIn>
 
           {/* Space Cards */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <StaggerContainer className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {spaces.map((space, index) => (
-              <div
-                key={index}
-                className="group bg-white border border-[var(--color-stone)]/40 overflow-hidden hover:shadow-lg transition-shadow duration-500"
-              >
-                {/* Image */}
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image
-                    src={space.image}
-                    alt={space.name}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                </div>
+              <StaggerItem key={index}>
+                <div className="group bg-white border border-[var(--color-stone)]/40 overflow-hidden hover:shadow-lg transition-shadow duration-500">
+                  {/* Image */}
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <AnimatedImage
+                      src={space.image}
+                      alt={space.name}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
                 {/* Content */}
                 <div className="p-8">
                   <div className="flex items-baseline justify-between mb-3">
@@ -271,9 +283,10 @@ export default function SvatbyPage() {
                     {space.description}
                   </p>
                 </div>
-              </div>
+                </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -281,34 +294,38 @@ export default function SvatbyPage() {
       <section className="bg-[var(--color-charcoal)] text-white py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           {/* Section Header */}
-          <div className="text-center mb-16 lg:mb-20">
-            <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold)] mb-4 block">
-              Co zajistíme
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl mb-4">
-              Vše pro vaši akci
-            </h2>
-            <div className="w-12 h-px bg-[var(--color-gold)] mx-auto" />
-          </div>
+          <FadeIn>
+            <div className="text-center mb-16 lg:mb-20">
+              <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold)] mb-4 block">
+                Co zajistíme
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl mb-4">
+                Vše pro vaši akci
+              </h2>
+              <div className="w-12 h-px bg-[var(--color-gold)] mx-auto" />
+            </div>
+          </FadeIn>
 
           {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
             {features.map((feature, index) => (
-              <div key={index} className="group">
-                <div className="flex items-start gap-4">
-                  <span className="w-8 h-px bg-[var(--color-gold)] mt-3 shrink-0 group-hover:w-12 transition-all duration-300" />
-                  <div>
-                    <h3 className="font-serif text-lg mb-2">
-                      {feature.title}
-                    </h3>
-                    <p className="text-white/60 text-sm leading-relaxed">
-                      {feature.description}
-                    </p>
+              <StaggerItem key={index}>
+                <div className="group">
+                  <div className="flex items-start gap-4">
+                    <span className="w-8 h-px bg-[var(--color-gold)] mt-3 shrink-0 group-hover:w-12 transition-all duration-300" />
+                    <div>
+                      <h3 className="font-serif text-lg mb-2">
+                        {feature.title}
+                      </h3>
+                      <p className="text-white/60 text-sm leading-relaxed">
+                        {feature.description}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -316,39 +333,41 @@ export default function SvatbyPage() {
       <section className="bg-[var(--color-ivory)] py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           {/* Section Header */}
-          <div className="text-center mb-16 lg:mb-20">
-            <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4 block">
-              Inspirace
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl text-[var(--color-charcoal)] mb-4">
-              Galerie
-            </h2>
-            <div className="w-12 h-px bg-[var(--color-gold)] mx-auto" />
-          </div>
+          <FadeIn>
+            <div className="text-center mb-16 lg:mb-20">
+              <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4 block">
+                Inspirace
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl text-[var(--color-charcoal)] mb-4">
+                Galerie
+              </h2>
+              <div className="w-12 h-px bg-[var(--color-gold)] mx-auto" />
+            </div>
+          </FadeIn>
 
           {/* Gallery Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {galleryImages.map((img, index) => (
-              <div
+              <StaggerItem
                 key={index}
                 className="group relative aspect-[4/3] overflow-hidden"
               >
-                <Image
+                <AnimatedImage
                   src={img.src}
                   alt={img.alt}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
       {/* CTA / Inquiry Section */}
       <section className="relative py-24 lg:py-36 overflow-hidden">
-        <Image
+        <AnimatedImage
           src="/images/JHK09411-Enhanced-NR.jpg"
           alt=""
           fill
@@ -356,6 +375,7 @@ export default function SvatbyPage() {
         />
         <div className="absolute inset-0 bg-black/65" />
 
+        <FadeIn>
         <div className="relative z-10 max-w-3xl mx-auto px-6 lg:px-12 text-center">
           <span className="text-[var(--color-gold)] text-[10px] tracking-[0.4em] uppercase mb-6 block">
             Máte zájem?
@@ -388,6 +408,7 @@ export default function SvatbyPage() {
             ublanickychrytiru@seznam.cz
           </p>
         </div>
+        </FadeIn>
       </section>
 
       <Footer />

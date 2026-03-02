@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/sections/Footer";
 import { RESTAURANT_INFO } from "@/lib/constants";
+import { FadeIn, SlideIn, AnimatedImage, StaggerContainer, StaggerItem } from "@/components/motion";
 
 export const metadata: Metadata = {
   title: "Kontakt | U Blanických rytířů",
@@ -18,7 +19,7 @@ export default function KontaktPage() {
 
       {/* Hero Banner */}
       <section className="relative h-[50vh] min-h-[400px] w-full overflow-hidden">
-        <Image
+        <AnimatedImage
           src="/images/JHK09361.jpg"
           alt="Restaurace U Blanických rytířů — vstup"
           fill
@@ -28,13 +29,19 @@ export default function KontaktPage() {
         <div className="absolute inset-0 bg-black/50" />
 
         <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center">
-          <span className="text-[var(--color-gold)] text-[10px] tracking-[0.4em] uppercase mb-6">
-            Zámecká restaurace
-          </span>
-          <h1 className="font-serif text-white text-4xl sm:text-5xl lg:text-6xl italic mb-6">
-            Kontakt
-          </h1>
-          <div className="w-16 h-px bg-[var(--color-gold)]" />
+          <FadeIn delay={0.2}>
+            <span className="text-[var(--color-gold)] text-[10px] tracking-[0.4em] uppercase mb-6 block">
+              Zámecká restaurace
+            </span>
+          </FadeIn>
+          <FadeIn delay={0.4}>
+            <h1 className="font-serif text-white text-4xl sm:text-5xl lg:text-6xl italic mb-6">
+              Kontakt
+            </h1>
+          </FadeIn>
+          <FadeIn delay={0.6}>
+            <div className="w-16 h-px bg-[var(--color-gold)]" />
+          </FadeIn>
         </div>
       </section>
 
@@ -43,7 +50,7 @@ export default function KontaktPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
             {/* Left — Contact Details */}
-            <div>
+            <SlideIn direction="left">
               <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4 block">
                 Kde nás najdete
               </span>
@@ -118,13 +125,13 @@ export default function KontaktPage() {
                   </a>
                 </div>
               </div>
-            </div>
+            </SlideIn>
 
             {/* Right — Map */}
-            <div>
+            <SlideIn direction="right">
               <div className="aspect-square lg:aspect-auto lg:h-full min-h-[400px] bg-[var(--color-stone)]">
                 <iframe
-                  src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2570.5!2d${RESTAURANT_INFO.coordinates.lng}!3d${RESTAURANT_INFO.coordinates.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470c9a7b3c8c1b1d%3A0x400af0f6614e830!2sZ%C3%A1mek%201%2C%20258%2001%20Vla%C5%A1im!5e0!3m2!1scs!2scz!4v1`}
+                  src={`https://maps.google.com/maps?q=${RESTAURANT_INFO.coordinates.lat},${RESTAURANT_INFO.coordinates.lng}&z=16&output=embed&hl=cs`}
                   width="100%"
                   height="100%"
                   style={{ border: 0, minHeight: "400px" }}
@@ -134,7 +141,7 @@ export default function KontaktPage() {
                   title="Mapa — U Blanických rytířů, Zámek 1, Vlašim"
                 />
               </div>
-            </div>
+            </SlideIn>
           </div>
         </div>
       </section>
@@ -142,9 +149,9 @@ export default function KontaktPage() {
       {/* Opening Hours + Parking */}
       <section className="bg-[var(--color-ivory)] py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
             {/* Opening Hours */}
-            <div>
+            <StaggerItem>
               <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-6">
                 Otevírací doba — Restaurace
               </h3>
@@ -169,10 +176,10 @@ export default function KontaktPage() {
                   </div>
                 ))}
               </div>
-            </div>
+            </StaggerItem>
 
             {/* Parking */}
-            <div>
+            <StaggerItem>
               <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-6">
                 Parkování
               </h3>
@@ -180,10 +187,10 @@ export default function KontaktPage() {
                 Bezplatné parkování přímo u zámku. Prostorné parkoviště
                 je k dispozici všem hostům restaurace.
               </p>
-            </div>
+            </StaggerItem>
 
             {/* Getting There */}
-            <div>
+            <StaggerItem>
               <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-6">
                 Jak se k nám dostanete
               </h3>
@@ -192,13 +199,14 @@ export default function KontaktPage() {
                 v centru města Vlašim. Z Prahy cca 70 km po dálnici D1
                 a dále po silnici 3. třídy směr Vlašim.
               </p>
-            </div>
-          </div>
+            </StaggerItem>
+          </StaggerContainer>
         </div>
       </section>
 
       {/* Reservation CTA */}
       <section className="bg-[var(--color-charcoal)] py-20 lg:py-24">
+        <FadeIn>
         <div className="max-w-3xl mx-auto px-6 lg:px-12 text-center">
           <span className="text-[var(--color-gold)] text-[10px] tracking-[0.4em] uppercase mb-6 block">
             Rezervace
@@ -226,6 +234,7 @@ export default function KontaktPage() {
             </Link>
           </div>
         </div>
+        </FadeIn>
       </section>
 
       <Footer />

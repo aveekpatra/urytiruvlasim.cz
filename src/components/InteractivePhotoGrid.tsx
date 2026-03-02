@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import Image from "next/image";
 import { ImageLightbox } from "./ImageLightbox";
+import { AnimatedImage } from "./motion";
 
 interface InteractivePhotoGridProps {
   photos: { src: string; alt: string }[];
@@ -37,7 +37,7 @@ export function InteractivePhotoGrid({ photos, columns = 3 }: InteractivePhotoGr
             className="group relative aspect-[4/3] overflow-hidden bg-[var(--color-stone)] cursor-pointer"
             onClick={() => setLightboxIndex(index)}
           >
-            <Image
+            <AnimatedImage
               src={img.src}
               alt={img.alt}
               fill

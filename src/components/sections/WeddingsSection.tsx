@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { IMAGES } from "@/lib/images";
+import { SlideIn, StaggerContainer, StaggerItem, AnimatedImage } from "@/components/motion";
 
 const features = [
   "Pronájem restaurace pro vaši akci",
@@ -17,7 +17,7 @@ export function WeddingsSection() {
     <section id="svatby" className="relative py-24 lg:py-40 bg-[var(--color-charcoal)] text-white overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
-        <Image
+        <AnimatedImage
           src={IMAGES.wedding.background}
           alt=""
           fill
@@ -29,7 +29,7 @@ export function WeddingsSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* Content */}
-          <div>
+          <SlideIn direction="left">
             <span className="text-[11px] tracking-[0.3em] uppercase text-[var(--color-gold)] mb-6 block">
               Svatby & Oslavy
             </span>
@@ -45,14 +45,18 @@ export function WeddingsSection() {
             </p>
 
             {/* Features */}
-            <ul className="space-y-4 mb-12">
-              {features.map((feature, index) => (
-                <li key={index} className="flex items-center gap-4">
-                  <span className="w-8 h-px bg-[var(--color-gold)]" />
-                  <span className="text-white/80 text-sm tracking-wide">{feature}</span>
-                </li>
-              ))}
-            </ul>
+            <StaggerContainer stagger={0.08}>
+              <ul className="space-y-4 mb-12">
+                {features.map((feature, index) => (
+                  <StaggerItem key={index}>
+                    <li className="flex items-center gap-4">
+                      <span className="w-8 h-px bg-[var(--color-gold)]" />
+                      <span className="text-white/80 text-sm tracking-wide">{feature}</span>
+                    </li>
+                  </StaggerItem>
+                ))}
+              </ul>
+            </StaggerContainer>
 
             {/* CTA */}
             <div className="flex flex-col sm:flex-row gap-4">
@@ -69,47 +73,55 @@ export function WeddingsSection() {
                 Více informací
               </Link>
             </div>
-          </div>
+          </SlideIn>
 
           {/* Image Collage */}
-          <div className="hidden lg:grid grid-cols-2 gap-4">
+          <StaggerContainer stagger={0.15} className="hidden lg:grid grid-cols-2 gap-4">
             <div className="space-y-4">
-              <div className="relative aspect-3/4 overflow-hidden">
-                <Image
-                  src={IMAGES.wedding.gallery[0]}
-                  alt="Svatební hostina"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="relative aspect-square overflow-hidden">
-                <Image
-                  src={IMAGES.wedding.gallery[1]}
-                  alt="Zámecký park"
-                  fill
-                  className="object-cover"
-                />
-              </div>
+              <StaggerItem>
+                <div className="relative aspect-3/4 overflow-hidden">
+                  <AnimatedImage
+                    src={IMAGES.wedding.gallery[0]}
+                    alt="Svatební hostina"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </StaggerItem>
+              <StaggerItem>
+                <div className="relative aspect-square overflow-hidden">
+                  <AnimatedImage
+                    src={IMAGES.wedding.gallery[1]}
+                    alt="Zámecký park"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </StaggerItem>
             </div>
             <div className="pt-12 space-y-4">
-              <div className="relative aspect-square overflow-hidden">
-                <Image
-                  src={IMAGES.wedding.gallery[2]}
-                  alt="Svatební tabule"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="relative aspect-3/4 overflow-hidden">
-                <Image
-                  src={IMAGES.wedding.gallery[3]}
-                  alt="Novomanželé"
-                  fill
-                  className="object-cover"
-                />
-              </div>
+              <StaggerItem>
+                <div className="relative aspect-square overflow-hidden">
+                  <AnimatedImage
+                    src={IMAGES.wedding.gallery[2]}
+                    alt="Svatební tabule"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </StaggerItem>
+              <StaggerItem>
+                <div className="relative aspect-3/4 overflow-hidden">
+                  <AnimatedImage
+                    src={IMAGES.wedding.gallery[3]}
+                    alt="Novomanželé"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </StaggerItem>
             </div>
-          </div>
+          </StaggerContainer>
         </div>
       </div>
     </section>

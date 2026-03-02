@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { IMAGES } from "@/lib/images";
+import { FadeIn, SlideUp } from "@/components/motion";
 
 export function HeroSection() {
   return (
@@ -20,21 +23,29 @@ export function HeroSection() {
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-end pb-32 lg:pb-40 px-6">
         <div className="text-center">
-          <p className="text-white/80 text-[11px] tracking-[0.4em] uppercase mb-6">
-            Zámek Vlašim
-          </p>
-          <h1 className="font-serif text-white text-4xl sm:text-5xl lg:text-6xl xl:text-7xl italic mb-8">
-            Kulinářský zážitek
-          </h1>
-          <div className="w-16 h-px bg-[var(--color-gold)] mx-auto mb-8" />
-          <p className="text-white/90 text-sm tracking-[0.15em] uppercase">
-            v srdci historického zámku
-          </p>
+          <FadeIn delay={0.2}>
+            <p className="text-white/80 text-[11px] tracking-[0.4em] uppercase mb-6">
+              Zámek Vlašim
+            </p>
+          </FadeIn>
+          <FadeIn delay={0.4}>
+            <h1 className="font-serif text-white text-4xl sm:text-5xl lg:text-6xl xl:text-7xl italic mb-8">
+              Kulinářský zážitek
+            </h1>
+          </FadeIn>
+          <FadeIn delay={0.6}>
+            <div className="w-16 h-px bg-[var(--color-gold)] mx-auto mb-8" />
+          </FadeIn>
+          <FadeIn delay={0.8}>
+            <p className="text-white/90 text-sm tracking-[0.15em] uppercase">
+              v srdci historického zámku
+            </p>
+          </FadeIn>
         </div>
       </div>
 
       {/* Bottom Booking Bar */}
-      <div className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm">
+      <SlideUp delay={1.0} className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-5">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-12">
             <div className="hidden sm:block text-center sm:text-left">
@@ -64,7 +75,7 @@ export function HeroSection() {
             </div>
           </div>
         </div>
-      </div>
+      </SlideUp>
     </section>
   );
 }

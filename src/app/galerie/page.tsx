@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/sections/Footer";
 import { InteractivePhotoGrid } from "@/components/InteractivePhotoGrid";
+import { FadeIn, AnimatedImage } from "@/components/motion";
 
 export const metadata: Metadata = {
   title: "Galerie | U Blanických rytířů",
@@ -70,7 +71,7 @@ export default function GaleriePage() {
 
       {/* Hero Banner */}
       <section className="relative h-[50vh] min-h-[400px] w-full overflow-hidden">
-        <Image
+        <AnimatedImage
           src="/images/JHK09345.jpg"
           alt="Restaurace U Blanických rytířů — interiér"
           fill
@@ -80,19 +81,26 @@ export default function GaleriePage() {
         <div className="absolute inset-0 bg-black/50" />
 
         <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center">
-          <span className="text-[var(--color-gold)] text-[10px] tracking-[0.4em] uppercase mb-6">
-            Zámecká restaurace
-          </span>
-          <h1 className="font-serif text-white text-4xl sm:text-5xl lg:text-6xl italic mb-6">
-            Galerie
-          </h1>
-          <div className="w-16 h-px bg-[var(--color-gold)]" />
+          <FadeIn delay={0.2}>
+            <span className="text-[var(--color-gold)] text-[10px] tracking-[0.4em] uppercase mb-6 block">
+              Zámecká restaurace
+            </span>
+          </FadeIn>
+          <FadeIn delay={0.4}>
+            <h1 className="font-serif text-white text-4xl sm:text-5xl lg:text-6xl italic mb-6">
+              Galerie
+            </h1>
+          </FadeIn>
+          <FadeIn delay={0.6}>
+            <div className="w-16 h-px bg-[var(--color-gold)]" />
+          </FadeIn>
         </div>
       </section>
 
       {/* Pivnice */}
       <section className="bg-[var(--color-cream)] py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <FadeIn>
           <div className="text-center mb-16 lg:mb-20">
             <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4 block">
               Hlavní prostor
@@ -106,6 +114,7 @@ export default function GaleriePage() {
               a komorní atmosférou pro slavnostní příležitosti.
             </p>
           </div>
+          </FadeIn>
           <InteractivePhotoGrid photos={pivnicePhotos} />
         </div>
       </section>
@@ -113,6 +122,7 @@ export default function GaleriePage() {
       {/* Salonek */}
       <section className="bg-[var(--color-ivory)] py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <FadeIn>
           <div className="text-center mb-16 lg:mb-20">
             <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4 block">
               Nekuřácký salonek
@@ -126,6 +136,7 @@ export default function GaleriePage() {
               a stylovou atmosférou.
             </p>
           </div>
+          </FadeIn>
           <InteractivePhotoGrid photos={salonekPhotos} />
         </div>
       </section>
@@ -133,6 +144,7 @@ export default function GaleriePage() {
       {/* Terasa */}
       <section className="bg-[var(--color-cream)] py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <FadeIn>
           <div className="text-center mb-16 lg:mb-20">
             <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4 block">
               Venkovní posezení
@@ -145,6 +157,7 @@ export default function GaleriePage() {
               Zastřešená terasa se skleněnými stěnami a výhledem do zámeckého parku.
             </p>
           </div>
+          </FadeIn>
           <InteractivePhotoGrid photos={terasaPhotos} columns={2} />
         </div>
       </section>
@@ -152,6 +165,7 @@ export default function GaleriePage() {
       {/* Details & Atmosphere */}
       <section className="bg-[var(--color-ivory)] py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <FadeIn>
           <div className="text-center mb-16 lg:mb-20">
             <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4 block">
               Zámecké prostředí
@@ -165,6 +179,7 @@ export default function GaleriePage() {
               vypráví příběh.
             </p>
           </div>
+          </FadeIn>
           <InteractivePhotoGrid photos={detailPhotos} />
         </div>
       </section>
@@ -172,6 +187,7 @@ export default function GaleriePage() {
       {/* Dishes */}
       <section className="bg-[var(--color-cream)] py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <FadeIn>
           <div className="text-center mb-16 lg:mb-20">
             <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4 block">
               Z naší kuchyně
@@ -184,6 +200,7 @@ export default function GaleriePage() {
               Česká kuchyně z lokálních surovin — steaky, polévky, saláty a dezerty.
             </p>
           </div>
+          </FadeIn>
           <InteractivePhotoGrid photos={dishPhotos} />
         </div>
       </section>
@@ -191,6 +208,7 @@ export default function GaleriePage() {
       {/* Drinks */}
       <section className="bg-[var(--color-ivory)] py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <FadeIn>
           <div className="text-center mb-16 lg:mb-20">
             <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4 block">
               Nápoje
@@ -203,12 +221,14 @@ export default function GaleriePage() {
               Pilsner Urquell a Kozel z tanku, Dallmayr káva a výběr destilátů.
             </p>
           </div>
+          </FadeIn>
           <InteractivePhotoGrid photos={drinkPhotos} />
         </div>
       </section>
 
       {/* CTA */}
       <section className="bg-[var(--color-charcoal)] py-20 lg:py-24">
+        <FadeIn>
         <div className="max-w-3xl mx-auto px-6 lg:px-12 text-center">
           <h2 className="font-serif text-white text-3xl sm:text-4xl italic mb-6">
             Přijďte se podívat osobně
@@ -233,6 +253,7 @@ export default function GaleriePage() {
             </Link>
           </div>
         </div>
+        </FadeIn>
       </section>
 
       <Footer />

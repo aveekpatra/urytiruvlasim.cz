@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { RESTAURANT_INFO } from "@/lib/constants";
+import { MotionProvider } from "@/components/motion";
 
 
 const inter = Inter({
@@ -78,7 +79,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} ${playfair.variable} antialiased`}>
-        {children}
+        <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
   );
