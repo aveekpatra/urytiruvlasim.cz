@@ -5,11 +5,11 @@ import Link from "next/link";
 import { IMAGES } from "@/lib/images";
 
 const features = [
-  "Exkluzivní pronájem restaurace",
-  "Svatební menu na míru",
-  "Ubytování v zámeckém hotelu",
-  "Koordinace celého dne",
-  "Kapacita 40–80 hostů",
+  "Pronájem restaurace pro vaši akci",
+  "Menu a dekorace na míru",
+  "Svatby, firemní akce, soukromé oslavy",
+  "Vinárna, terasa, rytířský salonek",
+  "Kapacita až 80 hostů",
 ];
 
 export function WeddingsSection() {
@@ -39,9 +39,9 @@ export function WeddingsSection() {
             </h2>
             <div className="w-16 h-px bg-[var(--color-gold)] mb-8" />
             <p className="text-white/70 leading-relaxed mb-10 max-w-lg">
-              Představte si svatební den v prostředí historického zámku —
-              obřad v romantickém parku, slavnostní hostina v elegantních
-              interiérech a vzpomínky, které zůstanou navždy.
+              Hledáte prostory pro svatbu, firemní akci nebo soukromou oslavu?
+              Nabízíme pronájem restaurace přímo ve vlašimském zámku —
+              dekorace i menu připravíme přesně podle vašich představ.
             </p>
 
             {/* Features */}
@@ -63,10 +63,10 @@ export function WeddingsSection() {
                 Nezávazná poptávka
               </Link>
               <Link
-                href="/documents/wedding-brochure.pdf"
+                href="/svatby"
                 className="inline-block px-10 py-4 border border-white/30 text-white text-[11px] tracking-[0.2em] uppercase font-medium hover:bg-white hover:text-[var(--color-charcoal)] transition-all duration-300 text-center"
               >
-                Stáhnout katalog
+                Více informací
               </Link>
             </div>
           </div>

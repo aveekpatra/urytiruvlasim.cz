@@ -1,0 +1,234 @@
+import { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/sections/Footer";
+import { RESTAURANT_INFO } from "@/lib/constants";
+
+export const metadata: Metadata = {
+  title: "Kontakt | U Blanických rytířů",
+  description:
+    "Kontaktní údaje restaurace U Blanických rytířů. Zámek 1, 258 01 Vlašim. Telefon: +420 732 878 238. Rezervace telefonicky nebo e-mailem.",
+};
+
+export default function KontaktPage() {
+  return (
+    <>
+      <Navigation />
+
+      {/* Hero Banner */}
+      <section className="relative h-[50vh] min-h-[400px] w-full overflow-hidden">
+        <Image
+          src="/images/JHK09361.jpg"
+          alt="Restaurace U Blanických rytířů — vstup"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/50" />
+
+        <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center">
+          <span className="text-[var(--color-gold)] text-[10px] tracking-[0.4em] uppercase mb-6">
+            Zámecká restaurace
+          </span>
+          <h1 className="font-serif text-white text-4xl sm:text-5xl lg:text-6xl italic mb-6">
+            Kontakt
+          </h1>
+          <div className="w-16 h-px bg-[var(--color-gold)]" />
+        </div>
+      </section>
+
+      {/* Contact Info + Map */}
+      <section className="bg-[var(--color-cream)] py-20 lg:py-32">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+            {/* Left — Contact Details */}
+            <div>
+              <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4 block">
+                Kde nás najdete
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl text-[var(--color-charcoal)] mb-6">
+                Navštivte nás
+              </h2>
+              <div className="w-12 h-px bg-[var(--color-gold)] mb-10" />
+
+              {/* Address */}
+              <div className="space-y-8">
+                <div>
+                  <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-3">
+                    Adresa
+                  </h3>
+                  <p className="text-[var(--color-text)] leading-relaxed">
+                    {RESTAURANT_INFO.name}
+                    <br />
+                    {RESTAURANT_INFO.address.street}
+                    <br />
+                    {RESTAURANT_INFO.address.postalCode}{" "}
+                    {RESTAURANT_INFO.address.city}
+                    <br />
+                    {RESTAURANT_INFO.address.country}
+                  </p>
+                </div>
+
+                {/* Phone */}
+                <div>
+                  <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-3">
+                    Telefon
+                  </h3>
+                  <a
+                    href={`tel:${RESTAURANT_INFO.phone.replace(/\s/g, "")}`}
+                    className="text-[var(--color-text)] text-lg hover:text-[var(--color-gold-dark)] transition-colors"
+                  >
+                    {RESTAURANT_INFO.phone}
+                  </a>
+                </div>
+
+                {/* Email */}
+                <div>
+                  <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-3">
+                    E-mail
+                  </h3>
+                  <a
+                    href={`mailto:${RESTAURANT_INFO.email}`}
+                    className="text-[var(--color-text)] hover:text-[var(--color-gold-dark)] transition-colors"
+                  >
+                    {RESTAURANT_INFO.email}
+                  </a>
+                </div>
+
+                {/* Social */}
+                <div>
+                  <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-3">
+                    Sociální sítě
+                  </h3>
+                  <a
+                    href="https://facebook.com/ublanickychrytiru"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-[var(--color-text)] hover:text-[var(--color-gold-dark)] transition-colors"
+                  >
+                    <svg
+                      className="w-5 h-5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                    </svg>
+                    Facebook
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Right — Map */}
+            <div>
+              <div className="aspect-square lg:aspect-auto lg:h-full min-h-[400px] bg-[var(--color-stone)]">
+                <iframe
+                  src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2570.5!2d${RESTAURANT_INFO.coordinates.lng}!3d${RESTAURANT_INFO.coordinates.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470c9a7b3c8c1b1d%3A0x400af0f6614e830!2sZ%C3%A1mek%201%2C%20258%2001%20Vla%C5%A1im!5e0!3m2!1scs!2scz!4v1`}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, minHeight: "400px" }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Mapa — U Blanických rytířů, Zámek 1, Vlašim"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Opening Hours + Parking */}
+      <section className="bg-[var(--color-ivory)] py-20 lg:py-32">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+            {/* Opening Hours */}
+            <div>
+              <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-6">
+                Otevírací doba — Restaurace
+              </h3>
+              <div className="space-y-3">
+                {RESTAURANT_INFO.openingHours.map((oh, index) => (
+                  <div
+                    key={index}
+                    className="flex justify-between max-w-[240px]"
+                  >
+                    <span className="text-[var(--color-text-muted)] text-sm">
+                      {oh.days}
+                    </span>
+                    <span
+                      className={`text-sm font-medium ${
+                        oh.hours === "Zavřeno"
+                          ? "text-red-700"
+                          : "text-[var(--color-text)]"
+                      }`}
+                    >
+                      {oh.hours}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Parking */}
+            <div>
+              <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-6">
+                Parkování
+              </h3>
+              <p className="text-[var(--color-text-muted)] text-sm leading-relaxed">
+                Bezplatné parkování přímo u zámku. Prostorné parkoviště
+                je k dispozici všem hostům restaurace.
+              </p>
+            </div>
+
+            {/* Getting There */}
+            <div>
+              <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-6">
+                Jak se k nám dostanete
+              </h3>
+              <p className="text-[var(--color-text-muted)] text-sm leading-relaxed">
+                Restaurace se nachází přímo v areálu vlašimského zámku
+                v centru města Vlašim. Z Prahy cca 70 km po dálnici D1
+                a dále po silnici 3. třídy směr Vlašim.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Reservation CTA */}
+      <section className="bg-[var(--color-charcoal)] py-20 lg:py-24">
+        <div className="max-w-3xl mx-auto px-6 lg:px-12 text-center">
+          <span className="text-[var(--color-gold)] text-[10px] tracking-[0.4em] uppercase mb-6 block">
+            Rezervace
+          </span>
+          <h2 className="font-serif text-white text-3xl sm:text-4xl italic mb-6">
+            Rezervujte si stůl
+          </h2>
+          <div className="w-12 h-px bg-[var(--color-gold)] mx-auto mb-8" />
+          <p className="text-white/60 text-sm leading-relaxed mb-10 max-w-xl mx-auto">
+            Pro rezervaci stolu nás kontaktujte telefonicky nebo e-mailem.
+            Těšíme se na vaši návštěvu.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href={`tel:${RESTAURANT_INFO.phone.replace(/\s/g, "")}`}
+              className="px-10 py-4 bg-[var(--color-gold)] text-[var(--color-charcoal)] text-[11px] tracking-[0.2em] uppercase font-semibold hover:bg-white transition-colors duration-300"
+            >
+              {RESTAURANT_INFO.phone}
+            </Link>
+            <Link
+              href={`mailto:${RESTAURANT_INFO.email}`}
+              className="px-10 py-4 border border-white/30 text-white text-[11px] tracking-[0.2em] uppercase font-medium hover:bg-white hover:text-[var(--color-charcoal)] transition-all duration-300"
+            >
+              Napsat e-mail
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </>
+  );
+}

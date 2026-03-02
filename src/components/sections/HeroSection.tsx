@@ -1,16 +1,7 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { IMAGES } from "@/lib/images";
 
 export function HeroSection() {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
-
   return (
     <section className="relative h-screen w-full overflow-hidden">
       {/* Video Background */}
@@ -28,12 +19,7 @@ export function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-end pb-32 lg:pb-40 px-6">
-        {/* Centered tagline - appears at bottom */}
-        <div
-          className={`text-center transition-all duration-1000 delay-500 ${
-            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
+        <div className="text-center">
           <p className="text-white/80 text-[11px] tracking-[0.4em] uppercase mb-6">
             Zámek Vlašim
           </p>
@@ -48,11 +34,7 @@ export function HeroSection() {
       </div>
 
       {/* Bottom Booking Bar */}
-      <div
-        className={`absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm transition-all duration-700 delay-700 ${
-          isLoaded ? "translate-y-0" : "translate-y-full"
-        }`}
-      >
+      <div className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-5">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-12">
             <div className="hidden sm:block text-center sm:text-left">
@@ -60,7 +42,7 @@ export function HeroSection() {
                 Otevírací doba
               </span>
               <p className="text-[var(--color-charcoal)] font-medium">
-                Po–Ne 11:00–22:00
+                Út–Ne 11:00–22:00
               </p>
             </div>
 
@@ -74,7 +56,7 @@ export function HeroSection() {
                 Menu
               </Link>
               <Link
-                href="tel:+420123456789"
+                href="tel:+420732878238"
                 className="px-6 sm:px-8 py-3 border border-[var(--color-charcoal)] text-[var(--color-charcoal)] text-[11px] tracking-[0.15em] uppercase font-medium hover:bg-[var(--color-charcoal)] hover:text-white transition-all duration-300"
               >
                 Rezervovat stůl

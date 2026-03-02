@@ -53,13 +53,6 @@ h1, h2, h3, h4 {
   outline-offset: 4px;
 }
 
-/* Smooth transitions globally */
-* {
-  transition-property: color, background-color, border-color, opacity, transform;
-  transition-duration: 300ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -109,45 +102,10 @@ h1, h2, h3, h4 {
   letter-spacing: 0.1em;
 }
 
-/* Fade in animation */
+/* Fade in animation (used by lightbox) */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInSlow {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.8s ease-out forwards;
-}
-
-.animate-fade-in-slow {
-  animation: fadeInSlow 1.2s ease-out forwards;
-}
-
-.animation-delay-200 {
-  animation-delay: 200ms;
-}
-
-.animation-delay-400 {
-  animation-delay: 400ms;
-}
-
-.animation-delay-600 {
-  animation-delay: 600ms;
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* Divider line */
@@ -173,16 +131,4 @@ h1, h2, h3, h4 {
 
 .btn-elegant:hover {
   transform: translateY(-2px);
-}
-
-/* Image reveal animation */
-.img-reveal {
-  clip-path: inset(0 100% 0 0);
-  animation: reveal 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
-}
-
-@keyframes reveal {
-  to {
-    clip-path: inset(0 0 0 0);
-  }
 }

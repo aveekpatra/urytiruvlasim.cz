@@ -1,8 +1,5 @@
-"use client";
-
 import Image from "next/image";
 import { IMAGES } from "@/lib/images";
-import { ScrollReveal, ScrollRevealGroup } from "@/components/ScrollReveal";
 
 export function GallerySection() {
   return (
@@ -10,26 +7,17 @@ export function GallerySection() {
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <ScrollReveal>
-            <span className="text-[11px] tracking-[0.3em] uppercase text-[var(--color-gold)] mb-6 block">
-              Nahlédněte
-            </span>
-          </ScrollReveal>
-          <ScrollReveal delay={0.1}>
-            <h2 className="font-serif text-4xl lg:text-5xl text-[var(--color-charcoal)] mb-6">
-              Galerie
-            </h2>
-          </ScrollReveal>
-          <ScrollReveal delay={0.2}>
-            <div className="w-16 h-px bg-[var(--color-gold)] mx-auto" />
-          </ScrollReveal>
+          <span className="text-[11px] tracking-[0.3em] uppercase text-[var(--color-gold)] mb-6 block">
+            Nahlédněte
+          </span>
+          <h2 className="font-serif text-4xl lg:text-5xl text-[var(--color-charcoal)] mb-6">
+            Galerie
+          </h2>
+          <div className="w-16 h-px bg-[var(--color-gold)] mx-auto" />
         </div>
 
         {/* Gallery Grid */}
-        <ScrollRevealGroup
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px] lg:auto-rows-[250px]"
-          stagger={0.08}
-        >
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px] lg:auto-rows-[250px]">
           {IMAGES.gallery.map((image, index) => (
             <div
               key={index}
@@ -50,7 +38,7 @@ export function GallerySection() {
               </div>
             </div>
           ))}
-        </ScrollRevealGroup>
+        </div>
       </div>
     </section>
   );

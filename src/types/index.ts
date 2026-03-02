@@ -3,6 +3,7 @@ export interface MenuItem {
   category: MenuCategory;
   name: string;
   description?: string;
+  allergens?: string;
   price: number;
   currency: string;
   isVegetarian?: boolean;

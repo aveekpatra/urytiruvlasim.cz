@@ -9,13 +9,20 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <div className="mb-6">
-              <span className="block text-[10px] tracking-[0.3em] uppercase text-white/50 mb-1">
-                Restaurace
-              </span>
-              <span className="block font-serif text-2xl italic">
-                U Blanických rytířů
-              </span>
+            <div className="mb-6 flex items-center gap-3">
+              <img
+                src="/Logo.svg"
+                alt=""
+                className="h-12 w-auto"
+              />
+              <div className="leading-none">
+                <span className="block font-serif text-base uppercase tracking-[0.05em]">
+                  Zámecká restaurace
+                </span>
+                <span className="block font-serif text-[11px] uppercase tracking-[0.08em] mt-0.5 text-white/80">
+                  U Blanických rytířů
+                </span>
+              </div>
             </div>
             <p className="text-white/60 text-sm leading-relaxed max-w-xs">
               Výjimečná gastronomie v srdci vlašimského zámku.
@@ -93,7 +100,7 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-6">
               <a
-                href="https://facebook.com"
+                href="https://facebook.com/ublanickychrytiru"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/40 hover:text-[var(--color-gold)] transition-colors"
@@ -104,7 +111,7 @@ export function Footer() {
                 </svg>
               </a>
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/restaurace_u_blanickych_rytiru"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/40 hover:text-[var(--color-gold)] transition-colors"

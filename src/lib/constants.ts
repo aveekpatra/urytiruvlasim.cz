@@ -9,16 +9,17 @@ export const RESTAURANT_INFO: RestaurantInfo = {
     postalCode: "258 01",
     country: "Česká republika"
   },
-  phone: "+420 123 456 789",
-  email: "rezervace@ublanickychrytiru.cz",
+  phone: "+420 732 878 238",
+  email: "ublanickychrytiru@seznam.cz",
   coordinates: {
-    lat: 49.7067,
-    lng: 14.8997
+    lat: 49.7073,
+    lng: 14.8950
   },
   openingHours: [
-    { days: "Po–Čt", hours: "11:00–22:00" },
-    { days: "Pá–So", hours: "11:00–23:00" },
-    { days: "Ne", hours: "11:00–21:00" }
+    { days: "Po", hours: "Zavřeno" },
+    { days: "Út–Čt", hours: "11:00–22:00" },
+    { days: "Pá–So", hours: "11:00–00:00" },
+    { days: "Ne", hours: "11:00–22:00" }
   ]
 };
 
@@ -44,30 +45,37 @@ export const SAMPLE_MENU: MenuItem[] = [
   {
     id: "soup-1",
     category: "soup",
-    name: "Cibulová s parmazánem",
-    price: 55,
+    name: "Zámecká cibulačka",
+    description: "se slaninou, vídeňskou cibulkou a bylinkovými krutony",
+    allergens: "1,3,7",
+    price: 96,
     currency: "Kč"
   },
   {
     id: "main-1",
     category: "main",
-    name: "Svíčková na smetaně, karlovarský knedlík, brusinky",
-    price: 245,
+    name: "Vepřová líčka 200g",
+    description: "v hříbkové omáčce, restované vaječné špecle",
+    allergens: "1,3,7,10",
+    price: 305,
     currency: "Kč"
   },
   {
     id: "main-2",
     category: "main",
-    name: "Kančí guláš z podblanických lesů, houskový knedlík",
-    price: 225,
+    name: "Kuřecí prso 200g",
+    description: "se smetanovo-liškovou omáčkou, domácí bramborové placky",
+    allergens: "1,3,7",
+    price: 310,
     currency: "Kč"
   },
   {
     id: "main-3",
     category: "main",
-    name: "Bramborové taštičky s tvarohem, máslo, perník",
-    description: "Vegetariánské",
-    price: 195,
+    name: "Bramborové noky 300g",
+    description: "v omáčce z italské gorgonzoly se smaženou rukolou",
+    allergens: "1,3,7",
+    price: 265,
     currency: "Kč",
     isVegetarian: true
   }
@@ -98,11 +106,11 @@ export const REVIEWS: Review[] = [
 ];
 
 export const WEDDING_FEATURES = [
-  "Exkluzivní pronájem restaurace",
-  "Svatební menu na míru",
-  "Koordinace s fotografem",
-  "Parkování pro hosty",
-  "Kapacita: 40–80 hostů"
+  "Pronájem restaurace pro vaši akci",
+  "Menu a dekorace na míru",
+  "Svatby, firemní akce, soukromé oslavy",
+  "Parkování zdarma pro hosty",
+  "Kapacita: až 80 hostů"
 ];
 
 export const ABOUT_TEXT = `Restaurace U Blanických rytířů není jen místem k jídlu – je to součást vlašimské historie. Naše kuchyně respektuje tradice české gastronomie: poctivé vývary, lokální suroviny a recepty, které stojí na pevných základech.

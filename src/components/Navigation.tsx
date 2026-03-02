@@ -1,21 +1,29 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { label: "Restaurace", href: "#restaurace" },
-  { label: "Menu", href: "#menu" },
-  { label: "Svatby", href: "#svatby" },
-  { label: "Galerie", href: "#galerie" },
-  { label: "Kontakt", href: "#kontakt" },
+  { label: "Restaurace", href: "#restaurace", homeOnly: true },
+  { label: "Menu", href: "/menu", homeOnly: false },
+  { label: "Svatby", href: "/svatby", homeOnly: false },
+  { label: "Galerie", href: "/galerie", homeOnly: false },
+  { label: "Kontakt", href: "/kontakt", homeOnly: false },
 ];
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
+  const getHref = (link: (typeof navLinks)[number]) => {
+    if (!link.homeOnly) return link.href;
+    return isHome ? link.href : `/${link.href}`;
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,29 +54,29 @@ export function Navigation() {
             {/* Contact Info */}
             <div className="flex items-center gap-6">
               <a
-                href="mailto:info@ublanickychrytiru.cz"
+                href="mailto:ublanickychrytiru@seznam.cz"
                 className="text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-2"
               >
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                info@ublanickychrytiru.cz
+                ublanickychrytiru@seznam.cz
               </a>
               <a
-                href="tel:+420123456789"
+                href="tel:+420732878238"
                 className="text-white/70 hover:text-white transition-colors duration-200 flex items-center gap-2"
               >
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
-                +420 123 456 789
+                +420 732 878 238
               </a>
             </div>
 
             {/* Social Links */}
             <div className="flex items-center gap-4">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/restaurace_u_blanickych_rytiru"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/70 hover:text-white transition-colors duration-200"
@@ -79,7 +87,7 @@ export function Navigation() {
                 </svg>
               </a>
               <a
-                href="https://facebook.com"
+                href="https://facebook.com/ublanickychrytiru"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/70 hover:text-white transition-colors duration-200"
@@ -106,20 +114,28 @@ export function Navigation() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="relative z-10">
-              <div className="text-center">
+            <Link href="/" className="relative z-10 flex items-center gap-3">
+              <img
+                src="/Logo.svg"
+                alt=""
+                className={cn(
+                  "h-10 lg:h-12 w-auto transition-all duration-200",
+                  isScrolled && "invert"
+                )}
+              />
+              <div className="leading-none">
                 <span
                   className={cn(
-                    "block text-[10px] tracking-[0.3em] uppercase transition-colors duration-200",
-                    isScrolled ? "text-[var(--color-text-muted)]" : "text-white/80"
+                    "block font-serif text-base lg:text-lg uppercase tracking-[0.05em] transition-colors duration-200",
+                    isScrolled ? "text-[var(--color-charcoal)]" : "text-white"
                   )}
                 >
-                  Restaurace
+                  Zámecká restaurace
                 </span>
                 <span
                   className={cn(
-                    "block font-serif text-2xl lg:text-3xl italic transition-colors duration-200",
-                    isScrolled ? "text-[var(--color-charcoal)]" : "text-white"
+                    "block font-serif text-[11px] lg:text-xs uppercase tracking-[0.08em] mt-0.5 transition-colors duration-200",
+                    isScrolled ? "text-[var(--color-charcoal)]" : "text-white/80"
                   )}
                 >
                   U Blanických rytířů
@@ -131,8 +147,8 @@ export function Navigation() {
             <nav className="hidden lg:flex items-center gap-10">
               {navLinks.map((link) => (
                 <Link
-                  key={link.href}
-                  href={link.href}
+                  key={link.label}
+                  href={getHref(link)}
                   className={cn(
                     "text-[11px] tracking-[0.2em] uppercase font-medium transition-colors duration-200 hover:text-[var(--color-gold)]",
                     isScrolled ? "text-[var(--color-text)]" : "text-white"
@@ -202,8 +218,8 @@ export function Navigation() {
         <nav className="flex flex-col items-center justify-center h-full gap-8">
           {navLinks.map((link) => (
             <Link
-              key={link.href}
-              href={link.href}
+              key={link.label}
+              href={getHref(link)}
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-2xl font-serif text-[var(--color-charcoal)] hover:text-[var(--color-gold)] transition-colors duration-200"
             >

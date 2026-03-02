@@ -18,6 +18,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.pexels.com",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.kudyznudy.cz",
+      },
+      {
+        protocol: "https",
+        hostname: "d48-a.sdn.cz",
+      },
     ],
   },
 };
