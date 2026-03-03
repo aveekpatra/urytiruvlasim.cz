@@ -88,12 +88,9 @@ export function DailyMenuSection() {
             {todayMenu.soup && (
               <div>
                 <div className="mb-8">
-                  <h3 className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-1">
+                  <h3 className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)]">
                     Polévka
                   </h3>
-                  <span className="text-[9px] tracking-[0.2em] uppercase text-[var(--color-text-muted)]">
-                    Soup
-                  </span>
                 </div>
 
                 <div>
@@ -125,12 +122,9 @@ export function DailyMenuSection() {
             {todayMenu.items.length > 0 && (
               <div className={todayMenu.soup ? "mt-10" : ""}>
                 <div className="mb-8">
-                  <h3 className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-1">
+                  <h3 className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)]">
                     Hlavní chod
                   </h3>
-                  <span className="text-[9px] tracking-[0.2em] uppercase text-[var(--color-text-muted)]">
-                    Main courses
-                  </span>
                 </div>
 
                 <div className="space-y-6">
@@ -171,12 +165,9 @@ export function DailyMenuSection() {
                 </div>
 
                 <div className="mb-8">
-                  <h3 className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-1">
+                  <h3 className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)]">
                     Dezert
                   </h3>
-                  <span className="text-[9px] tracking-[0.2em] uppercase text-[var(--color-text-muted)]">
-                    Dessert
-                  </span>
                 </div>
 
                 <div>

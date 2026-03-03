@@ -109,7 +109,6 @@ export function DailyMenuPDFDocument({ menu }: { menu: DailyMenuData }) {
         {menu.soup && (
           <View>
             <Text style={s.sectionLabel}>Polévka</Text>
-            <Text style={s.sectionSub}>Soup</Text>
             <View style={s.itemRow}>
               <Text style={s.itemName}>{menu.soup}</Text>
               <Text style={s.itemPrice}>{menu.soupPrice} Kč</Text>
@@ -128,7 +127,6 @@ export function DailyMenuPDFDocument({ menu }: { menu: DailyMenuData }) {
         {menu.items.length > 0 && (
           <View>
             <Text style={s.sectionLabel}>Hlavní chod</Text>
-            <Text style={s.sectionSub}>Main courses</Text>
             {menu.items.map((item, i) => (
               <View key={i}>
                 <View style={s.itemRow}>
@@ -154,7 +152,6 @@ export function DailyMenuPDFDocument({ menu }: { menu: DailyMenuData }) {
           <View>
             <Divider />
             <Text style={s.sectionLabel}>Dezert</Text>
-            <Text style={s.sectionSub}>Dessert</Text>
             <View style={s.itemRow}>
               <Text style={s.itemName}>{menu.dessert}</Text>
               {menu.dessertPrice && (

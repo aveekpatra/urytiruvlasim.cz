@@ -110,8 +110,7 @@ function MenuPreviewCard({ menu }: { menu: DailyMenuData }) {
       {/* Soup */}
       {menu.soup && (
         <div className="mb-8">
-          <p className="text-[9px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-0.5">Polévka</p>
-          <p className="text-[8px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">Soup</p>
+          <p className="text-[9px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4">Polévka</p>
           <div className="flex items-baseline justify-between gap-3">
             <span className="font-serif text-lg text-[var(--color-charcoal)]">{menu.soup}</span>
             <span className="text-sm font-medium text-[var(--color-charcoal)]">{menu.soupPrice} Kč</span>
@@ -132,8 +131,7 @@ function MenuPreviewCard({ menu }: { menu: DailyMenuData }) {
       {/* Mains */}
       {menu.items.length > 0 && (
         <div className="mb-8">
-          <p className="text-[9px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-0.5">Hlavní chod</p>
-          <p className="text-[8px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">Main courses</p>
+          <p className="text-[9px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4">Hlavní chod</p>
           <div className="space-y-4">
             {menu.items.map((item, i) => (
               <div key={i}>
@@ -163,8 +161,7 @@ function MenuPreviewCard({ menu }: { menu: DailyMenuData }) {
             <div className="w-1 h-1 bg-[var(--color-gold)] rotate-45" />
             <div className="w-8 h-px bg-[var(--color-stone)]" />
           </div>
-          <p className="text-[9px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-0.5">Dezert</p>
-          <p className="text-[8px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">Dessert</p>
+          <p className="text-[9px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4">Dezert</p>
           <div className="flex items-baseline justify-between gap-3">
             <span className="font-serif text-lg text-[var(--color-charcoal)]">{menu.dessert}</span>
             {menu.dessertPrice && (
