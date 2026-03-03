@@ -1,6 +1,18 @@
 "use client";
 
-import { useRef, useCallback } from "react";
+import { useState, useCallback } from "react";
+import dynamic from "next/dynamic";
+
+// Dynamically import react-pdf (it uses browser APIs)
+const PDFDownloadLink = dynamic(
+  () => import("@react-pdf/renderer").then((mod) => mod.PDFDownloadLink),
+  { ssr: false }
+);
+
+const BlobProvider = dynamic(
+  () => import("@react-pdf/renderer").then((mod) => mod.BlobProvider),
+  { ssr: false }
+);
 
 interface MenuItem {
   name: string;
@@ -10,7 +22,7 @@ interface MenuItem {
   isVegetarian?: boolean;
 }
 
-interface DailyMenuData {
+export interface DailyMenuData {
   date: string;
   soup: string;
   soupDescription?: string;
@@ -23,13 +35,120 @@ interface DailyMenuData {
   dessertPrice?: number;
 }
 
-function AllergenTag({ allergens }: { allergens?: string }) {
-  if (!allergens) return null;
-  return <span style={{ opacity: 0.5 }}>({allergens})</span>;
+// Lazy-load the PDF document component
+function usePDFDocument() {
+  const [DocComponent, setDocComponent] = useState<any>(null);
+
+  const loadDoc = useCallback(async () => {
+    const mod = await import("./DailyMenuPDFDocument");
+    return mod.DailyMenuPDFDocument;
+  }, []);
+
+  return { loadDoc, DocComponent, setDocComponent };
 }
 
-function MenuCard({ menu, date }: { menu: DailyMenuData; date: string }) {
-  const formatted = new Date(date + "T12:00:00").toLocaleDateString("cs-CZ", {
+export function DailyMenuPreview({
+  menu,
+  onClose,
+}: {
+  menu: DailyMenuData;
+  onClose: () => void;
+}) {
+  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
+  const [generating, setGenerating] = useState(false);
+
+  const handleGenerate = useCallback(async () => {
+    setGenerating(true);
+    try {
+      const { pdf } = await import("@react-pdf/renderer");
+      const { DailyMenuPDFDocument } = await import("./DailyMenuPDFDocument");
+      const blob = await pdf(DailyMenuPDFDocument({ menu })).toBlob();
+      const url = URL.createObjectURL(blob);
+      setPdfUrl(url);
+    } catch (e) {
+      console.error("PDF generation failed:", e);
+    } finally {
+      setGenerating(false);
+    }
+  }, [menu]);
+
+  const handleDownload = useCallback(async () => {
+    setGenerating(true);
+    try {
+      const { pdf } = await import("@react-pdf/renderer");
+      const { DailyMenuPDFDocument } = await import("./DailyMenuPDFDocument");
+      const blob = await pdf(DailyMenuPDFDocument({ menu })).toBlob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `denni-menu-${menu.date}.pdf`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      console.error("PDF download failed:", e);
+    } finally {
+      setGenerating(false);
+    }
+  }, [menu]);
+
+  const handleClose = () => {
+    if (pdfUrl) URL.revokeObjectURL(pdfUrl);
+    onClose();
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/60 flex items-start justify-center overflow-y-auto py-8 px-4">
+      <div className="bg-white max-w-3xl w-full relative" style={{ minHeight: "80vh" }}>
+        {/* Toolbar */}
+        <div className="sticky top-0 z-10 bg-[var(--color-charcoal)] text-white px-6 py-3 flex items-center justify-between">
+          <span className="text-xs uppercase tracking-wider">Náhled denního menu</span>
+          <div className="flex items-center gap-4">
+            {!pdfUrl && (
+              <button
+                onClick={handleGenerate}
+                disabled={generating}
+                className="text-xs uppercase tracking-wider text-[var(--color-gold)] hover:text-white transition-colors disabled:opacity-50"
+              >
+                {generating ? "Generování..." : "Náhled PDF"}
+              </button>
+            )}
+            <button
+              onClick={handleDownload}
+              disabled={generating}
+              className="text-xs uppercase tracking-wider text-[var(--color-gold)] hover:text-white transition-colors disabled:opacity-50"
+            >
+              {generating ? "..." : "Stáhnout PDF"}
+            </button>
+            <button
+              onClick={handleClose}
+              className="text-white/60 hover:text-white text-lg"
+            >
+              &times;
+            </button>
+          </div>
+        </div>
+
+        {/* Content */}
+        {pdfUrl ? (
+          <iframe
+            src={pdfUrl}
+            className="w-full border-0"
+            style={{ height: "calc(80vh - 48px)" }}
+            title="PDF náhled"
+          />
+        ) : (
+          <div className="p-8 bg-[var(--color-ivory)]">
+            <MenuPreviewCard menu={menu} />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// Simple HTML preview card (not for PDF, just for the modal preview before generating)
+function MenuPreviewCard({ menu }: { menu: DailyMenuData }) {
+  const formatted = new Date(menu.date + "T12:00:00").toLocaleDateString("cs-CZ", {
     weekday: "long",
     day: "numeric",
     month: "long",
@@ -37,210 +156,56 @@ function MenuCard({ menu, date }: { menu: DailyMenuData; date: string }) {
   });
 
   return (
-    <div
-      style={{
-        fontFamily: "'Playfair Display', Georgia, serif",
-        maxWidth: 600,
-        margin: "0 auto",
-        padding: "48px 40px",
-        backgroundColor: "#FFFEF9",
-        border: "1px solid #e8e4dc",
-        color: "#2C2C2C",
-      }}
-    >
+    <div className="max-w-lg mx-auto bg-[#FFFEF9] px-8 py-12 sm:px-12 sm:py-16">
       {/* Header */}
-      <div style={{ textAlign: "center", marginBottom: 40 }}>
-        <p
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: 9,
-            letterSpacing: "0.3em",
-            textTransform: "uppercase",
-            color: "#8B8680",
-            marginBottom: 12,
-          }}
-        >
+      <div className="text-center mb-10">
+        <p className="text-[9px] tracking-[0.3em] uppercase text-[var(--color-text-muted)] mb-3">
           Denní nabídka — {formatted}
         </p>
-        <h2
-          style={{
-            fontSize: 28,
-            fontWeight: 400,
-            color: "#2C2C2C",
-            marginBottom: 12,
-          }}
-        >
-          Menu
-        </h2>
-        <div
-          style={{
-            width: 48,
-            height: 1,
-            backgroundColor: "#B8860B",
-            margin: "0 auto",
-          }}
-        />
+        <h2 className="font-serif text-3xl text-[var(--color-charcoal)] mb-3">Menu</h2>
+        <div className="w-12 h-px bg-[var(--color-gold)] mx-auto" />
       </div>
 
       {/* Soup */}
       {menu.soup && (
-        <div style={{ marginBottom: 32 }}>
-          <p
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: 9,
-              letterSpacing: "0.3em",
-              textTransform: "uppercase",
-              color: "#8B7D3C",
-              marginBottom: 4,
-            }}
-          >
-            Polévka
-          </p>
-          <p
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: 8,
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              color: "#8B8680",
-              marginBottom: 16,
-            }}
-          >
-            Soup
-          </p>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "baseline",
-              gap: 12,
-            }}
-          >
-            <span style={{ fontSize: 16 }}>{menu.soup}</span>
-            <span
-              style={{
-                flexShrink: 0,
-                fontFamily: "Inter, sans-serif",
-                fontSize: 13,
-                fontWeight: 500,
-              }}
-            >
-              {menu.soupPrice} Kč
-            </span>
+        <div className="mb-8">
+          <p className="text-[9px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-0.5">Polévka</p>
+          <p className="text-[8px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">Soup</p>
+          <div className="flex items-baseline justify-between gap-3">
+            <span className="font-serif text-lg text-[var(--color-charcoal)]">{menu.soup}</span>
+            <span className="text-sm font-medium text-[var(--color-charcoal)]">{menu.soupPrice} Kč</span>
           </div>
           {(menu.soupDescription || menu.soupAllergens) && (
-            <p
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: 10,
-                color: "#8B8680",
-                marginTop: 4,
-              }}
-            >
-              {menu.soupDescription} <AllergenTag allergens={menu.soupAllergens} />
+            <p className="text-[10px] text-[var(--color-text-muted)] mt-1">
+              {menu.soupDescription} {menu.soupAllergens && <span className="opacity-50">({menu.soupAllergens})</span>}
             </p>
           )}
-
-          {/* Divider */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 12,
-              marginTop: 24,
-            }}
-          >
-            <div style={{ width: 32, height: 1, backgroundColor: "#e8e4dc" }} />
-            <div
-              style={{
-                width: 4,
-                height: 4,
-                backgroundColor: "#B8860B",
-                transform: "rotate(45deg)",
-              }}
-            />
-            <div style={{ width: 32, height: 1, backgroundColor: "#e8e4dc" }} />
+          <div className="mt-6 flex items-center justify-center gap-3">
+            <div className="w-8 h-px bg-[var(--color-stone)]" />
+            <div className="w-1 h-1 bg-[var(--color-gold)] rotate-45" />
+            <div className="w-8 h-px bg-[var(--color-stone)]" />
           </div>
         </div>
       )}
 
-      {/* Main Courses */}
+      {/* Mains */}
       {menu.items.length > 0 && (
-        <div style={{ marginBottom: 32 }}>
-          <p
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: 9,
-              letterSpacing: "0.3em",
-              textTransform: "uppercase",
-              color: "#8B7D3C",
-              marginBottom: 4,
-            }}
-          >
-            Hlavní chod
-          </p>
-          <p
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: 8,
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              color: "#8B8680",
-              marginBottom: 16,
-            }}
-          >
-            Main courses
-          </p>
-
-          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div className="mb-8">
+          <p className="text-[9px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-0.5">Hlavní chod</p>
+          <p className="text-[8px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">Main courses</p>
+          <div className="space-y-4">
             {menu.items.map((item, i) => (
               <div key={i}>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "baseline",
-                    gap: 12,
-                  }}
-                >
-                  <span style={{ fontSize: 16 }}>
+                <div className="flex items-baseline justify-between gap-3">
+                  <span className="font-serif text-lg text-[var(--color-charcoal)]">
                     {item.name}
-                    {item.isVegetarian && (
-                      <span
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: 8,
-                          color: "#15803d",
-                          marginLeft: 6,
-                        }}
-                      >
-                        (v)
-                      </span>
-                    )}
+                    {item.isVegetarian && <span className="text-[8px] text-green-700 ml-1">(v)</span>}
                   </span>
-                  <span
-                    style={{
-                      flexShrink: 0,
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: 13,
-                      fontWeight: 500,
-                    }}
-                  >
-                    {item.price} Kč
-                  </span>
+                  <span className="text-sm font-medium text-[var(--color-charcoal)]">{item.price} Kč</span>
                 </div>
                 {(item.description || item.allergens) && (
-                  <p
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: 10,
-                      color: "#8B8680",
-                      marginTop: 4,
-                    }}
-                  >
-                    {item.description} <AllergenTag allergens={item.allergens} />
+                  <p className="text-[10px] text-[var(--color-text-muted)] mt-1">
+                    {item.description} {item.allergens && <span className="opacity-50">({item.allergens})</span>}
                   </p>
                 )}
               </div>
@@ -251,218 +216,43 @@ function MenuCard({ menu, date }: { menu: DailyMenuData; date: string }) {
 
       {/* Dessert */}
       {menu.dessert && (
-        <div style={{ marginBottom: 32 }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 12,
-              marginBottom: 24,
-            }}
-          >
-            <div style={{ width: 32, height: 1, backgroundColor: "#e8e4dc" }} />
-            <div
-              style={{
-                width: 4,
-                height: 4,
-                backgroundColor: "#B8860B",
-                transform: "rotate(45deg)",
-              }}
-            />
-            <div style={{ width: 32, height: 1, backgroundColor: "#e8e4dc" }} />
+        <div className="mb-8">
+          <div className="mb-6 flex items-center justify-center gap-3">
+            <div className="w-8 h-px bg-[var(--color-stone)]" />
+            <div className="w-1 h-1 bg-[var(--color-gold)] rotate-45" />
+            <div className="w-8 h-px bg-[var(--color-stone)]" />
           </div>
-
-          <p
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: 9,
-              letterSpacing: "0.3em",
-              textTransform: "uppercase",
-              color: "#8B7D3C",
-              marginBottom: 4,
-            }}
-          >
-            Dezert
-          </p>
-          <p
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: 8,
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              color: "#8B8680",
-              marginBottom: 16,
-            }}
-          >
-            Dessert
-          </p>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "baseline",
-              gap: 12,
-            }}
-          >
-            <span style={{ fontSize: 16 }}>{menu.dessert}</span>
+          <p className="text-[9px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-0.5">Dezert</p>
+          <p className="text-[8px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-4">Dessert</p>
+          <div className="flex items-baseline justify-between gap-3">
+            <span className="font-serif text-lg text-[var(--color-charcoal)]">{menu.dessert}</span>
             {menu.dessertPrice && (
-              <span
-                style={{
-                  flexShrink: 0,
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: 13,
-                  fontWeight: 500,
-                }}
-              >
-                {menu.dessertPrice} Kč
-              </span>
+              <span className="text-sm font-medium text-[var(--color-charcoal)]">{menu.dessertPrice} Kč</span>
             )}
           </div>
           {(menu.dessertDescription || menu.dessertAllergens) && (
-            <p
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: 10,
-                color: "#8B8680",
-                marginTop: 4,
-              }}
-            >
-              {menu.dessertDescription} <AllergenTag allergens={menu.dessertAllergens} />
+            <p className="text-[10px] text-[var(--color-text-muted)] mt-1">
+              {menu.dessertDescription} {menu.dessertAllergens && <span className="opacity-50">({menu.dessertAllergens})</span>}
             </p>
           )}
         </div>
       )}
 
       {/* Footer */}
-      <div
-        style={{
-          marginTop: 32,
-          paddingTop: 20,
-          borderTop: "1px solid rgba(44,44,44,0.1)",
-          textAlign: "center",
-        }}
-      >
-        <p
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: 8,
-            color: "#8B8680",
-            lineHeight: 1.8,
-            maxWidth: 400,
-            margin: "0 auto 8px",
-          }}
-        >
+      <div className="mt-8 pt-6 border-t border-[var(--color-charcoal)]/10 text-center space-y-2">
+        <p className="text-[8px] text-[var(--color-text-muted)] leading-relaxed max-w-sm mx-auto">
           1 — obiloviny, 2 — korýši, 3 — vejce, 4 — ryby, 5 — arašídy, 6 — sója,
           7 — mléko, 8 — skořápkové plody, 9 — celer, 10 — hořčice, 11 — sezam,
           12 — oxid siřičitý, 13 — vlčí bob, 14 — měkkýši
         </p>
-        <p
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: 8,
-            color: "#8B8680",
-            textTransform: "uppercase",
-            letterSpacing: "0.15em",
-            marginBottom: 8,
-          }}
-        >
-          (v) — vegetariánské
-        </p>
-        <p
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: 8,
-            color: "#8B8680",
-          }}
-        >
-          Informujte nás prosím o případných alergiích.
-        </p>
+        <p className="text-[8px] text-[var(--color-text-muted)] uppercase tracking-wider">(v) — vegetariánské</p>
+        <p className="text-[8px] text-[var(--color-text-muted)]">Informujte nás prosím o případných alergiích.</p>
       </div>
 
-      {/* Restaurant info */}
-      <div style={{ textAlign: "center", marginTop: 24 }}>
-        <p
-          style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: 12,
-            color: "#2C2C2C",
-          }}
-        >
-          Zámecká restaurace U Blanických rytířů
-        </p>
-        <p
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: 8,
-            color: "#8B8680",
-            marginTop: 4,
-          }}
-        >
-          Zámek Vlašim · +420 732 878 238
-        </p>
-      </div>
-    </div>
-  );
-}
-
-export function DailyMenuPreview({
-  menu,
-  onClose,
-}: {
-  menu: DailyMenuData;
-  onClose: () => void;
-}) {
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  const handleDownload = useCallback(async () => {
-    if (!menuRef.current) return;
-
-    const html2canvas = (await import("html2canvas-pro")).default;
-    const { jsPDF } = await import("jspdf");
-
-    const canvas = await html2canvas(menuRef.current, {
-      scale: 2,
-      useCORS: true,
-      backgroundColor: "#FFFEF9",
-    });
-
-    const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF("p", "mm", "a4");
-
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-    pdf.save(`denni-menu-${menu.date}.pdf`);
-  }, [menu.date]);
-
-  return (
-    <div className="fixed inset-0 z-50 bg-black/60 flex items-start justify-center overflow-y-auto py-8 px-4">
-      <div className="bg-white max-w-2xl w-full relative">
-        {/* Toolbar */}
-        <div className="sticky top-0 z-10 bg-[var(--color-charcoal)] text-white px-6 py-3 flex items-center justify-between">
-          <span className="text-xs uppercase tracking-wider">Náhled denního menu</span>
-          <div className="flex items-center gap-4">
-            <button
-              onClick={handleDownload}
-              className="text-xs uppercase tracking-wider text-[var(--color-gold)] hover:text-white transition-colors"
-            >
-              Stáhnout PDF
-            </button>
-            <button
-              onClick={onClose}
-              className="text-white/60 hover:text-white text-lg"
-            >
-              &times;
-            </button>
-          </div>
-        </div>
-
-        {/* Menu content */}
-        <div ref={menuRef} className="p-8 bg-[var(--color-ivory)]">
-          <MenuCard menu={menu} date={menu.date} />
-        </div>
+      {/* Restaurant */}
+      <div className="text-center mt-6">
+        <p className="font-serif text-xs text-[var(--color-charcoal)]">Zámecká restaurace U Blanických rytířů</p>
+        <p className="text-[8px] text-[var(--color-text-muted)] mt-1">Zámek Vlašim · +420 732 878 238</p>
       </div>
     </div>
   );
