@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
+import { DailyMenuPreview } from "@/components/DailyMenuPDF";
 
 function LoginForm({ onLogin }: { onLogin: (token: string) => void }) {
   const [password, setPassword] = useState("");
@@ -85,6 +86,7 @@ function MenuEditor({ token, onLogout }: { token: string; onLogout: () => void }
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
   const [showHistory, setShowHistory] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
 
   const existingMenu = useQuery(api.dailyMenu.getByDate, { date });
   const recentMenus = useQuery(api.dailyMenu.listRecent, { token });
@@ -484,6 +486,13 @@ function MenuEditor({ token, onLogout }: { token: string; onLogout: () => void }
               >
                 {saving ? "Ukládání..." : "Uložit menu"}
               </button>
+              <button
+                onClick={() => setShowPreview(true)}
+                disabled={!soup}
+                className="px-6 py-3 border border-[var(--color-charcoal)] text-[var(--color-charcoal)] text-[11px] tracking-[0.2em] uppercase font-medium hover:bg-[var(--color-charcoal)] hover:text-white transition-all disabled:opacity-30"
+              >
+                Náhled / PDF
+              </button>
               {message && (
                 <span className="text-sm text-[var(--color-gold-dark)]">{message}</span>
               )}
@@ -535,6 +544,25 @@ function MenuEditor({ token, onLogout }: { token: string; onLogout: () => void }
           </div>
         </div>
       </div>
+
+      {/* PDF Preview Modal */}
+      {showPreview && (
+        <DailyMenuPreview
+          menu={{
+            date,
+            soup,
+            soupDescription: soupDescription || undefined,
+            soupAllergens: soupAllergens || undefined,
+            soupPrice,
+            items: items.filter((i) => i.name.trim() !== ""),
+            dessert: dessert || undefined,
+            dessertDescription: dessertDescription || undefined,
+            dessertAllergens: dessertAllergens || undefined,
+            dessertPrice: dessertPrice || undefined,
+          }}
+          onClose={() => setShowPreview(false)}
+        />
+      )}
     </div>
   );
 }
