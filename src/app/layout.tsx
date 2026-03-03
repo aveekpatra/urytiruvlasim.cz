@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { RESTAURANT_INFO } from "@/lib/constants";
 import { MotionProvider } from "@/components/motion";
+import { ConvexClientProvider } from "@/components/ConvexProvider";
 
 
 const inter = Inter({
@@ -79,7 +80,9 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} ${playfair.variable} antialiased overflow-x-hidden`}>
-        <MotionProvider>{children}</MotionProvider>
+        <ConvexClientProvider>
+          <MotionProvider>{children}</MotionProvider>
+        </ConvexClientProvider>
       </body>
     </html>
   );

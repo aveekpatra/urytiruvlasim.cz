@@ -5,7 +5,6 @@ import { DailyMenuSection } from "@/components/sections/DailyMenuSection";
 import { WeddingsSection } from "@/components/sections/WeddingsSection";
 import { GallerySection } from "@/components/sections/GallerySection";
 import { Footer } from "@/components/sections/Footer";
-import { SAMPLE_MENU } from "@/lib/constants";
 
 export default function Home() {
   return (
@@ -21,7 +20,7 @@ export default function Home() {
         <AboutSection />
 
         {/* Daily Menu */}
-        <DailyMenuSection menuItems={SAMPLE_MENU} />
+        <DailyMenuSection />
 
         {/* Weddings & Events */}
         <WeddingsSection />
