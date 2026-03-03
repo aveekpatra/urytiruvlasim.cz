@@ -8,20 +8,20 @@ import {
 } from "@react-pdf/renderer";
 import type { DailyMenuData } from "./DailyMenuPDF";
 
-// Register fonts
+// Register fonts (local files in public/fonts/)
 Font.register({
   family: "Playfair",
   fonts: [
-    { src: "https://fonts.gstatic.com/s/playfairdisplay/v37/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKdFvXDXbtM.ttf", fontWeight: 400 },
-    { src: "https://fonts.gstatic.com/s/playfairdisplay/v37/nuFvD-vYSZviVYUb_rj3ij__anPXJzDwcbmjWBN2PKd3u3DXbtM.ttf", fontWeight: 400, fontStyle: "italic" },
+    { src: "/fonts/PlayfairDisplay-Regular.ttf", fontWeight: 400 },
+    { src: "/fonts/PlayfairDisplay-Italic.ttf", fontWeight: 400, fontStyle: "italic" },
   ],
 });
 
 Font.register({
   family: "Inter",
   fonts: [
-    { src: "https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hiA.ttf", fontWeight: 400 },
-    { src: "https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fAZ9hiA.ttf", fontWeight: 500 },
+    { src: "/fonts/Inter-Regular.ttf", fontWeight: 400 },
+    { src: "/fonts/Inter-Medium.ttf", fontWeight: 500 },
   ],
 });
 
