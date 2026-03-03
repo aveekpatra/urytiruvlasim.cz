@@ -380,9 +380,10 @@ export default function MenuPage() {
             {/* Allergen Legend */}
             <div className="mt-16 pt-8 border-t border-[var(--color-charcoal)]/10 text-center space-y-3">
               <p className="text-[10px] tracking-[0.15em] text-[var(--color-text-muted)] leading-relaxed max-w-md mx-auto">
-                1 — obiloviny, 3 — vejce, 4 — ryby, 6 — sója, 7 — mléko, 8 —
-                skořápkové plody, 9 — celer, 10 — hořčice, 11 — sezam, 12 —
-                oxid siřičitý
+                1 — obiloviny, 2 — korýši, 3 — vejce, 4 — ryby, 5 — arašídy,
+                6 — sója, 7 — mléko, 8 — skořápkové plody, 9 — celer,
+                10 — hořčice, 11 — sezam, 12 — oxid siřičitý, 13 — vlčí bob,
+                14 — měkkýši
               </p>
               <p className="text-[10px] tracking-[0.15em] text-[var(--color-text-muted)]">
                 Informujte nás prosím o případných alergiích.

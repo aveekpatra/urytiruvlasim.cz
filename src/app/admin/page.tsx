@@ -63,7 +63,7 @@ interface MenuItem {
 function AllergenHint() {
   return (
     <p className="text-[9px] text-[var(--color-text-muted)] mt-1">
-      1-obiloviny 3-vejce 4-ryby 6-sója 7-mléko 8-skořápky 9-celer 10-hořčice 11-sezam 12-siřičitany
+      1-obiloviny 2-korýši 3-vejce 4-ryby 5-arašídy 6-sója 7-mléko 8-skořápky 9-celer 10-hořčice 11-sezam 12-siřičitany 13-vlčí bob 14-měkkýši
     </p>
   );
 }
