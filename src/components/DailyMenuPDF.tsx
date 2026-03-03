@@ -1,18 +1,6 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import dynamic from "next/dynamic";
-
-// Dynamically import react-pdf (it uses browser APIs)
-const PDFDownloadLink = dynamic(
-  () => import("@react-pdf/renderer").then((mod) => mod.PDFDownloadLink),
-  { ssr: false }
-);
-
-const BlobProvider = dynamic(
-  () => import("@react-pdf/renderer").then((mod) => mod.BlobProvider),
-  { ssr: false }
-);
 
 interface MenuItem {
   name: string;
@@ -35,18 +23,6 @@ export interface DailyMenuData {
   dessertPrice?: number;
 }
 
-// Lazy-load the PDF document component
-function usePDFDocument() {
-  const [DocComponent, setDocComponent] = useState<any>(null);
-
-  const loadDoc = useCallback(async () => {
-    const mod = await import("./DailyMenuPDFDocument");
-    return mod.DailyMenuPDFDocument;
-  }, []);
-
-  return { loadDoc, DocComponent, setDocComponent };
-}
-
 export function DailyMenuPreview({
   menu,
   onClose,
@@ -54,23 +30,7 @@ export function DailyMenuPreview({
   menu: DailyMenuData;
   onClose: () => void;
 }) {
-  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
   const [generating, setGenerating] = useState(false);
-
-  const handleGenerate = useCallback(async () => {
-    setGenerating(true);
-    try {
-      const { pdf } = await import("@react-pdf/renderer");
-      const { DailyMenuPDFDocument } = await import("./DailyMenuPDFDocument");
-      const blob = await pdf(DailyMenuPDFDocument({ menu })).toBlob();
-      const url = URL.createObjectURL(blob);
-      setPdfUrl(url);
-    } catch (e) {
-      console.error("PDF generation failed:", e);
-    } finally {
-      setGenerating(false);
-    }
-  }, [menu]);
 
   const handleDownload = useCallback(async () => {
     setGenerating(true);
@@ -92,7 +52,6 @@ export function DailyMenuPreview({
   }, [menu]);
 
   const handleClose = () => {
-    if (pdfUrl) URL.revokeObjectURL(pdfUrl);
     onClose();
   };
 
@@ -103,15 +62,6 @@ export function DailyMenuPreview({
         <div className="sticky top-0 z-10 bg-[var(--color-charcoal)] text-white px-6 py-3 flex items-center justify-between">
           <span className="text-xs uppercase tracking-wider">Náhled denního menu</span>
           <div className="flex items-center gap-4">
-            {!pdfUrl && (
-              <button
-                onClick={handleGenerate}
-                disabled={generating}
-                className="text-xs uppercase tracking-wider text-[var(--color-gold)] hover:text-white transition-colors disabled:opacity-50"
-              >
-                {generating ? "Generování..." : "Náhled PDF"}
-              </button>
-            )}
             <button
               onClick={handleDownload}
               disabled={generating}
@@ -129,18 +79,9 @@ export function DailyMenuPreview({
         </div>
 
         {/* Content */}
-        {pdfUrl ? (
-          <iframe
-            src={pdfUrl}
-            className="w-full border-0"
-            style={{ height: "calc(80vh - 48px)" }}
-            title="PDF náhled"
-          />
-        ) : (
-          <div className="p-8 bg-[var(--color-ivory)]">
-            <MenuPreviewCard menu={menu} />
-          </div>
-        )}
+        <div className="p-8 bg-[var(--color-ivory)]">
+          <MenuPreviewCard menu={menu} />
+        </div>
       </div>
     </div>
   );

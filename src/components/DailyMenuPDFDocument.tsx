@@ -63,7 +63,7 @@ const s = StyleSheet.create({
   dividerDot: { width: 3, height: 3, backgroundColor: gold, marginHorizontal: 8, transform: "rotate(45deg)" },
 
   // Footer
-  footerWrap: { marginTop: 28, paddingTop: 16, borderTopWidth: 0.5, borderTopColor: "rgba(44,44,44,0.1)", textAlign: "center" },
+  footerWrap: { marginTop: 28, paddingTop: 16, borderTopWidth: 0.5, borderTopColor: "#E3E3E3", textAlign: "center" },
   footerText: { fontFamily: "Inter", fontSize: 6.5, color: muted, lineHeight: 1.8, maxWidth: 360, marginHorizontal: "auto", marginBottom: 6 },
   footerSmall: { fontFamily: "Inter", fontSize: 6.5, color: muted, marginBottom: 6 },
 
