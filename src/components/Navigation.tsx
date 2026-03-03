@@ -8,7 +8,7 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import { Mail01Icon, CallIcon, InstagramIcon, Facebook01Icon } from "@hugeicons/core-free-icons";
 
 const navLinks = [
-  { label: "Domů", href: "/", homeOnly: false, mobileOnly: true },
+  { label: "Domů", href: "/", homeOnly: false, mobileOnly: false },
   { label: "Menu", href: "/menu", homeOnly: false, mobileOnly: false },
   { label: "Svatby & Oslavy", href: "/svatby", homeOnly: false, mobileOnly: false },
   { label: "Galerie", href: "/galerie", homeOnly: false, mobileOnly: false },
