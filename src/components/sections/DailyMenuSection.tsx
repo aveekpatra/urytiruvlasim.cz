@@ -5,6 +5,15 @@ import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { FadeIn } from "@/components/motion";
 
+function AllergenTag({ allergens }: { allergens?: string }) {
+  if (!allergens) return null;
+  return (
+    <span className="text-[var(--color-text-muted)]/60">
+      ({allergens})
+    </span>
+  );
+}
+
 export function DailyMenuSection() {
   const todayMenu = useQuery(api.dailyMenu.getToday);
 
@@ -87,14 +96,21 @@ export function DailyMenuSection() {
                   </span>
                 </div>
 
-                <div className="flex items-baseline gap-3">
-                  <span className="font-serif text-lg sm:text-xl text-[var(--color-charcoal)]">
-                    {todayMenu.soup}
-                  </span>
-                  <span className="flex-1 border-b border-dotted border-[var(--color-charcoal)]/15 min-w-[2rem] translate-y-[-4px]" />
-                  <span className="text-[var(--color-charcoal)] text-sm font-medium whitespace-nowrap">
-                    {todayMenu.soupPrice} Kč
-                  </span>
+                <div>
+                  <div className="flex items-baseline gap-3">
+                    <span className="font-serif text-lg sm:text-xl text-[var(--color-charcoal)]">
+                      {todayMenu.soup}
+                    </span>
+                    <span className="flex-1 border-b border-dotted border-[var(--color-charcoal)]/15 min-w-[2rem] translate-y-[-4px]" />
+                    <span className="text-[var(--color-charcoal)] text-sm font-medium whitespace-nowrap">
+                      {todayMenu.soupPrice} Kč
+                    </span>
+                  </div>
+                  <p className="text-[var(--color-text-muted)] text-xs mt-1 tracking-wide">
+                    {todayMenu.soupDescription}
+                    {todayMenu.soupDescription && todayMenu.soupAllergens && " "}
+                    <AllergenTag allergens={todayMenu.soupAllergens} />
+                  </p>
                 </div>
 
                 <div className="mt-10 flex items-center justify-center gap-4">
@@ -124,16 +140,21 @@ export function DailyMenuSection() {
                         <span className="font-serif text-lg sm:text-xl text-[var(--color-charcoal)]">
                           {item.name}
                         </span>
+                        {item.isVegetarian && (
+                          <span className="text-[9px] tracking-[0.1em] uppercase text-green-700 shrink-0">
+                            (v)
+                          </span>
+                        )}
                         <span className="flex-1 border-b border-dotted border-[var(--color-charcoal)]/15 min-w-[2rem] translate-y-[-4px]" />
                         <span className="text-[var(--color-charcoal)] text-sm font-medium whitespace-nowrap">
                           {item.price} Kč
                         </span>
                       </div>
-                      {item.description && (
-                        <p className="text-[var(--color-text-muted)] text-xs mt-1 tracking-wide">
-                          {item.description}
-                        </p>
-                      )}
+                      <p className="text-[var(--color-text-muted)] text-xs mt-1 tracking-wide">
+                        {item.description}
+                        {item.description && item.allergens && " "}
+                        <AllergenTag allergens={item.allergens} />
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -158,22 +179,37 @@ export function DailyMenuSection() {
                   </span>
                 </div>
 
-                <div className="flex items-baseline gap-3">
-                  <span className="font-serif text-lg sm:text-xl text-[var(--color-charcoal)]">
-                    {todayMenu.dessert}
-                  </span>
-                  <span className="flex-1 border-b border-dotted border-[var(--color-charcoal)]/15 min-w-[2rem] translate-y-[-4px]" />
-                  {todayMenu.dessertPrice && (
-                    <span className="text-[var(--color-charcoal)] text-sm font-medium whitespace-nowrap">
-                      {todayMenu.dessertPrice} Kč
+                <div>
+                  <div className="flex items-baseline gap-3">
+                    <span className="font-serif text-lg sm:text-xl text-[var(--color-charcoal)]">
+                      {todayMenu.dessert}
                     </span>
-                  )}
+                    <span className="flex-1 border-b border-dotted border-[var(--color-charcoal)]/15 min-w-[2rem] translate-y-[-4px]" />
+                    {todayMenu.dessertPrice && (
+                      <span className="text-[var(--color-charcoal)] text-sm font-medium whitespace-nowrap">
+                        {todayMenu.dessertPrice} Kč
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-[var(--color-text-muted)] text-xs mt-1 tracking-wide">
+                    {todayMenu.dessertDescription}
+                    {todayMenu.dessertDescription && todayMenu.dessertAllergens && " "}
+                    <AllergenTag allergens={todayMenu.dessertAllergens} />
+                  </p>
                 </div>
               </div>
             )}
 
             {/* Footer */}
-            <div className="mt-12 pt-8 border-t border-[var(--color-charcoal)]/10 text-center">
+            <div className="mt-12 pt-8 border-t border-[var(--color-charcoal)]/10 text-center space-y-3">
+              <p className="text-[10px] tracking-[0.15em] text-[var(--color-text-muted)] leading-relaxed max-w-md mx-auto">
+                1 — obiloviny, 3 — vejce, 4 — ryby, 6 — sója, 7 — mléko, 8 —
+                skořápkové plody, 9 — celer, 10 — hořčice, 11 — sezam, 12 —
+                oxid siřičitý
+              </p>
+              <p className="text-[10px] tracking-[0.15em] uppercase text-[var(--color-text-muted)]">
+                (v) — vegetariánské
+              </p>
               <p className="text-[10px] tracking-[0.15em] text-[var(--color-text-muted)]">
                 Informujte nás prosím o případných alergiích.
               </p>
