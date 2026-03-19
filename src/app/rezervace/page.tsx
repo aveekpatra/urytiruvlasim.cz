@@ -334,8 +334,7 @@ export default function ReservacePage() {
                     ))}
                   </div>
                   <p className="text-[var(--color-text-muted)] text-xs mt-4 leading-relaxed">
-                    Pondělí zavřeno. Kuchyně se zavírá 1 hodinu před koncem
-                    otevírací doby.
+                    Kuchyně se zavírá 1 hodinu před koncem otevírací doby.
                   </p>
                 </div>
 
@@ -375,10 +374,6 @@ export default function ReservacePage() {
                     <li className="flex items-start gap-2">
                       <span className="w-1 h-1 bg-[var(--color-gold)] rotate-45 mt-2 shrink-0" />
                       Pro skupiny nad 20 osob nás prosím kontaktujte telefonicky
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="w-1 h-1 bg-[var(--color-gold)] rotate-45 mt-2 shrink-0" />
-                      Bezplatné parkování přímo u zámku
                     </li>
                   </ul>
                 </div>

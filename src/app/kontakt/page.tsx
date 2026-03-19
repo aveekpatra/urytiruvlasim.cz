@@ -6,7 +6,7 @@ import { Footer } from "@/components/sections/Footer";
 import { RESTAURANT_INFO } from "@/lib/constants";
 import { FadeIn, SlideIn, AnimatedImage, StaggerContainer, StaggerItem } from "@/components/motion";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Facebook01Icon, InstagramIcon, Location01Icon, CallIcon, Mail01Icon, Clock01Icon, ParkingAreaSquareIcon, MapsLocation01Icon } from "@hugeicons/core-free-icons";
+import { Facebook01Icon, InstagramIcon, Location01Icon, CallIcon, Mail01Icon, Clock01Icon, MapsLocation01Icon } from "@hugeicons/core-free-icons";
 
 export const metadata: Metadata = {
   title: "Kontakt | U Blanických rytířů",
@@ -159,7 +159,7 @@ export default function KontaktPage() {
       {/* Opening Hours + Parking */}
       <section className="bg-[var(--color-ivory)] py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
             {/* Opening Hours */}
             <StaggerItem>
               <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-6 flex items-center gap-2">
@@ -187,18 +187,6 @@ export default function KontaktPage() {
                   </div>
                 ))}
               </div>
-            </StaggerItem>
-
-            {/* Parking */}
-            <StaggerItem>
-              <h3 className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)] font-medium mb-6 flex items-center gap-2">
-                <HugeiconsIcon icon={ParkingAreaSquareIcon} size={14} strokeWidth={1.5} />
-                Parkování
-              </h3>
-              <p className="text-[var(--color-text-muted)] text-sm leading-relaxed">
-                Bezplatné parkování přímo u zámku. Prostorné parkoviště
-                je k dispozici všem hostům restaurace.
-              </p>
             </StaggerItem>
 
             {/* Getting There */}

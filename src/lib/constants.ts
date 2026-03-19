@@ -16,10 +16,9 @@ export const RESTAURANT_INFO: RestaurantInfo = {
     lng: 14.8950
   },
   openingHours: [
-    { days: "Po", hours: "Zavřeno" },
-    { days: "Út–Čt", hours: "11:00–22:00" },
-    { days: "Pá–So", hours: "11:00–00:00" },
-    { days: "Ne", hours: "11:00–22:00" }
+    { days: "Po–Čt", hours: "11:00–22:00" },
+    { days: "Pá–So", hours: "11:00–23:00" },
+    { days: "Ne", hours: "11:00–21:00" }
   ]
 };
 
@@ -28,11 +27,6 @@ export const USP_FEATURES: Feature[] = [
     icon: "castle",
     title: "Jedinečná lokace",
     description: "Obědváte přímo v prostorách historického vlašimského zámku. Park s 75 hektary zeleně je ideální na procházku po jídle."
-  },
-  {
-    icon: "parking",
-    title: "Parkování zdarma",
-    description: "Nemusíte hledat místo. Parkujete přímo před vstupem do zámeckého areálu."
   },
   {
     icon: "family",
@@ -109,7 +103,6 @@ export const WEDDING_FEATURES = [
   "Pronájem restaurace pro vaši akci",
   "Menu a dekorace na míru",
   "Svatby, firemní akce, soukromé oslavy",
-  "Parkování zdarma pro hosty",
   "Kapacita: až 80 hostů"
 ];
 

@@ -83,11 +83,6 @@ const features = [
       "Elegantní vinárna s výběrem tuzemských i zahraničních vín pro slavnostní přípitek.",
   },
   {
-    title: "Parkování zdarma",
-    description:
-      "Prostorné parkoviště přímo u zámku. Žádné starosti s parkováním pro vaše hosty.",
-  },
-  {
     title: "Wi-Fi v celém objektu",
     description:
       "Připojení k internetu ve všech prostorách restaurace.",
