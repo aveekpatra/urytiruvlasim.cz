@@ -34,31 +34,31 @@ export function AboutSection() {
               </p>
             </div>
             <FadeIn delay={0.3}>
-              <div className="mt-12 flex flex-col sm:flex-row gap-10">
-                <div>
-                  <span className="flex items-center gap-2 font-serif text-4xl text-[var(--color-gold)]">
-                    <HugeiconsIcon icon={Tree01Icon} size={36} strokeWidth={1.5} />
-                    75
-                  </span>
-                  <span className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-text-muted)]">
+              <div className="mt-12 grid grid-cols-3 gap-6 sm:gap-10">
+                <div className="text-center sm:text-left">
+                  <div className="flex items-center justify-center sm:justify-start gap-2 text-[var(--color-gold)] mb-1">
+                    <HugeiconsIcon icon={Tree01Icon} className="w-6 h-6 sm:w-9 sm:h-9 shrink-0" strokeWidth={1.5} />
+                    <span className="font-serif text-2xl sm:text-4xl">75</span>
+                  </div>
+                  <span className="text-[9px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase text-[var(--color-text-muted)] leading-tight block">
                     Hektarů zámeckého parku
                   </span>
                 </div>
-                <div>
-                  <span className="flex items-center gap-2 font-serif text-4xl text-[var(--color-gold)]">
-                    <HugeiconsIcon icon={CastleIcon} size={36} strokeWidth={1.5} />
-                    1850
-                  </span>
-                  <span className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-text-muted)]">
+                <div className="text-center sm:text-left">
+                  <div className="flex items-center justify-center sm:justify-start gap-2 text-[var(--color-gold)] mb-1">
+                    <HugeiconsIcon icon={CastleIcon} className="w-6 h-6 sm:w-9 sm:h-9 shrink-0" strokeWidth={1.5} />
+                    <span className="font-serif text-2xl sm:text-4xl">1850</span>
+                  </div>
+                  <span className="text-[9px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase text-[var(--color-text-muted)] leading-tight block">
                     Historie zámku
                   </span>
                 </div>
-                <div>
-                  <span className="flex items-center gap-2 font-serif text-4xl text-[var(--color-gold)]">
-                    <HugeiconsIcon icon={DrinkIcon} size={36} strokeWidth={1.5} />
-                    Na čepu
-                  </span>
-                  <span className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-text-muted)]">
+                <div className="text-center sm:text-left">
+                  <div className="flex items-center justify-center sm:justify-start gap-2 text-[var(--color-gold)] mb-1">
+                    <HugeiconsIcon icon={DrinkIcon} className="w-6 h-6 sm:w-9 sm:h-9 shrink-0" strokeWidth={1.5} />
+                    <span className="font-serif text-lg sm:text-2xl whitespace-nowrap">Na čepu</span>
+                  </div>
+                  <span className="text-[9px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase text-[var(--color-text-muted)] leading-tight block">
                     Točená Plzeň
                   </span>
                 </div>
