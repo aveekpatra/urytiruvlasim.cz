@@ -36,7 +36,7 @@ export const USP_FEATURES: Feature[] = [
   {
     icon: "drink",
     title: "Točené pivo",
-    description: "Točená Plzeň a Kozel přímo z tanku. Vychlazené, čerstvé, tak jak má být."
+    description: "Točená Plzeň přímo z tanku. Vychlazená, čerstvá, tak jak má být."
   }
 ];
 

@@ -218,7 +218,7 @@ export default function GaleriePage() {
             </h2>
             <div className="w-12 h-px bg-[var(--color-gold)] mx-auto mb-6" />
             <p className="text-[var(--color-text-muted)] text-sm max-w-lg mx-auto">
-              Pilsner Urquell a Kozel z tanku, Dallmayr káva a výběr destilátů.
+              Pilsner Urquell z tanku, Dallmayr káva a výběr destilátů.
             </p>
           </div>
           </FadeIn>

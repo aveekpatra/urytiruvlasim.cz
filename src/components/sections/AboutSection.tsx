@@ -59,7 +59,7 @@ export function AboutSection() {
                     Na čepu
                   </span>
                   <span className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-text-muted)]">
-                    Točená Plzeň & Kozel
+                    Točená Plzeň
                   </span>
                 </div>
               </div>
