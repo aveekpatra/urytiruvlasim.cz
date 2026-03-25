@@ -10,6 +10,8 @@
 
 import type * as auth from "../auth.js";
 import type * as dailyMenu from "../dailyMenu.js";
+import type * as reservations from "../reservations.js";
+import type * as seed from "../seed.js";
 
 import type {
   ApiFromModules,
@@ -20,6 +22,8 @@ import type {
 declare const fullApi: ApiFromModules<{
   auth: typeof auth;
   dailyMenu: typeof dailyMenu;
+  reservations: typeof reservations;
+  seed: typeof seed;
 }>;
 
 /**

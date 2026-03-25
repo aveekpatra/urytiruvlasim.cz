@@ -55,7 +55,7 @@ export const PREDKRMY: FullMenuItem[] = [
   },
   {
     name: "Grilovaný kozí sýr ve slanině",
-    description: "rukolový salát s brusinkami, domácí focaccia",
+    description: "rukolový salát s brusinkami, toustový chléb",
     allergens: "1,7",
     price: 185,
   },
@@ -156,7 +156,7 @@ export const SALATY: FullMenuItem[] = [
   },
   {
     name: "Grilovaný kozí sýr na listovém salátu",
-    description: "zelenina, červená řepa, medovo-hořčičná emulze, domácí focaccia",
+    description: "zelenina, červená řepa, medovo-hořčičná emulze, toustový chléb",
     allergens: "1,3,7,10",
     weight: "300g",
     price: 285,

@@ -47,4 +47,24 @@ export default defineSchema({
     token: v.string(),
     expiresAt: v.number(),
   }).index("by_token", ["token"]),
+
+  reservations: defineTable({
+    name: v.string(),
+    email: v.string(),
+    phone: v.string(),
+    date: v.string(),
+    time: v.string(),
+    guests: v.number(),
+    occasion: v.optional(v.string()),
+    notes: v.optional(v.string()),
+    status: v.union(
+      v.literal("pending"),
+      v.literal("confirmed"),
+      v.literal("rejected")
+    ),
+    createdAt: v.number(),
+    respondedAt: v.optional(v.number()),
+  })
+    .index("by_status", ["status"])
+    .index("by_date", ["date"]),
 });
