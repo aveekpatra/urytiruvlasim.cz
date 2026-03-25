@@ -1,18 +1,18 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
 const RESTAURANT_EMAIL = "ublanickychrytiru@seznam.cz";
 
-function getResend() {
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
-    throw new Error("RESEND_API_KEY is not configured");
-  }
-  return new Resend(apiKey);
-}
-
-function getFromEmail() {
-  return process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
+function createTransport() {
+  return nodemailer.createTransport({
+    host: process.env.SMTP_HOST || "smtp.seznam.cz",
+    port: Number(process.env.SMTP_PORT) || 465,
+    secure: true,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
+    },
+  });
 }
 
 interface ReservationData {
@@ -141,7 +141,6 @@ export async function POST(request: Request) {
     const { name, email, phone, date, time, guests, occasion, notes } =
       body as ReservationData;
 
-    // Server-side validation
     if (!name || !email || !phone || !date || !time || !guests) {
       return NextResponse.json(
         { error: "Vyplňte prosím všechna povinná pole." },
@@ -149,41 +148,22 @@ export async function POST(request: Request) {
       );
     }
 
-    const resend = getResend();
-    const fromEmail = getFromEmail();
+    const transporter = createTransport();
 
     // Send notification to restaurant
-    await resend.emails.send({
-      from: fromEmail,
+    await transporter.sendMail({
+      from: `"U Blanických rytířů" <${RESTAURANT_EMAIL}>`,
       to: RESTAURANT_EMAIL,
       subject: `Rezervace: ${name} — ${formatCzechDate(date)} v ${time}`,
-      html: buildRestaurantEmail({
-        name,
-        email,
-        phone,
-        date,
-        time,
-        guests,
-        occasion,
-        notes,
-      }),
+      html: buildRestaurantEmail({ name, email, phone, date, time, guests, occasion, notes }),
     });
 
     // Send confirmation to customer
-    await resend.emails.send({
-      from: fromEmail,
+    await transporter.sendMail({
+      from: `"U Blanických rytířů" <${RESTAURANT_EMAIL}>`,
       to: email,
       subject: `Potvrzení rezervace — U Blanických rytířů`,
-      html: buildConfirmationEmail({
-        name,
-        email,
-        phone,
-        date,
-        time,
-        guests,
-        occasion,
-        notes,
-      }),
+      html: buildConfirmationEmail({ name, email, phone, date, time, guests, occasion, notes }),
     });
 
     return NextResponse.json({ success: true });
