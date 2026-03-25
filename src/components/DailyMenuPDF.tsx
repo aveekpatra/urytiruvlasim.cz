@@ -52,10 +52,6 @@ export function DailyMenuPreview({
     }
   }, [menu]);
 
-  const handleClose = () => {
-    onClose();
-  };
-
   return (
     <div className="fixed inset-0 z-50 bg-black/60 flex items-start justify-center overflow-y-auto py-8 px-4">
       <div className="bg-white max-w-3xl w-full relative" style={{ minHeight: "80vh" }}>
@@ -71,7 +67,7 @@ export function DailyMenuPreview({
               {generating ? "..." : "Stáhnout PDF"}
             </button>
             <button
-              onClick={handleClose}
+              onClick={onClose}
               className="text-white/60 hover:text-white text-lg"
             >
               &times;
@@ -88,7 +84,18 @@ export function DailyMenuPreview({
   );
 }
 
-// Simple HTML preview card (not for PDF, just for the modal preview before generating)
+function PriceWithLines({ price }: { price: number }) {
+  return (
+    <div className="flex items-center justify-center gap-3 mt-2 mb-6">
+      <div className="w-12 h-px bg-[var(--color-charcoal)]" />
+      <span className="font-serif text-sm font-bold text-[var(--color-charcoal)]">
+        {price} Kč
+      </span>
+      <div className="w-12 h-px bg-[var(--color-charcoal)]" />
+    </div>
+  );
+}
+
 function MenuPreviewCard({ menu }: { menu: DailyMenuData }) {
   const formatted = new Date(menu.date + "T12:00:00").toLocaleDateString("cs-CZ", {
     weekday: "long",
@@ -98,127 +105,142 @@ function MenuPreviewCard({ menu }: { menu: DailyMenuData }) {
   });
 
   return (
-    <div className="max-w-lg mx-auto bg-[#FFFEF9] px-8 py-12 sm:px-12 sm:py-16">
-      {/* Header */}
-      <div className="text-center mb-10">
-        <p className="text-[9px] tracking-[0.3em] uppercase text-[var(--color-text-muted)] mb-3">
-          Denní nabídka — {formatted}
-        </p>
-        <h2 className="font-serif text-3xl text-[var(--color-charcoal)] mb-3">Menu</h2>
-        <div className="w-12 h-px bg-[var(--color-gold)] mx-auto" />
-      </div>
+    <div className="max-w-lg mx-auto bg-[#FFFEF9] border border-[#D4D0C8] relative px-10 py-14 sm:px-14 sm:py-16">
+      {/* Corner ornaments */}
+      <svg className="absolute top-2 left-2 w-6 h-6 text-[#D4D0C8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.8">
+        <path d="M2 2 C2 2, 8 2, 12 6 C16 10, 16 16, 16 22 M2 2 C2 2, 2 8, 6 12 C10 16, 16 16, 22 16" />
+      </svg>
+      <svg className="absolute top-2 right-2 w-6 h-6 text-[#D4D0C8] -scale-x-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.8">
+        <path d="M2 2 C2 2, 8 2, 12 6 C16 10, 16 16, 16 22 M2 2 C2 2, 2 8, 6 12 C10 16, 16 16, 22 16" />
+      </svg>
+      <svg className="absolute bottom-2 left-2 w-6 h-6 text-[#D4D0C8] -scale-y-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.8">
+        <path d="M2 2 C2 2, 8 2, 12 6 C16 10, 16 16, 16 22 M2 2 C2 2, 2 8, 6 12 C10 16, 16 16, 22 16" />
+      </svg>
+      <svg className="absolute bottom-2 right-2 w-6 h-6 text-[#D4D0C8] -scale-x-100 -scale-y-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.8">
+        <path d="M2 2 C2 2, 8 2, 12 6 C16 10, 16 16, 16 22 M2 2 C2 2, 2 8, 6 12 C10 16, 16 16, 22 16" />
+      </svg>
+
+      {/* Date */}
+      <p className="text-[9px] tracking-[0.25em] uppercase text-[var(--color-text-muted)] text-center mb-8">
+        Denní nabídka — {formatted}
+      </p>
 
       {/* Soup */}
       {menu.soup && (
-        <div className="mb-8">
-          <p className="text-[9px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4">Polévka</p>
-          <div className="flex items-baseline justify-between gap-3">
-            <span className="font-serif text-lg text-[var(--color-charcoal)]">{menu.soup}</span>
-            <span className="text-sm font-medium text-[var(--color-charcoal)]">{menu.soupPrice} Kč</span>
-          </div>
-          {(menu.soupDescription || menu.soupAllergens) && (
-            <p className="text-[10px] text-[var(--color-text-muted)] mt-1">
-              {menu.soupDescription} {menu.soupAllergens && <span className="opacity-50">({menu.soupAllergens})</span>}
+        <div className="mb-4">
+          <h3 className="font-serif text-2xl tracking-wider uppercase text-center text-[var(--color-charcoal)] mb-5">
+            Polévka
+          </h3>
+          <p className="font-serif text-sm font-bold uppercase tracking-wider text-center text-[var(--color-charcoal)]">
+            {menu.soup}
+          </p>
+          {menu.soupDescription && (
+            <p className="text-[9px] tracking-[0.15em] uppercase text-center text-[var(--color-text-muted)] mt-1">
+              {menu.soupDescription}
             </p>
           )}
-          <div className="mt-6 flex items-center justify-center gap-3">
-            <div className="w-8 h-px bg-[var(--color-stone)]" />
-            <div className="w-1 h-1 bg-[var(--color-gold)] rotate-45" />
-            <div className="w-8 h-px bg-[var(--color-stone)]" />
-          </div>
+          {menu.soupAllergens && (
+            <p className="text-[9px] tracking-wider text-center text-[var(--color-text-muted)] mt-0.5">
+              ({menu.soupAllergens})
+            </p>
+          )}
+          <PriceWithLines price={menu.soupPrice} />
         </div>
       )}
 
-      {/* Mains */}
+      {/* Main courses */}
       {menu.items.length > 0 && (
-        <div className="mb-8">
-          <p className="text-[9px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4">Hlavní chod</p>
-          <div className="space-y-4">
-            {menu.items.map((item, i) => (
-              <div key={i}>
-                <div className="flex items-baseline justify-between gap-3">
-                  <span className="font-serif text-lg text-[var(--color-charcoal)]">
-                    {item.name}
-                    {item.isVegetarian && <span className="text-[8px] text-green-700 ml-1">(v)</span>}
-                  </span>
-                  <span className="text-sm font-medium text-[var(--color-charcoal)]">{item.price} Kč</span>
-                </div>
-                {(item.description || item.allergens) && (
-                  <p className="text-[10px] text-[var(--color-text-muted)] mt-1">
-                    {item.description} {item.allergens && <span className="opacity-50">({item.allergens})</span>}
-                  </p>
-                )}
-              </div>
-            ))}
-          </div>
+        <div className="mt-8">
+          <h3 className="font-serif text-2xl tracking-wider uppercase text-center text-[var(--color-charcoal)] mb-5">
+            Hlavní chod
+          </h3>
+          {menu.items.map((item, i) => (
+            <div key={i}>
+              <p className="font-serif text-sm font-bold uppercase tracking-wider text-center text-[var(--color-charcoal)]">
+                {item.name}
+              </p>
+              {item.description && (
+                <p className="text-[9px] tracking-[0.15em] uppercase text-center text-[var(--color-text-muted)] mt-1">
+                  {item.description}
+                </p>
+              )}
+              {item.allergens && (
+                <p className="text-[9px] tracking-wider text-center text-[var(--color-text-muted)] mt-0.5">
+                  ({item.allergens})
+                </p>
+              )}
+              {item.isVegetarian && (
+                <p className="text-[8px] tracking-wider text-center text-green-700 mt-0.5">(V)</p>
+              )}
+              <PriceWithLines price={item.price} />
+            </div>
+          ))}
         </div>
       )}
 
       {/* Dessert */}
       {menu.dessert && (
-        <div className="mb-8">
-          <div className="mb-6 flex items-center justify-center gap-3">
-            <div className="w-8 h-px bg-[var(--color-stone)]" />
-            <div className="w-1 h-1 bg-[var(--color-gold)] rotate-45" />
-            <div className="w-8 h-px bg-[var(--color-stone)]" />
-          </div>
-          <p className="text-[9px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4">Dezert</p>
-          <div className="flex items-baseline justify-between gap-3">
-            <span className="font-serif text-lg text-[var(--color-charcoal)]">{menu.dessert}</span>
-            {menu.dessertPrice && (
-              <span className="text-sm font-medium text-[var(--color-charcoal)]">{menu.dessertPrice} Kč</span>
-            )}
-          </div>
-          {(menu.dessertDescription || menu.dessertAllergens) && (
-            <p className="text-[10px] text-[var(--color-text-muted)] mt-1">
-              {menu.dessertDescription} {menu.dessertAllergens && <span className="opacity-50">({menu.dessertAllergens})</span>}
+        <div className="mt-8">
+          <h3 className="font-serif text-2xl tracking-wider uppercase text-center text-[var(--color-charcoal)] mb-5">
+            Dezert
+          </h3>
+          <p className="font-serif text-sm font-bold uppercase tracking-wider text-center text-[var(--color-charcoal)]">
+            {menu.dessert}
+          </p>
+          {menu.dessertDescription && (
+            <p className="text-[9px] tracking-[0.15em] uppercase text-center text-[var(--color-text-muted)] mt-1">
+              {menu.dessertDescription}
             </p>
           )}
+          {menu.dessertAllergens && (
+            <p className="text-[9px] tracking-wider text-center text-[var(--color-text-muted)] mt-0.5">
+              ({menu.dessertAllergens})
+            </p>
+          )}
+          {menu.dessertPrice && <PriceWithLines price={menu.dessertPrice} />}
         </div>
       )}
 
       {/* Drinks */}
       {menu.drinks && menu.drinks.length > 0 && (
-        <div className="mb-8">
-          <div className="mb-6 flex items-center justify-center gap-3">
-            <div className="w-8 h-px bg-[var(--color-stone)]" />
-            <div className="w-1 h-1 bg-[var(--color-gold)] rotate-45" />
-            <div className="w-8 h-px bg-[var(--color-stone)]" />
-          </div>
-          <p className="text-[9px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4">Nápoje</p>
-          <div className="space-y-4">
-            {menu.drinks.map((drink, i) => (
-              <div key={i}>
-                <div className="flex items-baseline justify-between gap-3">
-                  <span className="font-serif text-lg text-[var(--color-charcoal)]">{drink.name}</span>
-                  <span className="text-sm font-medium text-[var(--color-charcoal)]">{drink.price} Kč</span>
-                </div>
-                {(drink.description || drink.allergens) && (
-                  <p className="text-[10px] text-[var(--color-text-muted)] mt-1">
-                    {drink.description} {drink.allergens && <span className="opacity-50">({drink.allergens})</span>}
-                  </p>
-                )}
-              </div>
-            ))}
-          </div>
+        <div className="mt-8">
+          <h3 className="font-serif text-2xl tracking-wider uppercase text-center text-[var(--color-charcoal)] mb-5">
+            Nápoje
+          </h3>
+          {menu.drinks.map((drink, i) => (
+            <div key={i}>
+              <p className="font-serif text-sm font-bold uppercase tracking-wider text-center text-[var(--color-charcoal)]">
+                {drink.name}
+              </p>
+              {drink.description && (
+                <p className="text-[9px] tracking-[0.15em] uppercase text-center text-[var(--color-text-muted)] mt-1">
+                  {drink.description}
+                </p>
+              )}
+              {drink.allergens && (
+                <p className="text-[9px] tracking-wider text-center text-[var(--color-text-muted)] mt-0.5">
+                  ({drink.allergens})
+                </p>
+              )}
+              <PriceWithLines price={drink.price} />
+            </div>
+          ))}
         </div>
       )}
 
       {/* Footer */}
-      <div className="mt-8 pt-6 border-t border-[var(--color-charcoal)]/10 text-center space-y-2">
-        <p className="text-[8px] text-[var(--color-text-muted)] leading-relaxed max-w-sm mx-auto">
+      <div className="mt-10 pt-6 text-center space-y-2">
+        <p className="text-[7px] tracking-wider text-[var(--color-text-muted)] leading-relaxed max-w-sm mx-auto uppercase">
           1 — obiloviny, 2 — korýši, 3 — vejce, 4 — ryby, 5 — arašídy, 6 — sója,
           7 — mléko, 8 — skořápkové plody, 9 — celer, 10 — hořčice, 11 — sezam,
           12 — oxid siřičitý, 13 — vlčí bob, 14 — měkkýši
         </p>
-        <p className="text-[8px] text-[var(--color-text-muted)] uppercase tracking-wider">(v) — vegetariánské</p>
-        <p className="text-[8px] text-[var(--color-text-muted)]">Informujte nás prosím o případných alergiích.</p>
-      </div>
-
-      {/* Restaurant */}
-      <div className="text-center mt-6">
-        <p className="font-serif text-xs text-[var(--color-charcoal)]">Zámecká restaurace U Blanických rytířů</p>
-        <p className="text-[8px] text-[var(--color-text-muted)] mt-1">Zámek Vlašim · +420 732 878 238</p>
+        <p className="text-[7px] text-[var(--color-text-muted)] uppercase tracking-widest">(v) — vegetariánské</p>
+        <p className="text-[7px] text-[var(--color-text-muted)] uppercase tracking-wider">Informujte nás prosím o případných alergiích.</p>
+        {/* Bottom ornament */}
+        <svg className="mx-auto mt-3 w-8 h-5 text-[#D4D0C8]" viewBox="0 0 30 20" fill="none" stroke="currentColor" strokeWidth="0.6">
+          <path d="M15 2 C12 6, 6 8, 2 8 C6 8, 8 12, 8 16 M15 2 C18 6, 24 8, 28 8 C24 8, 22 12, 22 16 M8 16 C10 14, 13 14, 15 16 C17 14, 20 14, 22 16" />
+        </svg>
       </div>
     </div>
   );
