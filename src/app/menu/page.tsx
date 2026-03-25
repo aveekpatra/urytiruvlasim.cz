@@ -43,6 +43,37 @@ export const metadata: Metadata = {
 
 /* ─── Reusable components ─── */
 
+function CornerOrnament({ className }: { className: string }) {
+  return (
+    <svg
+      className={`absolute w-8 h-8 sm:w-10 sm:h-10 text-[var(--color-charcoal)] ${className}`}
+      viewBox="0 0 40 40"
+      fill="currentColor"
+    >
+      <path d="M4 2 L4 14 L2 14 L2 2 Z" />
+      <path d="M2 2 L14 2 L14 4 L2 4 Z" />
+      <path d="M6 6 C6 6 10 6 12 8 C14 10 14 14 14 14 L12 14 C12 14 12 11 10.5 9.5 C9 8 6 8 6 8 Z" />
+      <path d="M6 6 C6 6 6 10 8 12 C10 14 14 14 14 14 L14 12 C14 12 11 12 9.5 10.5 C8 9 8 6 8 6 Z" />
+      <path d="M8 3 C8 1 10 0 10 0 C10 0 12 1 12 3 C12 5 10 5.5 10 5.5 C10 5.5 8 5 8 3 Z" opacity="0.9" />
+      <path d="M3 8 C1 8 0 10 0 10 C0 10 1 12 3 12 C5 12 5.5 10 5.5 10 C5.5 10 5 8 3 8 Z" opacity="0.9" />
+    </svg>
+  );
+}
+
+function MenuCard({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="bg-[#FFFEF9] p-2 sm:p-3 border border-[var(--color-charcoal)]/20 shadow-[0_4px_20px_rgba(0,0,0,0.08)] relative">
+      <CornerOrnament className="top-1 left-1 sm:top-1.5 sm:left-1.5" />
+      <CornerOrnament className="top-1 right-1 sm:top-1.5 sm:right-1.5 -scale-x-100" />
+      <CornerOrnament className="bottom-1 left-1 sm:bottom-1.5 sm:left-1.5 -scale-y-100" />
+      <CornerOrnament className="bottom-1 right-1 sm:bottom-1.5 sm:right-1.5 -scale-x-100 -scale-y-100" />
+      <div className="border border-[var(--color-charcoal)]/15 px-6 py-12 sm:px-10 sm:py-16 lg:px-14 lg:py-20">
+        {children}
+      </div>
+    </div>
+  );
+}
+
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
     <FadeIn>
@@ -201,6 +232,7 @@ export default function MenuPage() {
       {/* ═══════════ FOOD MENU ═══════════ */}
       <section className="bg-[var(--color-ivory)] py-16 lg:py-24">
         <div className="max-w-2xl mx-auto px-6 lg:px-12">
+          <MenuCard>
 
           {/* Polévky */}
           <SectionTitle>Polévky</SectionTitle>
@@ -356,12 +388,14 @@ export default function MenuPage() {
               </p>
             </div>
           </FadeIn>
+          </MenuCard>
         </div>
       </section>
 
       {/* ═══════════ DRINKS ═══════════ */}
       <section className="bg-[var(--color-cream)] py-16 lg:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-12">
+          <MenuCard>
           <FadeIn>
             <div className="text-center mb-14">
               <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4 block">
@@ -432,12 +466,14 @@ export default function MenuPage() {
               <DrinkSectionBlock title="Koňaky" items={KONAKY} />
             </FadeIn>
           </div>
+          </MenuCard>
         </div>
       </section>
 
       {/* ═══════════ WINE LIST ═══════════ */}
       <section className="bg-[var(--color-ivory)] py-16 lg:py-24">
         <div className="max-w-2xl mx-auto px-6 lg:px-12">
+          <MenuCard>
           <FadeIn>
             <div className="text-center mb-6">
               <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4 block">
@@ -506,6 +542,7 @@ export default function MenuPage() {
               <WineRow key={i} item={wine} />
             ))}
           </FadeIn>
+          </MenuCard>
         </div>
       </section>
 
