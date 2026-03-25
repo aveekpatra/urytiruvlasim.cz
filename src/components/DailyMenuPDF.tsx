@@ -96,6 +96,23 @@ function PriceWithLines({ price }: { price: number }) {
   );
 }
 
+function CornerOrnament({ className }: { className: string }) {
+  return (
+    <svg
+      className={`absolute w-8 h-8 sm:w-10 sm:h-10 text-[var(--color-charcoal)] ${className}`}
+      viewBox="0 0 40 40"
+      fill="currentColor"
+    >
+      <path d="M4 2 L4 14 L2 14 L2 2 Z" />
+      <path d="M2 2 L14 2 L14 4 L2 4 Z" />
+      <path d="M6 6 C6 6 10 6 12 8 C14 10 14 14 14 14 L12 14 C12 14 12 11 10.5 9.5 C9 8 6 8 6 8 Z" />
+      <path d="M6 6 C6 6 6 10 8 12 C10 14 14 14 14 14 L14 12 C14 12 11 12 9.5 10.5 C8 9 8 6 8 6 Z" />
+      <path d="M8 3 C8 1 10 0 10 0 C10 0 12 1 12 3 C12 5 10 5.5 10 5.5 C10 5.5 8 5 8 3 Z" opacity="0.9" />
+      <path d="M3 8 C1 8 0 10 0 10 C0 10 1 12 3 12 C5 12 5.5 10 5.5 10 C5.5 10 5 8 3 8 Z" opacity="0.9" />
+    </svg>
+  );
+}
+
 function MenuPreviewCard({ menu }: { menu: DailyMenuData }) {
   const formatted = new Date(menu.date + "T12:00:00").toLocaleDateString("cs-CZ", {
     weekday: "long",
@@ -105,20 +122,15 @@ function MenuPreviewCard({ menu }: { menu: DailyMenuData }) {
   });
 
   return (
-    <div className="max-w-lg mx-auto bg-[#FFFEF9] border border-[#D4D0C8] relative px-10 py-14 sm:px-14 sm:py-16">
+    <div className="max-w-lg mx-auto bg-[#FFFEF9] p-2 sm:p-3 border border-[var(--color-charcoal)]/20 shadow-[0_4px_20px_rgba(0,0,0,0.08)] relative">
       {/* Corner ornaments */}
-      <svg className="absolute top-2 left-2 w-6 h-6 text-[#D4D0C8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.8">
-        <path d="M2 2 C2 2, 8 2, 12 6 C16 10, 16 16, 16 22 M2 2 C2 2, 2 8, 6 12 C10 16, 16 16, 22 16" />
-      </svg>
-      <svg className="absolute top-2 right-2 w-6 h-6 text-[#D4D0C8] -scale-x-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.8">
-        <path d="M2 2 C2 2, 8 2, 12 6 C16 10, 16 16, 16 22 M2 2 C2 2, 2 8, 6 12 C10 16, 16 16, 22 16" />
-      </svg>
-      <svg className="absolute bottom-2 left-2 w-6 h-6 text-[#D4D0C8] -scale-y-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.8">
-        <path d="M2 2 C2 2, 8 2, 12 6 C16 10, 16 16, 16 22 M2 2 C2 2, 2 8, 6 12 C10 16, 16 16, 22 16" />
-      </svg>
-      <svg className="absolute bottom-2 right-2 w-6 h-6 text-[#D4D0C8] -scale-x-100 -scale-y-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.8">
-        <path d="M2 2 C2 2, 8 2, 12 6 C16 10, 16 16, 16 22 M2 2 C2 2, 2 8, 6 12 C10 16, 16 16, 22 16" />
-      </svg>
+      <CornerOrnament className="top-1 left-1 sm:top-1.5 sm:left-1.5" />
+      <CornerOrnament className="top-1 right-1 sm:top-1.5 sm:right-1.5 -scale-x-100" />
+      <CornerOrnament className="bottom-1 left-1 sm:bottom-1.5 sm:left-1.5 -scale-y-100" />
+      <CornerOrnament className="bottom-1 right-1 sm:bottom-1.5 sm:right-1.5 -scale-x-100 -scale-y-100" />
+
+      {/* Inner border */}
+      <div className="border border-[var(--color-charcoal)]/15 px-8 py-12 sm:px-12 sm:py-14">
 
       {/* Date */}
       <p className="text-[9px] tracking-[0.25em] uppercase text-[var(--color-text-muted)] text-center mb-8">
@@ -241,6 +253,7 @@ function MenuPreviewCard({ menu }: { menu: DailyMenuData }) {
         <svg className="mx-auto mt-3 w-8 h-5 text-[#D4D0C8]" viewBox="0 0 30 20" fill="none" stroke="currentColor" strokeWidth="0.6">
           <path d="M15 2 C12 6, 6 8, 2 8 C6 8, 8 12, 8 16 M15 2 C18 6, 24 8, 28 8 C24 8, 22 12, 22 16 M8 16 C10 14, 13 14, 15 16 C17 14, 20 14, 22 16" />
         </svg>
+      </div>
       </div>
     </div>
   );
