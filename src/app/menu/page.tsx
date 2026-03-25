@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/sections/Footer";
 import { FadeIn, AnimatedImage } from "@/components/motion";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { DrinkIcon } from "@hugeicons/core-free-icons";
 
 export const metadata: Metadata = {
   title: "Jídelní lístek | U Blanických rytířů",
@@ -72,6 +74,43 @@ export default function MenuPage() {
                 >
                   Zpět na hlavní stránku
                 </Link>
+              </div>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* Draft Beer Section */}
+      <section className="bg-[var(--color-cream)] py-20 lg:py-28">
+        <div className="max-w-5xl mx-auto px-6 lg:px-12">
+          <FadeIn>
+            <div className="text-center mb-12">
+              <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4 block">
+                Na čepu
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl text-[var(--color-charcoal)] mb-4">
+                Točené pivo
+              </h2>
+              <div className="w-12 h-px bg-[var(--color-gold)] mx-auto" />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl mx-auto">
+              <div className="bg-[#FFFEF9] p-8 border border-[var(--color-stone)]/30 shadow-[0_2px_12px_rgba(0,0,0,0.05)] text-center">
+                <HugeiconsIcon icon={DrinkIcon} size={32} color="var(--color-gold)" strokeWidth={1.5} className="mx-auto mb-4" />
+                <h3 className="font-serif text-xl text-[var(--color-charcoal)] mb-2">
+                  Plzeňský Prazdroj
+                </h3>
+                <p className="text-[var(--color-text-muted)] text-sm">
+                  Točená Plzeň
+                </p>
+              </div>
+              <div className="bg-[#FFFEF9] p-8 border border-[var(--color-stone)]/30 shadow-[0_2px_12px_rgba(0,0,0,0.05)] text-center">
+                <HugeiconsIcon icon={DrinkIcon} size={32} color="var(--color-gold)" strokeWidth={1.5} className="mx-auto mb-4" />
+                <h3 className="font-serif text-xl text-[var(--color-charcoal)] mb-2">
+                  Velkopopovický Kozel
+                </h3>
+                <p className="text-[var(--color-text-muted)] text-sm">
+                  Točený Kozel
+                </p>
               </div>
             </div>
           </FadeIn>

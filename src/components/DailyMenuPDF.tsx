@@ -21,6 +21,7 @@ export interface DailyMenuData {
   dessertDescription?: string;
   dessertAllergens?: string;
   dessertPrice?: number;
+  drinks?: MenuItem[];
 }
 
 export function DailyMenuPreview({
@@ -173,6 +174,33 @@ function MenuPreviewCard({ menu }: { menu: DailyMenuData }) {
               {menu.dessertDescription} {menu.dessertAllergens && <span className="opacity-50">({menu.dessertAllergens})</span>}
             </p>
           )}
+        </div>
+      )}
+
+      {/* Drinks */}
+      {menu.drinks && menu.drinks.length > 0 && (
+        <div className="mb-8">
+          <div className="mb-6 flex items-center justify-center gap-3">
+            <div className="w-8 h-px bg-[var(--color-stone)]" />
+            <div className="w-1 h-1 bg-[var(--color-gold)] rotate-45" />
+            <div className="w-8 h-px bg-[var(--color-stone)]" />
+          </div>
+          <p className="text-[9px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4">Nápoje</p>
+          <div className="space-y-4">
+            {menu.drinks.map((drink, i) => (
+              <div key={i}>
+                <div className="flex items-baseline justify-between gap-3">
+                  <span className="font-serif text-lg text-[var(--color-charcoal)]">{drink.name}</span>
+                  <span className="text-sm font-medium text-[var(--color-charcoal)]">{drink.price} Kč</span>
+                </div>
+                {(drink.description || drink.allergens) && (
+                  <p className="text-[10px] text-[var(--color-text-muted)] mt-1">
+                    {drink.description} {drink.allergens && <span className="opacity-50">({drink.allergens})</span>}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       )}
 

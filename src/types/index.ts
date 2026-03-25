@@ -40,7 +40,7 @@ export interface CTAButton {
 }
 
 export interface Feature {
-  icon: 'castle' | 'parking' | 'family';
+  icon: 'castle' | 'parking' | 'family' | 'drink';
   title: string;
   description: string;
 }

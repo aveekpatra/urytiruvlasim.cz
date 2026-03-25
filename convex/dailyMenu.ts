@@ -96,6 +96,7 @@ export const upsert = mutation({
     dessertDescription: v.optional(v.string()),
     dessertAllergens: v.optional(v.string()),
     dessertPrice: v.optional(v.number()),
+    drinks: v.optional(v.array(menuItemValidator)),
     isPublished: v.boolean(),
   },
   handler: async (ctx, { token, ...data }) => {
@@ -121,6 +122,7 @@ export const upsert = mutation({
         dessertDescription: existing.dessertDescription,
         dessertAllergens: existing.dessertAllergens,
         dessertPrice: existing.dessertPrice,
+        drinks: existing.drinks,
         isPublished: existing.isPublished,
       });
 
@@ -158,6 +160,7 @@ export const restoreVersion = mutation({
       dessertDescription: historyEntry.dessertDescription,
       dessertAllergens: historyEntry.dessertAllergens,
       dessertPrice: historyEntry.dessertPrice,
+      drinks: historyEntry.drinks,
       isPublished: historyEntry.isPublished,
     };
 
@@ -176,6 +179,7 @@ export const restoreVersion = mutation({
         dessertDescription: existing.dessertDescription,
         dessertAllergens: existing.dessertAllergens,
         dessertPrice: existing.dessertPrice,
+        drinks: existing.drinks,
         isPublished: existing.isPublished,
       });
 

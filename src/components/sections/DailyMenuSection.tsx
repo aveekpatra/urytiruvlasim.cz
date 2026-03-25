@@ -191,6 +191,46 @@ export function DailyMenuSection() {
               </div>
             )}
 
+            {/* Drinks */}
+            {todayMenu.drinks && todayMenu.drinks.length > 0 && (
+              <div className="mt-10">
+                <div className="mt-10 mb-8 flex items-center justify-center gap-4">
+                  <div className="w-8 h-px bg-[var(--color-stone)]" />
+                  <div className="w-1 h-1 bg-[var(--color-gold)] rotate-45" />
+                  <div className="w-8 h-px bg-[var(--color-stone)]" />
+                </div>
+
+                <div className="mb-8">
+                  <h3 className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)]">
+                    Nápoje
+                  </h3>
+                </div>
+
+                <div className="space-y-6">
+                  {todayMenu.drinks.map((drink, index) => (
+                    <div key={index}>
+                      <div className="flex items-baseline gap-3">
+                        <span className="font-serif text-lg sm:text-xl text-[var(--color-charcoal)]">
+                          {drink.name}
+                        </span>
+                        <span className="flex-1 border-b border-dotted border-[var(--color-charcoal)]/15 min-w-[2rem] translate-y-[-4px]" />
+                        <span className="text-[var(--color-charcoal)] text-sm font-medium whitespace-nowrap">
+                          {drink.price} Kč
+                        </span>
+                      </div>
+                      {(drink.description || drink.allergens) && (
+                        <p className="text-[var(--color-text-muted)] text-xs mt-1 tracking-wide">
+                          {drink.description}
+                          {drink.description && drink.allergens && " "}
+                          <AllergenTag allergens={drink.allergens} />
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Footer */}
             <div className="mt-12 pt-8 border-t border-[var(--color-charcoal)]/10 text-center space-y-3">
               <p className="text-[10px] tracking-[0.15em] text-[var(--color-text-muted)] leading-relaxed max-w-md mx-auto">

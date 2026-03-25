@@ -26,12 +26,48 @@ const occasions = [
 
 export default function ReservacePage() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const today = new Date().toISOString().split("T")[0];
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
+    setError("");
+    setLoading(true);
+
+    const form = e.currentTarget;
+    const data = {
+      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
+      date: (form.elements.namedItem("date") as HTMLInputElement).value,
+      time: (form.elements.namedItem("time") as HTMLSelectElement).value,
+      guests: Number((form.elements.namedItem("guests") as HTMLInputElement).value),
+      occasion: (form.elements.namedItem("occasion") as HTMLSelectElement).value || undefined,
+      notes: (form.elements.namedItem("notes") as HTMLTextAreaElement).value || undefined,
+    };
+
+    try {
+      const res = await fetch("/api/reservation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        setError(result.error || "Něco se pokazilo. Zkuste to prosím znovu.");
+        return;
+      }
+
+      setSubmitted(true);
+    } catch {
+      setError("Nepodařilo se odeslat rezervaci. Zkuste to prosím znovu.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -289,13 +325,21 @@ export default function ReservacePage() {
                         />
                       </div>
 
+                      {/* Error */}
+                      {error && (
+                        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 text-sm text-center">
+                          {error}
+                        </div>
+                      )}
+
                       {/* Submit */}
                       <div className="pt-4 text-center">
                         <button
                           type="submit"
-                          className="px-12 py-4 bg-[var(--color-charcoal)] text-white text-[11px] tracking-[0.2em] uppercase font-medium hover:bg-[var(--color-gold)] transition-colors duration-300"
+                          disabled={loading}
+                          className="px-12 py-4 bg-[var(--color-charcoal)] text-white text-[11px] tracking-[0.2em] uppercase font-medium hover:bg-[var(--color-gold)] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                          Odeslat rezervaci
+                          {loading ? "Odesílání..." : "Odeslat rezervaci"}
                         </button>
                       </div>
                     </form>

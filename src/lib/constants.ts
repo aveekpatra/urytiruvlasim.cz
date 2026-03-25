@@ -32,6 +32,11 @@ export const USP_FEATURES: Feature[] = [
     icon: "family",
     title: "Pro rodiny s dětmi",
     description: "Terasa s dětským koutkem. Děti si hrají, rodiče si užívají klid."
+  },
+  {
+    icon: "drink",
+    title: "Točené pivo",
+    description: "Točená Plzeň a Kozel přímo z tanku. Vychlazené, čerstvé, tak jak má být."
   }
 ];
 

@@ -82,6 +82,7 @@ function MenuEditor({ token, onLogout }: { token: string; onLogout: () => void }
   const [dessertDescription, setDessertDescription] = useState("");
   const [dessertAllergens, setDessertAllergens] = useState("");
   const [dessertPrice, setDessertPrice] = useState(0);
+  const [drinks, setDrinks] = useState<MenuItem[]>([]);
   const [isPublished, setIsPublished] = useState(false);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
@@ -119,6 +120,15 @@ function MenuEditor({ token, onLogout }: { token: string; onLogout: () => void }
       setDessertDescription(existingMenu.dessertDescription || "");
       setDessertAllergens(existingMenu.dessertAllergens || "");
       setDessertPrice(existingMenu.dessertPrice || 0);
+      setDrinks(
+        (existingMenu.drinks || []).map((d: any) => ({
+          name: d.name,
+          description: d.description,
+          allergens: d.allergens || "",
+          price: d.price,
+          isVegetarian: false,
+        }))
+      );
       setIsPublished(existingMenu.isPublished);
     } else if (existingMenu === null) {
       setSoup("");
@@ -130,6 +140,7 @@ function MenuEditor({ token, onLogout }: { token: string; onLogout: () => void }
       setDessertDescription("");
       setDessertAllergens("");
       setDessertPrice(0);
+      setDrinks([]);
       setIsPublished(false);
     }
   }, [existingMenu]);
@@ -157,6 +168,15 @@ function MenuEditor({ token, onLogout }: { token: string; onLogout: () => void }
         dessertDescription: dessertDescription || undefined,
         dessertAllergens: dessertAllergens || undefined,
         dessertPrice: dessertPrice || undefined,
+        drinks: drinks.filter((d) => d.name.trim() !== "").length > 0
+          ? drinks.filter((d) => d.name.trim() !== "").map((d) => ({
+              name: d.name,
+              description: d.description,
+              allergens: d.allergens || undefined,
+              price: d.price,
+              isVegetarian: undefined,
+            }))
+          : undefined,
         isPublished,
       });
       setMessage("Uloženo!");
@@ -205,6 +225,20 @@ function MenuEditor({ token, onLogout }: { token: string; onLogout: () => void }
     const newItems = [...items];
     newItems[index] = { ...newItems[index], [field]: value };
     setItems(newItems);
+  };
+
+  const addDrink = () => {
+    setDrinks([...drinks, { name: "", description: "", allergens: "", price: 0 }]);
+  };
+
+  const removeDrink = (index: number) => {
+    setDrinks(drinks.filter((_, i) => i !== index));
+  };
+
+  const updateDrink = (index: number, field: keyof MenuItem, value: string | number | boolean) => {
+    const newDrinks = [...drinks];
+    newDrinks[index] = { ...newDrinks[index], [field]: value };
+    setDrinks(newDrinks);
   };
 
   const formatDate = (dateStr: string) => {
@@ -468,6 +502,73 @@ function MenuEditor({ token, onLogout }: { token: string; onLogout: () => void }
               </div>
             </div>
 
+            {/* Drinks */}
+            <div className="bg-white p-6 border border-[var(--color-stone)]/30">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-[10px] tracking-[0.2em] uppercase text-[var(--color-gold-dark)]">
+                  Nápoje (volitelné)
+                </h3>
+                <button
+                  onClick={addDrink}
+                  className="text-xs text-[var(--color-gold-dark)] hover:text-[var(--color-charcoal)] uppercase tracking-wider"
+                >
+                  + Přidat
+                </button>
+              </div>
+              {drinks.length === 0 ? (
+                <p className="text-xs text-[var(--color-text-muted)]">
+                  Žádné nápoje — klikněte &quot;+ Přidat&quot; pro přidání
+                </p>
+              ) : (
+                <div className="space-y-5">
+                  {drinks.map((drink, i) => (
+                    <div key={i} className="space-y-2 pb-5 border-b border-[var(--color-stone)]/20 last:border-0 last:pb-0">
+                      <div className="flex gap-3 items-start">
+                        <div className="flex-1 space-y-2">
+                          <input
+                            type="text"
+                            value={drink.name}
+                            onChange={(e) => updateDrink(i, "name", e.target.value)}
+                            placeholder="Název nápoje"
+                            className="w-full px-3 py-2 border border-[var(--color-stone)] text-sm focus:outline-none focus:border-[var(--color-gold)]"
+                          />
+                          <input
+                            type="text"
+                            value={drink.description}
+                            onChange={(e) => updateDrink(i, "description", e.target.value)}
+                            placeholder="Popis (volitelný)"
+                            className="w-full px-3 py-2 border border-[var(--color-stone)] text-xs focus:outline-none focus:border-[var(--color-gold)]"
+                          />
+                          <input
+                            type="text"
+                            value={drink.allergens || ""}
+                            onChange={(e) => updateDrink(i, "allergens", e.target.value)}
+                            placeholder="Alergeny (např. 1,12)"
+                            className="w-full px-3 py-2 border border-[var(--color-stone)] text-xs focus:outline-none focus:border-[var(--color-gold)]"
+                          />
+                        </div>
+                        <div className="flex flex-col items-end gap-2">
+                          <input
+                            type="number"
+                            value={drink.price || ""}
+                            onChange={(e) => updateDrink(i, "price", Number(e.target.value))}
+                            placeholder="Kč"
+                            className="w-24 px-3 py-2 border border-[var(--color-stone)] text-sm focus:outline-none focus:border-[var(--color-gold)]"
+                          />
+                          <button
+                            onClick={() => removeDrink(i)}
+                            className="text-red-400 hover:text-red-600 text-xs"
+                          >
+                            Odebrat
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
             {/* Publish & Save */}
             <div className="flex items-center gap-6">
               <label className="flex items-center gap-2 cursor-pointer">
@@ -559,6 +660,7 @@ function MenuEditor({ token, onLogout }: { token: string; onLogout: () => void }
             dessertDescription: dessertDescription || undefined,
             dessertAllergens: dessertAllergens || undefined,
             dessertPrice: dessertPrice || undefined,
+            drinks: drinks.filter((d) => d.name.trim() !== ""),
           }}
           onClose={() => setShowPreview(false)}
         />

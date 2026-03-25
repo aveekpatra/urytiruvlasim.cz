@@ -21,6 +21,7 @@ export default defineSchema({
     dessertDescription: v.optional(v.string()),
     dessertAllergens: v.optional(v.string()),
     dessertPrice: v.optional(v.number()),
+    drinks: v.optional(v.array(menuItemValidator)),
     isPublished: v.boolean(),
     version: v.number(), // auto-incremented on each save
   }).index("by_date", ["date"]),
@@ -38,6 +39,7 @@ export default defineSchema({
     dessertDescription: v.optional(v.string()),
     dessertAllergens: v.optional(v.string()),
     dessertPrice: v.optional(v.number()),
+    drinks: v.optional(v.array(menuItemValidator)),
     isPublished: v.boolean(),
   }).index("by_menu_date", ["menuDate"]),
 

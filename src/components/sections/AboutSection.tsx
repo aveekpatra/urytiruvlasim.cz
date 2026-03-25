@@ -3,7 +3,7 @@
 import { IMAGES } from "@/lib/images";
 import { SlideIn, FadeIn, AnimatedImage } from "@/components/motion";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Tree01Icon, CastleIcon } from "@hugeicons/core-free-icons";
+import { Tree01Icon, CastleIcon, DrinkIcon } from "@hugeicons/core-free-icons";
 
 export function AboutSection() {
   return (
@@ -51,6 +51,15 @@ export function AboutSection() {
                   </span>
                   <span className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-text-muted)]">
                     Historie zámku
+                  </span>
+                </div>
+                <div>
+                  <span className="flex items-center gap-2 font-serif text-4xl text-[var(--color-gold)]">
+                    <HugeiconsIcon icon={DrinkIcon} size={36} strokeWidth={1.5} />
+                    Na čepu
+                  </span>
+                  <span className="text-[11px] tracking-[0.2em] uppercase text-[var(--color-text-muted)]">
+                    Točená Plzeň & Kozel
                   </span>
                 </div>
               </div>

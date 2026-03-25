@@ -1,128 +1,67 @@
-# CLAUDE.md - AI Assistant Guide for Adel Restaurant Website
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
 
-Czech restaurant website for "Restaurace Adéla" — a full-stack Next.js application with a Convex real-time backend. All user-facing content is in **Czech (cs-CZ)**.
-
-## Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Framework | Next.js 16 (App Router) |
-| Language | TypeScript 5 (strict mode) |
-| React | v19 |
-| Styling | Tailwind CSS v4 + CSS variables |
-| Animation | Framer Motion 12 |
-| Backend/DB | Convex 1.32 (serverless, real-time) |
-| Icons | @hugeicons/react |
-| PDF | @react-pdf/renderer |
-| Fonts | Inter (sans), Playfair Display (serif) |
+Czech restaurant website for "Restaurace Adéla" (U Blanických rytířů) — Next.js 16 App Router with Convex real-time backend. All user-facing content is in **Czech (cs-CZ)**.
 
 ## Commands
 
 ```bash
-npm run dev      # Start dev server (Next.js + Convex)
+npm run dev      # Start Next.js dev server (Convex must be started separately: npx convex dev)
 npm run build    # Production build
-npm run start    # Start production server
 npm run lint     # ESLint
 ```
 
-## Project Structure
+There are no tests configured in this project.
 
-```
-src/
-├── app/                    # Next.js App Router pages
-│   ├── layout.tsx          # Root layout (fonts, metadata, JSON-LD)
-│   ├── globals.css         # Global styles, CSS variables, theme
-│   ├── page.tsx            # Home (/)
-│   ├── menu/page.tsx       # Full menu (/menu)
-│   ├── admin/page.tsx      # Admin panel (/admin) — auth-protected
-│   ├── svatby/page.tsx     # Weddings (/svatby)
-│   ├── galerie/page.tsx    # Gallery (/galerie)
-│   ├── kontakt/page.tsx    # Contact (/kontakt)
-│   └── rezervace/page.tsx  # Reservations (/rezervace)
-├── components/
-│   ├── sections/           # Page-level composable blocks (Hero, About, Footer, etc.)
-│   ├── motion/             # Framer Motion wrappers (FadeIn, SlideUp, StaggerContainer)
-│   ├── ui/                 # Reusable primitives (Button, Container, SectionWrapper)
-│   ├── Navigation.tsx      # Sticky responsive header
-│   ├── ConvexProvider.tsx  # Convex React provider
-│   ├── DailyMenuPDF.tsx    # PDF export trigger
-│   └── DailyMenuPDFDocument.tsx  # PDF document layout
-├── lib/
-│   ├── constants.ts        # Restaurant info, hours, features, sample menus, reviews
-│   ├── utils.ts            # cn(), formatPrice(), formatDate()
-│   └── images.ts           # Centralized image path definitions
-└── types/
-    └── index.ts            # Shared TypeScript interfaces
+## Architecture
 
-convex/
-├── schema.ts               # DB schema (dailyMenu, dailyMenuHistory, adminSessions)
-├── auth.ts                 # login/logout/verifySession mutations & queries
-├── dailyMenu.ts            # Menu CRUD — public queries + token-protected admin mutations
-└── _generated/             # Auto-generated Convex types (DO NOT EDIT)
+### Provider Hierarchy
 
-public/
-├── fonts/                  # TTF font files (Inter, Playfair Display)
-├── images/                 # Restaurant photography organized by section
-├── Logo.svg                # Restaurant logo
-└── bg.mp4                  # Hero background video
-```
+`RootLayout` → `ConvexClientProvider` → `MotionProvider` → page content. All client components that use Convex or Framer Motion must be within this tree.
+
+### Page Composition Pattern
+
+Each route page (`src/app/*/page.tsx`) composes section components from `src/components/sections/`. Pages are thin — they import and arrange sections, which contain the actual UI.
+
+### Convex Backend
+
+Three tables: `dailyMenu` (current menus by date), `dailyMenuHistory` (version snapshots), `adminSessions` (auth tokens).
+
+**Import convention**: Convex API is imported via relative path `../../convex/_generated/api` (or `../../../` depending on depth), NOT via `@/` alias. The `@/` alias only maps to `src/`.
+
+Admin auth flow: password → `auth.login` mutation → session token stored in `localStorage` → token passed to every admin query/mutation for server-side validation. Sessions expire after 24 hours.
+
+All admin mutations call `verifyAdmin()` helper before performing operations. Public queries (`getToday`, `getByDate`) don't require auth.
+
+### Styling
+
+Tailwind CSS v4 with CSS variables in `globals.css`. Compose classes with `cn()` (clsx + tailwind-merge) from `@/lib/utils`.
+
+Theme colors: `--gold` (#B8860B), `--charcoal` (#1C1C1C), `--cream` (#FDFBF7), `--ivory` (#F5F3EE), `--stone` (#E8E4DD). Referenced as `var(--color-gold)` etc. in component styles.
+
+### Animation
+
+Use motion wrappers from `src/components/motion/` (FadeIn, SlideUp, SlideIn, StaggerContainer) rather than raw Framer Motion. These respect `prefers-reduced-motion`.
 
 ## Key Conventions
 
-### Path Alias
-- `@/*` maps to `./src/*` — always use `@/` imports (e.g., `import { cn } from "@/lib/utils"`)
-
-### Styling
-- Use Tailwind CSS utility classes; compose with `cn()` from `@/lib/utils` (clsx + tailwind-merge)
-- Theme colors are CSS variables defined in `globals.css`:
-  - `--gold: #B8860B` (primary accent)
-  - `--charcoal: #1C1C1C` (dark text)
-  - `--cream: #FDFBF7` (light background)
-  - `--ivory: #F5F3EE` (section background)
-  - `--stone: #E8E4DD` (borders)
-
-### Components
-- **Sections** (`components/sections/`) are page-level blocks composed into route pages
-- **UI** (`components/ui/`) are small reusable primitives
-- **Motion** (`components/motion/`) wrap Framer Motion — use these for scroll animations
-- Animations respect `prefers-reduced-motion`
-
-### Data & State
-- **Convex** for all backend data — use `useQuery()` and `useMutation()` hooks from `convex/react`
-- Real-time sync, no manual refetching needed
-- Admin endpoints require a session token (validated server-side in Convex functions)
-- Constants (restaurant info, static content) live in `src/lib/constants.ts`
-
-### Convex Backend
-- `convex/_generated/` is auto-generated — never edit these files
-- All admin mutations validate the session token before performing operations
-- Schema uses indexes (`by_date`, `by_token`, `by_menu_date`) for efficient queries
-- `dailyMenu` table stores current menus; `dailyMenuHistory` stores version snapshots
-
-### Currency & Locale
-- All prices formatted with `formatPrice()` → `"305 Kč"` format
-- Dates formatted with `formatDate()` using `cs-CZ` locale
-- All UI text is in Czech — maintain this when adding or editing content
-
-### Images
-- Use Next.js `<Image>` component with optimization
-- Image paths centralized in `src/lib/images.ts`
-- Remote images allowed from: unsplash, pexels, cdn.kudyznudy.cz, d48-a.sdn.cz (configured in `next.config.ts`)
-
-### TypeScript
-- Strict mode enabled — no `any` types
-- Shared interfaces in `src/types/index.ts`
-- Convex schema types auto-generated in `convex/_generated/dataModel.d.ts`
+- `@/*` maps to `./src/*` — always use for src imports
+- All prices: `formatPrice()` → `"305 Kč"`; all dates: `formatDate()` with `cs-CZ` locale
+- All UI text must be in Czech
+- Images use Next.js `<Image>` component; paths centralized in `src/lib/images.ts`
+- Remote images allowed from: unsplash, pexels, cdn.kudyznudy.cz, d48-a.sdn.cz
+- Static restaurant info (hours, contact, features) lives in `src/lib/constants.ts`
+- Never edit `convex/_generated/` — auto-generated by Convex CLI
+- TypeScript strict mode — no `any` types; shared interfaces in `src/types/index.ts`
 
 ## Environment Variables
 
-Required env vars (not committed — see `.env.local`):
-- `NEXT_PUBLIC_CONVEX_URL` — Convex deployment URL
-- Admin password configured in Convex environment (checked in `auth.ts`)
+- `NEXT_PUBLIC_CONVEX_URL` — Convex deployment URL (in `.env.local`)
+- `ADMIN_PASSWORD` — set in Convex environment (not in `.env.local`), checked in `convex/auth.ts`
 
 ## Deployment
 
-- Deployed on **Vercel** (`.vercel` in gitignore)
-- Convex backend deployed separately via Convex CLI
+- Frontend on **Vercel**; Convex backend deployed separately via `npx convex deploy`

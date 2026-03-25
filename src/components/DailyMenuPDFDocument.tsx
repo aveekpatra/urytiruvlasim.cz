@@ -167,6 +167,28 @@ export function DailyMenuPDFDocument({ menu }: { menu: DailyMenuData }) {
           </View>
         )}
 
+        {/* Drinks */}
+        {menu.drinks && menu.drinks.length > 0 && (
+          <View>
+            <Divider />
+            <Text style={s.sectionLabel}>Nápoje</Text>
+            {menu.drinks.map((drink, i) => (
+              <View key={i}>
+                <View style={s.itemRow}>
+                  <Text style={s.itemName}>{drink.name}</Text>
+                  <Text style={s.itemPrice}>{drink.price} Kč</Text>
+                </View>
+                {(drink.description || drink.allergens) && (
+                  <Text style={s.itemDesc}>
+                    {drink.description}
+                    <AllergenText allergens={drink.allergens} />
+                  </Text>
+                )}
+              </View>
+            ))}
+          </View>
+        )}
+
         {/* Footer */}
         <View style={s.footerWrap}>
           <Text style={s.footerText}>
