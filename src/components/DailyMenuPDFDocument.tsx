@@ -30,59 +30,68 @@ Font.register({
 });
 
 const charcoal = "#2C2C2C";
-const muted = "#8B8680";
-const borderColor = "#D4D0C8";
+const muted = "#6B6560";
+const borderColor = "#C8C4BC";
 const green = "#15803d";
 
 const s = StyleSheet.create({
   page: {
     fontFamily: "Playfair",
-    backgroundColor: "#FFFEF9",
-    padding: 36,
+    backgroundColor: "#F8F6F1",
+    padding: 28,
   },
   // Outer border frame
   frame: {
     flex: 1,
-    borderWidth: 0.8,
+    borderWidth: 0.6,
     borderColor: borderColor,
-    paddingTop: 40,
+    paddingTop: 50,
     paddingBottom: 30,
-    paddingHorizontal: 50,
+    paddingHorizontal: 60,
   },
-  // Section header (large uppercase centered)
+  // Section header — large, THIN/regular weight, uppercase, generous spacing
   sectionHeader: {
-    fontSize: 22,
-    letterSpacing: 3,
+    fontSize: 26,
+    fontWeight: 400,
+    letterSpacing: 2,
     textTransform: "uppercase",
     color: charcoal,
     textAlign: "center",
-    marginBottom: 24,
+    marginBottom: 6,
   },
-  // Item name (bold, small-caps style, centered)
+  // Thin horizontal rule under section header
+  sectionRule: {
+    width: 200,
+    height: 0.4,
+    backgroundColor: borderColor,
+    marginHorizontal: "auto",
+    marginBottom: 20,
+  },
+  // Item name — bold, small-caps style, centered
   itemName: {
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: 700,
-    letterSpacing: 1,
+    letterSpacing: 0.8,
     textTransform: "uppercase",
     color: charcoal,
     textAlign: "center",
     marginBottom: 3,
   },
-  // Item description (small uppercase, centered)
+  // Item description + allergens inline — small caps, muted
   itemDesc: {
     fontFamily: "Inter",
-    fontSize: 8,
-    letterSpacing: 1.5,
+    fontSize: 7.5,
+    letterSpacing: 1.2,
     textTransform: "uppercase",
     color: muted,
     textAlign: "center",
-    marginBottom: 3,
+    lineHeight: 1.6,
+    marginBottom: 2,
   },
-  // Allergens inline
-  allergenText: {
+  // Weight on its own line
+  itemWeight: {
     fontFamily: "Inter",
     fontSize: 8,
-    letterSpacing: 1,
     color: muted,
     textAlign: "center",
     marginBottom: 2,
@@ -95,16 +104,16 @@ const s = StyleSheet.create({
     textAlign: "center",
     marginBottom: 2,
   },
-  // Price line with decorative dashes
+  // Price line with dashes — "—— 295Kč ——"
   priceRow: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 4,
-    marginBottom: 20,
+    marginTop: 3,
+    marginBottom: 22,
   },
   priceLine: {
-    width: 50,
+    width: 55,
     height: 0.5,
     backgroundColor: charcoal,
   },
@@ -113,11 +122,11 @@ const s = StyleSheet.create({
     fontWeight: 700,
     color: charcoal,
     textAlign: "center",
-    marginHorizontal: 10,
+    marginHorizontal: 8,
   },
   // Spacer between sections
   sectionSpacer: {
-    height: 28,
+    height: 30,
   },
   // Footer
   footerWrap: {
@@ -155,13 +164,13 @@ const s = StyleSheet.create({
     textTransform: "uppercase",
     color: muted,
     textAlign: "center",
-    marginBottom: 20,
+    marginBottom: 28,
   },
 });
 
-// Decorative corner ornament SVG
+// Decorative corner ornament SVG — matching the PDF's flourish style
 function CornerOrnament({ position }: { position: "tl" | "tr" | "bl" | "br" }) {
-  const size = 24;
+  const size = 32;
   const isTop = position === "tl" || position === "tr";
   const isLeft = position === "tl" || position === "bl";
 
@@ -171,24 +180,46 @@ function CornerOrnament({ position }: { position: "tl" | "tr" | "bl" | "br" }) {
     height: size,
   };
 
-  if (isTop) style.top = 8;
-  else style.bottom = 8;
-  if (isLeft) style.left = 8;
-  else style.right = 8;
+  if (isTop) style.top = 4;
+  else style.bottom = 4;
+  if (isLeft) style.left = 4;
+  else style.right = 4;
 
-  // Scale/flip for each corner
   const scaleX = isLeft ? 1 : -1;
   const scaleY = isTop ? 1 : -1;
 
   return (
     <View style={style}>
-      <Svg viewBox="0 0 24 24" width={size} height={size}>
+      <Svg viewBox="0 0 32 32" width={size} height={size}>
+        {/* Main curving flourish lines */}
         <Path
-          d={`M2 2 C2 2, 8 2, 12 6 C16 10, 16 16, 16 22 M2 2 C2 2, 2 8, 6 12 C10 16, 16 16, 22 16`}
+          d="M2 2 C2 2, 10 2, 16 8 C22 14, 22 22, 22 30"
           stroke={borderColor}
-          strokeWidth={0.8}
+          strokeWidth={0.7}
           fill="none"
-          transform={`scale(${scaleX}, ${scaleY}) translate(${scaleX < 0 ? -24 : 0}, ${scaleY < 0 ? -24 : 0})`}
+          transform={`scale(${scaleX}, ${scaleY}) translate(${scaleX < 0 ? -32 : 0}, ${scaleY < 0 ? -32 : 0})`}
+        />
+        <Path
+          d="M2 2 C2 2, 2 10, 8 16 C14 22, 22 22, 30 22"
+          stroke={borderColor}
+          strokeWidth={0.7}
+          fill="none"
+          transform={`scale(${scaleX}, ${scaleY}) translate(${scaleX < 0 ? -32 : 0}, ${scaleY < 0 ? -32 : 0})`}
+        />
+        {/* Small inner curl */}
+        <Path
+          d="M4 4 C4 4, 7 4, 9 6 C11 8, 11 11, 11 14"
+          stroke={borderColor}
+          strokeWidth={0.5}
+          fill="none"
+          transform={`scale(${scaleX}, ${scaleY}) translate(${scaleX < 0 ? -32 : 0}, ${scaleY < 0 ? -32 : 0})`}
+        />
+        <Path
+          d="M4 4 C4 4, 4 7, 6 9 C8 11, 11 11, 14 11"
+          stroke={borderColor}
+          strokeWidth={0.5}
+          fill="none"
+          transform={`scale(${scaleX}, ${scaleY}) translate(${scaleX < 0 ? -32 : 0}, ${scaleY < 0 ? -32 : 0})`}
         />
       </Svg>
     </View>
@@ -199,26 +230,62 @@ function PriceLine({ price }: { price: number }) {
   return (
     <View style={s.priceRow}>
       <View style={s.priceLine} />
-      <Text style={s.priceText}>{price} Kč</Text>
+      <Text style={s.priceText}>{price}Kč</Text>
       <View style={s.priceLine} />
     </View>
   );
 }
 
-// Small decorative ornament for bottom of page
+// Bottom ornament matching the PDF's centered decorative element
 function BottomOrnament() {
   return (
     <View style={s.ornamentWrap}>
-      <Svg viewBox="0 0 30 20" width={30} height={20}>
+      <Svg viewBox="0 0 40 24" width={40} height={24}>
+        {/* Symmetrical fleur-de-lis style ornament */}
         <Path
-          d="M15 2 C12 6, 6 8, 2 8 C6 8, 8 12, 8 16 M15 2 C18 6, 24 8, 28 8 C24 8, 22 12, 22 16 M8 16 C10 14, 13 14, 15 16 C17 14, 20 14, 22 16"
+          d="M20 4 C17 8, 10 10, 5 10 C10 10, 12 14, 12 20"
           stroke={borderColor}
           strokeWidth={0.6}
           fill="none"
         />
+        <Path
+          d="M20 4 C23 8, 30 10, 35 10 C30 10, 28 14, 28 20"
+          stroke={borderColor}
+          strokeWidth={0.6}
+          fill="none"
+        />
+        <Path
+          d="M12 20 C15 17, 18 17, 20 20 C22 17, 25 17, 28 20"
+          stroke={borderColor}
+          strokeWidth={0.6}
+          fill="none"
+        />
+        {/* Center dot */}
+        <Path
+          d="M19 10 A1 1 0 1 1 21 10 A1 1 0 1 1 19 10"
+          fill={borderColor}
+        />
       </Svg>
     </View>
   );
+}
+
+// Helper: format description with allergens inline like the PDF
+function formatDescWithAllergens(
+  description?: string,
+  allergens?: string
+): string {
+  const parts: string[] = [];
+  if (description) parts.push(description);
+  if (allergens) {
+    if (parts.length > 0) {
+      // Append allergens to description: "description (1,3,7)"
+      parts[parts.length - 1] += ` (${allergens})`;
+    } else {
+      parts.push(`(${allergens})`);
+    }
+  }
+  return parts.join("");
 }
 
 export function DailyMenuPDFDocument({ menu }: { menu: DailyMenuData }) {
@@ -246,13 +313,11 @@ export function DailyMenuPDFDocument({ menu }: { menu: DailyMenuData }) {
           {menu.soup && (
             <View>
               <Text style={s.sectionHeader}>Polévka</Text>
+              <View style={s.sectionRule} />
               <Text style={s.itemName}>{menu.soup}</Text>
-              {menu.soupDescription && (
-                <Text style={s.itemDesc}>{menu.soupDescription}</Text>
-              )}
-              {menu.soupAllergens && (
-                <Text style={s.allergenText}>({menu.soupAllergens})</Text>
-              )}
+              <Text style={s.itemDesc}>
+                {formatDescWithAllergens(menu.soupDescription, menu.soupAllergens)}
+              </Text>
               <PriceLine price={menu.soupPrice} />
             </View>
           )}
@@ -262,15 +327,13 @@ export function DailyMenuPDFDocument({ menu }: { menu: DailyMenuData }) {
             <View>
               <View style={s.sectionSpacer} />
               <Text style={s.sectionHeader}>Hlavní chod</Text>
+              <View style={s.sectionRule} />
               {menu.items.map((item, i) => (
                 <View key={i}>
                   <Text style={s.itemName}>{item.name}</Text>
-                  {item.description && (
-                    <Text style={s.itemDesc}>{item.description}</Text>
-                  )}
-                  {item.allergens && (
-                    <Text style={s.allergenText}>({item.allergens})</Text>
-                  )}
+                  <Text style={s.itemDesc}>
+                    {formatDescWithAllergens(item.description, item.allergens)}
+                  </Text>
                   {item.isVegetarian && <Text style={s.veg}>(V)</Text>}
                   <PriceLine price={item.price} />
                 </View>
@@ -283,13 +346,11 @@ export function DailyMenuPDFDocument({ menu }: { menu: DailyMenuData }) {
             <View>
               <View style={s.sectionSpacer} />
               <Text style={s.sectionHeader}>Dezert</Text>
+              <View style={s.sectionRule} />
               <Text style={s.itemName}>{menu.dessert}</Text>
-              {menu.dessertDescription && (
-                <Text style={s.itemDesc}>{menu.dessertDescription}</Text>
-              )}
-              {menu.dessertAllergens && (
-                <Text style={s.allergenText}>({menu.dessertAllergens})</Text>
-              )}
+              <Text style={s.itemDesc}>
+                {formatDescWithAllergens(menu.dessertDescription, menu.dessertAllergens)}
+              </Text>
               {menu.dessertPrice && <PriceLine price={menu.dessertPrice} />}
             </View>
           )}
@@ -299,15 +360,13 @@ export function DailyMenuPDFDocument({ menu }: { menu: DailyMenuData }) {
             <View>
               <View style={s.sectionSpacer} />
               <Text style={s.sectionHeader}>Nápoje</Text>
+              <View style={s.sectionRule} />
               {menu.drinks.map((drink, i) => (
                 <View key={i}>
                   <Text style={s.itemName}>{drink.name}</Text>
-                  {drink.description && (
-                    <Text style={s.itemDesc}>{drink.description}</Text>
-                  )}
-                  {drink.allergens && (
-                    <Text style={s.allergenText}>({drink.allergens})</Text>
-                  )}
+                  <Text style={s.itemDesc}>
+                    {formatDescWithAllergens(drink.description, drink.allergens)}
+                  </Text>
                   <PriceLine price={drink.price} />
                 </View>
               ))}
