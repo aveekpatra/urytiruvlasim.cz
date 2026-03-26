@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/sections/Footer";
-import { IMAGES } from "@/lib/images";
+import { IMAGES, cdn } from "@/lib/images";
 import { FadeIn, SlideIn, StaggerContainer, StaggerItem, AnimatedImage } from "@/components/motion";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { CallIcon, Mail01Icon } from "@hugeicons/core-free-icons";
@@ -20,21 +20,21 @@ const spaces = [
     capacity: "až 80 hostů",
     description:
       "Dva nekuřácké salonky s krbem v historických prostorách zámku. Ideální pro svatební hostiny, firemní večeře a velké oslavy.",
-    image: "/images/JHK09452-Enhanced-NR.jpg",
+    image: cdn("/images/JHK09452-Enhanced-NR.jpg"),
   },
   {
     name: "Venkovní terasa",
     capacity: "až 58 míst",
     description:
       "Letní terasa s výhledem do zámeckého parku. Skvělá pro letní oslavy, přípitky a posezení v přírodě.",
-    image: "/images/JHK09524.jpg",
+    image: cdn("/images/JHK09524.jpg"),
   },
   {
     name: "Pivnice",
     capacity: "20–40 hostů",
     description:
       "Komorní nekuřácký prostor pro menší oslavy, zásnuby, narozeniny nebo intimní posezení v naprostém soukromí.",
-    image: "/images/JHK09424-Enhanced-NR.jpg",
+    image: cdn("/images/JHK09424-Enhanced-NR.jpg"),
   },
 ];
 
@@ -91,27 +91,27 @@ const features = [
 
 const galleryImages = [
   {
-    src: "/images/JHK09452-Enhanced-NR.jpg",
+    src: cdn("/images/JHK09452-Enhanced-NR.jpg"),
     alt: "Restaurace — dlouhý stůl pod klenbou",
   },
   {
-    src: "/images/JHK09524.jpg",
+    src: cdn("/images/JHK09524.jpg"),
     alt: "Terasa s výhledem do parku",
   },
   {
-    src: "/images/JHK09405-Edit.jpg",
+    src: cdn("/images/JHK09405-Edit.jpg"),
     alt: "Obsluha připravuje stůl",
   },
   {
-    src: "/images/JHK09490.jpg",
+    src: cdn("/images/JHK09490.jpg"),
     alt: "Restaurace — hosté při oslavě",
   },
   {
-    src: "/images/JHK09378.jpg",
+    src: cdn("/images/JHK09378.jpg"),
     alt: "Květiny v pivnici",
   },
   {
-    src: "/images/dishes/JHK09587.jpg",
+    src: cdn("/images/dishes/JHK09587.jpg"),
     alt: "Salát na prostřeném stole",
   },
 ];
@@ -188,7 +188,7 @@ export default function SvatbyPage() {
                 <div className="absolute -inset-4 border border-[var(--color-gold)]/20" />
                 <div className="relative aspect-[4/5] overflow-hidden">
                   <AnimatedImage
-                    src="/images/JHK09458-Enhanced-NR.jpg"
+                    src={cdn("/images/JHK09458-Enhanced-NR.jpg")}
                     alt="Restaurace — slavnostní tabule"
                     fill
                     className="object-cover"
@@ -365,7 +365,7 @@ export default function SvatbyPage() {
       {/* CTA / Inquiry Section */}
       <section className="relative py-24 lg:py-36 overflow-hidden">
         <AnimatedImage
-          src="/images/JHK09411-Enhanced-NR.jpg"
+          src={cdn("/images/JHK09411-Enhanced-NR.jpg")}
           alt=""
           fill
           className="object-cover"

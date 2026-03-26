@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { RESTAURANT_INFO } from "@/lib/constants";
+import { cdn } from "@/lib/images";
 import { StaggerContainer, StaggerItem } from "@/components/motion";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Facebook01Icon, InstagramIcon, Location01Icon, CallIcon, Mail01Icon, Clock01Icon } from "@hugeicons/core-free-icons";
@@ -16,7 +17,7 @@ export function Footer() {
           <StaggerItem className="lg:col-span-1">
             <div className="mb-6 flex items-center gap-3">
               <img
-                src="/Logo.svg"
+                src={cdn("/Logo.svg")}
                 alt=""
                 className="h-12 w-auto"
               />

@@ -5,6 +5,7 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/sections/Footer";
 import { RESTAURANT_INFO } from "@/lib/constants";
 import { FadeIn, SlideIn, AnimatedImage, StaggerContainer, StaggerItem } from "@/components/motion";
+import { cdn } from "@/lib/images";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Facebook01Icon, InstagramIcon, Location01Icon, CallIcon, Mail01Icon, Clock01Icon, MapsLocation01Icon } from "@hugeicons/core-free-icons";
 
@@ -22,7 +23,7 @@ export default function KontaktPage() {
       {/* Hero Banner */}
       <section className="relative h-[50vh] min-h-[400px] w-full overflow-hidden">
         <AnimatedImage
-          src="/images/JHK09361.jpg"
+          src={cdn("/images/JHK09361.jpg")}
           alt="Restaurace U Blanických rytířů — vstup"
           fill
           className="object-cover"

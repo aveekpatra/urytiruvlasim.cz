@@ -1,75 +1,83 @@
 /**
  * Local restaurant images — professional photography by JHK
- * All images located in /public/images/
+ * Served from GitHub raw to reduce Vercel CDN bandwidth costs.
  */
+
+const CDN_BASE =
+  "https://raw.githubusercontent.com/aveekpatra/Adel/master/public";
+
+/** Prefix any /public path with CDN_BASE */
+export function cdn(path: string): string {
+  return `${CDN_BASE}${path}`;
+}
 
 export const IMAGES = {
   // Hero Section - Local video
   hero: {
-    video: "/bg.mp4",
-    fallback: "/images/JHK09411-Enhanced-NR.jpg",
+    video: `${CDN_BASE}/bg.mp4`,
+    fallback: `${CDN_BASE}/images/JHK09411-Enhanced-NR.jpg`,
   },
 
   // About Section - Restaurant Interior
   about: {
-    interior: "/images/JHK09424-Enhanced-NR.jpg",
+    interior: `${CDN_BASE}/images/JHK09424-Enhanced-NR.jpg`,
   },
 
   // Wedding / Events Section
   wedding: {
-    background: "/images/JHK09458-Enhanced-NR.jpg",
+    background: `${CDN_BASE}/images/JHK09458-Enhanced-NR.jpg`,
     gallery: [
-      "/images/JHK09452-Enhanced-NR.jpg", // Restaurace — reserved long table
-      "/images/JHK09524.jpg", // Terrace — wide shot
-      "/images/JHK09458-Enhanced-NR.jpg", // Restaurace — reserved table by window
-      "/images/JHK09408-Enhanced-NR-Edit.jpg", // Pivnice — banquette seating
+      `${CDN_BASE}/images/JHK09452-Enhanced-NR.jpg`, // Restaurace — reserved long table
+      `${CDN_BASE}/images/JHK09524.jpg`, // Terrace — wide shot
+      `${CDN_BASE}/images/JHK09458-Enhanced-NR.jpg`, // Restaurace — reserved table by window
+      `${CDN_BASE}/images/JHK09408-Enhanced-NR-Edit.jpg`, // Pivnice — banquette seating
     ],
   },
 
   // Home page gallery grid
   gallery: [
     {
-      src: "/images/castle-2.jpeg",
+      src: `${CDN_BASE}/images/castle-2.jpeg`,
       alt: "Zámek Vlašim — panorama",
       span: "col-span-2 row-span-2",
     },
     {
-      src: "/images/JHK09458-Enhanced-NR.jpg",
+      src: `${CDN_BASE}/images/JHK09458-Enhanced-NR.jpg`,
       alt: "Restaurace — slavnostní tabule",
       span: "col-span-1",
     },
     {
-      src: "/images/dishes/JHK09557.jpg",
+      src: `${CDN_BASE}/images/dishes/JHK09557.jpg`,
       alt: "Hovězí biftek s pepřovou omáčkou",
       span: "col-span-1",
     },
     {
-      src: "/images/JHK09524.jpg",
+      src: `${CDN_BASE}/images/JHK09524.jpg`,
       alt: "Venkovní terasa",
       span: "col-span-1 row-span-2",
     },
     {
-      src: "/images/dishes/JHK09591.jpg",
+      src: `${CDN_BASE}/images/dishes/JHK09591.jpg`,
       alt: "Crème brûlée s čerstvým ovocem",
       span: "col-span-1",
     },
     {
-      src: "/images/JHK09380.jpg",
+      src: `${CDN_BASE}/images/JHK09380.jpg`,
       alt: "Květiny na baru",
       span: "col-span-1",
     },
     {
-      src: "/images/drinks/JHK09520-Enhanced-NR.jpg",
+      src: `${CDN_BASE}/images/drinks/JHK09520-Enhanced-NR.jpg`,
       alt: "Pivo U Blanických rytířů",
       span: "col-span-1",
     },
     {
-      src: "/images/JHK09347.jpg",
+      src: `${CDN_BASE}/images/JHK09347.jpg`,
       alt: "Rytířská zbroj",
       span: "col-span-1",
     },
   ],
 
   // Open Graph / Social sharing
-  og: "/images/JHK09408-Enhanced-NR-Edit.jpg",
+  og: `${CDN_BASE}/images/JHK09408-Enhanced-NR-Edit.jpg`,
 };

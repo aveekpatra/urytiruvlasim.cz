@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { cdn } from "@/lib/images";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Mail01Icon, CallIcon, InstagramIcon, Facebook01Icon } from "@hugeicons/core-free-icons";
 
@@ -110,7 +111,7 @@ export function Navigation() {
             {/* Logo */}
             <Link href="/" className="relative z-10 flex items-center gap-3">
               <img
-                src="/Logo.svg"
+                src={cdn("/Logo.svg")}
                 alt=""
                 className={cn(
                   "h-10 lg:h-12 w-auto transition-all duration-200",

@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/sections/Footer";
 import { FadeIn, SlideUp, AnimatedImage } from "@/components/motion";
+import { cdn } from "@/lib/images";
 import {
   POLEVKY,
   PREDKRMY,
@@ -205,7 +206,7 @@ export default function MenuPage() {
       {/* Hero Banner */}
       <section className="relative h-[50vh] min-h-[400px] w-full overflow-hidden">
         <AnimatedImage
-          src="/images/menu/JHK09462.jpg"
+          src={cdn("/images/menu/JHK09462.jpg")}
           alt="Jídelní lístek U Blanických rytířů"
           fill
           className="object-cover"

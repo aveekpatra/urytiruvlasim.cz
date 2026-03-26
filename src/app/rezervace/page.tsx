@@ -6,6 +6,7 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/sections/Footer";
 import { RESTAURANT_INFO } from "@/lib/constants";
 import { FadeIn, SlideIn, AnimatedImage } from "@/components/motion";
+import { cdn } from "@/lib/images";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Tick01Icon, CallIcon } from "@hugeicons/core-free-icons";
 
@@ -77,7 +78,7 @@ export default function ReservacePage() {
       {/* Hero Banner */}
       <section className="relative h-[50vh] min-h-[400px] w-full overflow-hidden">
         <AnimatedImage
-          src="/images/JHK09452-Enhanced-NR.jpg"
+          src={cdn("/images/JHK09452-Enhanced-NR.jpg")}
           alt="Rezervace — U Blanických rytířů"
           fill
           className="object-cover"

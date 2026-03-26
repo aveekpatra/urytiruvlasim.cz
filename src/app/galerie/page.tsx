@@ -5,6 +5,7 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/sections/Footer";
 import { InteractivePhotoGrid } from "@/components/InteractivePhotoGrid";
 import { FadeIn, AnimatedImage } from "@/components/motion";
+import { cdn } from "@/lib/images";
 
 export const metadata: Metadata = {
   title: "Galerie | U Blanických rytířů",
@@ -13,55 +14,55 @@ export const metadata: Metadata = {
 };
 
 const pivnicePhotos = [
-  { src: "/images/JHK09458-Enhanced-NR.jpg", alt: "Restaurace — slavnostní tabule u okna" },
-  { src: "/images/JHK09452-Enhanced-NR.jpg", alt: "Restaurace — dlouhý stůl pod klenbou" },
-  { src: "/images/JHK09486-Enhanced-NR.jpg", alt: "Restaurace — intimní stůl pro dva" },
-  { src: "/images/JHK09487.jpg", alt: "Restaurace — květiny a hosté v pozadí" },
-  { src: "/images/JHK09490.jpg", alt: "Restaurace — atmosféra s hosty" },
-  { src: "/images/JHK09493.jpg", alt: "Nástěnná malba vlašimského zámku" },
+  { src: cdn("/images/JHK09458-Enhanced-NR.jpg"), alt: "Restaurace — slavnostní tabule u okna" },
+  { src: cdn("/images/JHK09452-Enhanced-NR.jpg"), alt: "Restaurace — dlouhý stůl pod klenbou" },
+  { src: cdn("/images/JHK09486-Enhanced-NR.jpg"), alt: "Restaurace — intimní stůl pro dva" },
+  { src: cdn("/images/JHK09487.jpg"), alt: "Restaurace — květiny a hosté v pozadí" },
+  { src: cdn("/images/JHK09490.jpg"), alt: "Restaurace — atmosféra s hosty" },
+  { src: cdn("/images/JHK09493.jpg"), alt: "Nástěnná malba vlašimského zámku" },
 ];
 
 const salonekPhotos = [
-  { src: "/images/JHK09411-Enhanced-NR.jpg", alt: "Pivnice — interiér s klenbou a rostlinami" },
-  { src: "/images/JHK09408-Enhanced-NR-Edit.jpg", alt: "Pivnice — lavice podél stěny" },
-  { src: "/images/JHK09424-Enhanced-NR.jpg", alt: "Pivnice — pohled do hloubky sálu" },
-  { src: "/images/JHK09343.jpg", alt: "Pivnice — pohled s obsluhou" },
-  { src: "/images/JHK09380.jpg", alt: "Pivnice — bar s květinami a logem" },
-  { src: "/images/JHK09415-Enhanced-NR.jpg", alt: "Pivnice — detail prostření" },
+  { src: cdn("/images/JHK09411-Enhanced-NR.jpg"), alt: "Pivnice — interiér s klenbou a rostlinami" },
+  { src: cdn("/images/JHK09408-Enhanced-NR-Edit.jpg"), alt: "Pivnice — lavice podél stěny" },
+  { src: cdn("/images/JHK09424-Enhanced-NR.jpg"), alt: "Pivnice — pohled do hloubky sálu" },
+  { src: cdn("/images/JHK09343.jpg"), alt: "Pivnice — pohled s obsluhou" },
+  { src: cdn("/images/JHK09380.jpg"), alt: "Pivnice — bar s květinami a logem" },
+  { src: cdn("/images/JHK09415-Enhanced-NR.jpg"), alt: "Pivnice — detail prostření" },
 ];
 
 const terasaPhotos = [
-  { src: "/images/JHK09524.jpg", alt: "Terasa — celkový pohled s výhledem do parku" },
-  { src: "/images/JHK09525.jpg", alt: "Terasa — řada stolů s květinami" },
-  { src: "/images/JHK09526.jpg", alt: "Terasa — stůl s výhledem do zahrady" },
-  { src: "/images/JHK09528.jpg", alt: "Terasa — posezení u zídky" },
+  { src: cdn("/images/JHK09524.jpg"), alt: "Terasa — celkový pohled s výhledem do parku" },
+  { src: cdn("/images/JHK09525.jpg"), alt: "Terasa — řada stolů s květinami" },
+  { src: cdn("/images/JHK09526.jpg"), alt: "Terasa — stůl s výhledem do zahrady" },
+  { src: cdn("/images/JHK09528.jpg"), alt: "Terasa — posezení u zídky" },
 ];
 
 const detailPhotos = [
-  { src: "/images/JHK09347.jpg", alt: "Rytířská zbroj u okna" },
-  { src: "/images/JHK09361.jpg", alt: "Vstupní chodba s lustrem a zbrojí" },
-  { src: "/images/JHK09351.jpg", alt: "Směrovky — pivnice a vinárna" },
-  { src: "/images/JHK09447.jpg", alt: "Historická mapa Království českého" },
-  { src: "/images/JHK09377.jpg", alt: "Rostliny a svíčka na parapetu" },
-  { src: "/images/JHK09387.jpg", alt: "Pilsner Urquell — pivní kohouty" },
+  { src: cdn("/images/JHK09347.jpg"), alt: "Rytířská zbroj u okna" },
+  { src: cdn("/images/JHK09361.jpg"), alt: "Vstupní chodba s lustrem a zbrojí" },
+  { src: cdn("/images/JHK09351.jpg"), alt: "Směrovky — pivnice a vinárna" },
+  { src: cdn("/images/JHK09447.jpg"), alt: "Historická mapa Království českého" },
+  { src: cdn("/images/JHK09377.jpg"), alt: "Rostliny a svíčka na parapetu" },
+  { src: cdn("/images/JHK09387.jpg"), alt: "Pilsner Urquell — pivní kohouty" },
 ];
 
 const dishPhotos = [
-  { src: "/images/dishes/JHK09557.jpg", alt: "Hovězí biftek s pepřovou omáčkou a hranolky" },
-  { src: "/images/dishes/JHK09551.jpg", alt: "Krémová polévka s krutonky a slaninou" },
-  { src: "/images/dishes/JHK09579.jpg", alt: "Caesar salát s parmazánem" },
-  { src: "/images/dishes/JHK09591.jpg", alt: "Crème brûlée s čerstvým ovocem" },
-  { src: "/images/dishes/JHK09587.jpg", alt: "Salát na stole s prostřením" },
-  { src: "/images/dishes/JHK09573.jpg", alt: "Hovězí steak — pohled z výšky" },
+  { src: cdn("/images/dishes/JHK09557.jpg"), alt: "Hovězí biftek s pepřovou omáčkou a hranolky" },
+  { src: cdn("/images/dishes/JHK09551.jpg"), alt: "Krémová polévka s krutonky a slaninou" },
+  { src: cdn("/images/dishes/JHK09579.jpg"), alt: "Caesar salát s parmazánem" },
+  { src: cdn("/images/dishes/JHK09591.jpg"), alt: "Crème brûlée s čerstvým ovocem" },
+  { src: cdn("/images/dishes/JHK09587.jpg"), alt: "Salát na stole s prostřením" },
+  { src: cdn("/images/dishes/JHK09573.jpg"), alt: "Hovězí steak — pohled z výšky" },
 ];
 
 const drinkPhotos = [
-  { src: "/images/drinks/JHK09520-Enhanced-NR.jpg", alt: "Pivo ve sklenicích U Blanických rytířů" },
-  { src: "/images/drinks/JHK09516-Enhanced-NR.jpg", alt: "Čepování piva" },
-  { src: "/images/drinks/JHK09509-Enhanced-NR.jpg", alt: "Dallmayr espresso" },
-  { src: "/images/drinks/JHK09605.jpg", alt: "Dallmayr cappuccino s rostlinami" },
-  { src: "/images/drinks/JHK09504-Enhanced-NR.jpg", alt: "Bumbu rum na baru" },
-  { src: "/images/drinks/JHK09400.jpg", alt: "Káva na stole" },
+  { src: cdn("/images/drinks/JHK09520-Enhanced-NR.jpg"), alt: "Pivo ve sklenicích U Blanických rytířů" },
+  { src: cdn("/images/drinks/JHK09516-Enhanced-NR.jpg"), alt: "Čepování piva" },
+  { src: cdn("/images/drinks/JHK09509-Enhanced-NR.jpg"), alt: "Dallmayr espresso" },
+  { src: cdn("/images/drinks/JHK09605.jpg"), alt: "Dallmayr cappuccino s rostlinami" },
+  { src: cdn("/images/drinks/JHK09504-Enhanced-NR.jpg"), alt: "Bumbu rum na baru" },
+  { src: cdn("/images/drinks/JHK09400.jpg"), alt: "Káva na stole" },
 ];
 
 export default function GaleriePage() {
@@ -72,7 +73,7 @@ export default function GaleriePage() {
       {/* Hero Banner */}
       <section className="relative h-[50vh] min-h-[400px] w-full overflow-hidden">
         <AnimatedImage
-          src="/images/JHK09345.jpg"
+          src={cdn("/images/JHK09345.jpg")}
           alt="Restaurace U Blanických rytířů — interiér"
           fill
           className="object-cover"
