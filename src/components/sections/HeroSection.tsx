@@ -56,7 +56,7 @@ export function HeroSection() {
                 Otevírací doba
               </span>
               <p className="text-[var(--color-charcoal)] font-medium">
-                Út–Ne 11:00–22:00
+                Po–Čt 11–22 | Pá–So 11–23 | Ne 11–21
               </p>
             </div>
 
