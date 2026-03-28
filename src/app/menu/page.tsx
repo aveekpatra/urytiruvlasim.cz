@@ -1,21 +1,13 @@
 import { Metadata } from "next";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/sections/Footer";
-import { FadeIn, SlideUp, AnimatedImage } from "@/components/motion";
+import { FadeIn, /* SlideUp, */ AnimatedImage } from "@/components/motion";
 import { cdn } from "@/lib/images";
 import {
-  POLEVKY,
-  PREDKRMY,
-  HOVEZI_MASO,
-  VEPROVE_MASO,
-  DRUBEZI_MASO,
-  SALATY,
-  VEGETARIANSKA_JIDLA,
-  RYBY,
-  DETSKA_JIDLA,
-  PRILOHY,
-  OMACKY,
-  DEZERTY,
+  /* Food menu imports — hidden for now, uncomment when ready:
+  POLEVKY, PREDKRMY, HOVEZI_MASO, VEPROVE_MASO, DRUBEZI_MASO,
+  SALATY, VEGETARIANSKA_JIDLA, RYBY, DETSKA_JIDLA, PRILOHY,
+  OMACKY, DEZERTY, ALLERGEN_LIST, MENU_NOTES, */
   NEALKO,
   PIVO_TOCENE,
   PIVO_LAHVOVE,
@@ -31,10 +23,8 @@ import {
   CERVENA_VINA,
   RUZOVE_VINO,
   SUMIVA_VINA,
-  ALLERGEN_LIST,
-  MENU_NOTES,
 } from "@/lib/menuData";
-import type { FullMenuItem, DrinkItem, WineItem } from "@/lib/menuData";
+import type { /* FullMenuItem, */ DrinkItem, WineItem } from "@/lib/menuData";
 
 export const metadata: Metadata = {
   title: "Jídelní lístek | U Blanických rytířů",
@@ -75,6 +65,7 @@ function MenuCard({ children }: { children: React.ReactNode }) {
   );
 }
 
+/* SectionTitle & FoodItem — hidden with food menu, uncomment when ready:
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
     <FadeIn>
@@ -122,6 +113,7 @@ function FoodItem({ item }: { item: FullMenuItem }) {
     </div>
   );
 }
+*/
 
 function DrinkRow({ item }: { item: DrinkItem }) {
   return (
@@ -230,165 +222,22 @@ export default function MenuPage() {
         </div>
       </section>
 
-      {/* ═══════════ FOOD MENU ═══════════ */}
+      {/* ═══════════ FOOD MENU — hidden, coming soon ═══════════ */}
       <section className="bg-[var(--color-ivory)] py-16 lg:py-24">
         <div className="max-w-2xl mx-auto px-6 lg:px-12">
           <MenuCard>
-
-          {/* Polévky */}
-          <SectionTitle>Polévky</SectionTitle>
-          {POLEVKY.map((item, i) => (
-            <SlideUp key={i} delay={i * 0.05}>
-              <FoodItem item={item} />
-            </SlideUp>
-          ))}
-
-          <Divider />
-
-          {/* Předkrmy */}
-          <SectionTitle>Předkrmy</SectionTitle>
-          {PREDKRMY.map((item, i) => (
-            <SlideUp key={i} delay={i * 0.05}>
-              <FoodItem item={item} />
-            </SlideUp>
-          ))}
-
-          <Divider />
-
-          {/* Hovězí maso */}
-          <SectionTitle>Hovězí maso</SectionTitle>
-          {HOVEZI_MASO.map((item, i) => (
-            <SlideUp key={i} delay={i * 0.05}>
-              <FoodItem item={item} />
-            </SlideUp>
-          ))}
-
-          <Divider />
-
-          {/* Vepřové maso */}
-          <SectionTitle>Vepřové maso</SectionTitle>
-          {VEPROVE_MASO.map((item, i) => (
-            <SlideUp key={i} delay={i * 0.05}>
-              <FoodItem item={item} />
-            </SlideUp>
-          ))}
-
-          <Divider />
-
-          {/* Drůbeží maso */}
-          <SectionTitle>Drůbeží maso</SectionTitle>
-          {DRUBEZI_MASO.map((item, i) => (
-            <SlideUp key={i} delay={i * 0.05}>
-              <FoodItem item={item} />
-            </SlideUp>
-          ))}
-
-          <Divider />
-
-          {/* Saláty */}
-          <SectionTitle>Saláty</SectionTitle>
-          {SALATY.map((item, i) => (
-            <SlideUp key={i} delay={i * 0.05}>
-              <FoodItem item={item} />
-            </SlideUp>
-          ))}
-
-          <Divider />
-
-          {/* Vegetariánská jídla */}
-          <SectionTitle>Vegetariánská jídla</SectionTitle>
-          {VEGETARIANSKA_JIDLA.map((item, i) => (
-            <SlideUp key={i} delay={i * 0.05}>
-              <FoodItem item={item} />
-            </SlideUp>
-          ))}
-
-          <Divider />
-
-          {/* Ryby */}
-          <SectionTitle>Ryby</SectionTitle>
-          {RYBY.map((item, i) => (
-            <SlideUp key={i} delay={i * 0.05}>
-              <FoodItem item={item} />
-            </SlideUp>
-          ))}
-
-          <Divider />
-
-          {/* Dětská jídla */}
-          <SectionTitle>Dětská jídla</SectionTitle>
-          {DETSKA_JIDLA.map((item, i) => (
-            <SlideUp key={i} delay={i * 0.05}>
-              <FoodItem item={item} />
-            </SlideUp>
-          ))}
-
-          <Divider />
-
-          {/* Přílohy & Omáčky */}
-          <SectionTitle>Přílohy</SectionTitle>
-          <FadeIn>
-            <div className="text-center mb-8">
-              <div className="flex flex-wrap justify-center gap-x-6 gap-y-1">
-                {PRILOHY.map((item, i) => (
-                  <span
-                    key={i}
-                    className="text-xs tracking-widest uppercase text-[var(--color-text-muted)]"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </FadeIn>
-
-          <FadeIn>
-            <div className="text-center mb-4">
-              <h3 className="font-serif text-lg tracking-wide uppercase text-[var(--color-charcoal)] mb-3">
-                Omáčky
-              </h3>
-              <div className="flex flex-wrap justify-center gap-x-6 gap-y-1">
-                {OMACKY.map((item, i) => (
-                  <span
-                    key={i}
-                    className="text-xs tracking-widest uppercase text-[var(--color-text-muted)]"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </FadeIn>
-
-          <Divider />
-
-          {/* Dezerty */}
-          <SectionTitle>Dezerty</SectionTitle>
-          {DEZERTY.map((item, i) => (
-            <SlideUp key={i} delay={i * 0.05}>
-              <FoodItem item={item} />
-            </SlideUp>
-          ))}
-
-          {/* Notes & Allergens */}
-          <FadeIn>
-            <div className="mt-12 pt-8 border-t border-[var(--color-stone)]/40 text-center">
-              {MENU_NOTES.map((note, i) => (
-                <p
-                  key={i}
-                  className="text-xs text-[var(--color-text-muted)] mb-1"
-                >
-                  {note}
-                </p>
-              ))}
-              <p className="text-[10px] text-[var(--color-text-muted)] mt-4 max-w-md mx-auto leading-relaxed">
-                {ALLERGEN_LIST}
-              </p>
-              <p className="text-[10px] text-green-700 mt-2">
-                (V) — vegetariánské
+            <div className="text-center py-12">
+              <span className="text-[10px] tracking-[0.3em] uppercase text-[var(--color-gold-dark)] mb-4 block">
+                Jídelní lístek
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl tracking-wide uppercase text-[var(--color-charcoal)]">
+                Již brzy
+              </h2>
+              <div className="w-16 h-px bg-[var(--color-gold)] mx-auto mt-4 mb-6" />
+              <p className="text-sm text-[var(--color-text-muted)] max-w-md mx-auto leading-relaxed">
+                Pracujeme na novém jídelním lístku. Brzy zde naleznete kompletní nabídku našich pokrmů.
               </p>
             </div>
-          </FadeIn>
           </MenuCard>
         </div>
       </section>
