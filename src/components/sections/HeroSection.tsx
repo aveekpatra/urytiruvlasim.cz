@@ -51,13 +51,15 @@ export function HeroSection() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-5">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-12">
             <div className="hidden sm:block text-left">
-              <span className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)]">
+              <span className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-1.5">
                 <HugeiconsIcon icon={Clock01Icon} size={14} strokeWidth={1.5} className="text-[var(--color-gold-dark)]" />
                 Otevírací doba
               </span>
-              <p className="text-[var(--color-charcoal)] font-medium">
-                Po–Čt 11–22 | Pá–So 11–23 | Ne 11–21
-              </p>
+              <div className="grid grid-cols-[auto_auto] gap-x-3 gap-y-0 text-sm text-[var(--color-charcoal)]">
+                <span className="font-medium">Po–Čt</span><span>11:00–22:00</span>
+                <span className="font-medium">Pá–So</span><span>11:00–23:00</span>
+                <span className="font-medium">Ne</span><span>11:00–21:00</span>
+              </div>
             </div>
 
             <div className="hidden sm:block w-px h-10 bg-[var(--color-stone)]" />
