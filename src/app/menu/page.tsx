@@ -11,9 +11,25 @@ import { FadeIn, AnimatedImage } from "@/components/motion";
 import { cdn } from "@/lib/images";
 
 export const metadata: Metadata = {
-  title: "Jídelní lístek | U Blanických rytířů",
+  title: "Jídelní lístek",
   description:
     "Kompletní jídelní lístek restaurace U Blanických rytířů. Česká kuchyně z lokálních surovin v prostorách vlašimského zámku.",
+  alternates: {
+    canonical: "https://www.ublanickychrytiru.cz/menu",
+  },
+  openGraph: {
+    title: "Jídelní lístek — U Blanických rytířů",
+    description:
+      "Česká kuchyně z lokálních surovin v prostorách vlašimského zámku.",
+    images: [
+      {
+        url: cdn("/images/menu/JHK09462.jpg"),
+        width: 1200,
+        height: 630,
+        alt: "Jídelní lístek restaurace U Blanických rytířů",
+      },
+    ],
+  },
 };
 
 function CornerOrnament({ className }: { className: string }) {

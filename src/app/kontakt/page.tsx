@@ -10,9 +10,25 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import { Facebook01Icon, InstagramIcon, Location01Icon, CallIcon, Mail01Icon, Clock01Icon, MapsLocation01Icon } from "@hugeicons/core-free-icons";
 
 export const metadata: Metadata = {
-  title: "Kontakt | U Blanických rytířů",
+  title: "Kontakt",
   description:
     "Kontaktní údaje restaurace U Blanických rytířů. Zámek 1, 258 01 Vlašim. Telefon: +420 732 878 238. Rezervace telefonicky nebo e-mailem.",
+  alternates: {
+    canonical: "https://www.ublanickychrytiru.cz/kontakt",
+  },
+  openGraph: {
+    title: "Kontakt — U Blanických rytířů",
+    description:
+      "Kontaktní údaje restaurace U Blanických rytířů. Zámek 1, Vlašim. Telefon: +420 732 878 238.",
+    images: [
+      {
+        url: cdn("/images/JHK09411-Enhanced-NR.jpg"),
+        width: 1200,
+        height: 630,
+        alt: "Restaurace U Blanických rytířů — kontakt",
+      },
+    ],
+  },
 };
 
 export default function KontaktPage() {

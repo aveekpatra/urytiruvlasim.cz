@@ -112,7 +112,7 @@ export function Navigation() {
             <Link href="/" className="relative z-10 flex items-center gap-3">
               <img
                 src={cdn("/Logo.svg")}
-                alt=""
+                alt="U Blanických rytířů"
                 className={cn(
                   "h-10 lg:h-12 w-auto transition-all duration-200",
                   isScrolled && "invert"

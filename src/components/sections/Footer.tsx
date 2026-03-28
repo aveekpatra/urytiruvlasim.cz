@@ -18,7 +18,7 @@ export function Footer() {
             <div className="mb-6 flex items-center gap-3">
               <img
                 src={cdn("/Logo.svg")}
-                alt=""
+                alt="U Blanických rytířů"
                 className="h-12 w-auto"
               />
               <div className="leading-none">

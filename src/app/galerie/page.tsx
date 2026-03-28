@@ -8,9 +8,25 @@ import { FadeIn, AnimatedImage } from "@/components/motion";
 import { cdn } from "@/lib/images";
 
 export const metadata: Metadata = {
-  title: "Galerie | U Blanických rytířů",
+  title: "Galerie",
   description:
     "Fotogalerie restaurace U Blanických rytířů — interiéry, terasa, jídlo a nápoje. Vlašimský zámek, Zámek 1, Vlašim.",
+  alternates: {
+    canonical: "https://www.ublanickychrytiru.cz/galerie",
+  },
+  openGraph: {
+    title: "Galerie — U Blanických rytířů",
+    description:
+      "Fotogalerie restaurace U Blanických rytířů — interiéry, terasa, jídlo a nápoje.",
+    images: [
+      {
+        url: cdn("/images/JHK09424-Enhanced-NR.jpg"),
+        width: 1200,
+        height: 630,
+        alt: "Fotogalerie restaurace U Blanických rytířů",
+      },
+    ],
+  },
 };
 
 const pivnicePhotos = [

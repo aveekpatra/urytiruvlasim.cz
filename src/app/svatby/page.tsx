@@ -9,9 +9,25 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import { CallIcon, Mail01Icon } from "@hugeicons/core-free-icons";
 
 export const metadata: Metadata = {
-  title: "Svatby & Oslavy | U Blanických rytířů",
+  title: "Svatby & Oslavy",
   description:
     "Pronájem prostor pro svatby, firemní akce a soukromé oslavy v historickém vlašimském zámku. Kapacita až 80 hostů, menu a dekorace na míru.",
+  alternates: {
+    canonical: "https://www.ublanickychrytiru.cz/svatby",
+  },
+  openGraph: {
+    title: "Svatby & Oslavy — U Blanických rytířů",
+    description:
+      "Pronájem prostor pro svatby a oslavy v historickém vlašimském zámku. Kapacita až 80 hostů.",
+    images: [
+      {
+        url: cdn("/images/JHK09458-Enhanced-NR.jpg"),
+        width: 1200,
+        height: 630,
+        alt: "Svatby a oslavy v zámecké restauraci U Blanických rytířů",
+      },
+    ],
+  },
 };
 
 const spaces = [
