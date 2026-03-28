@@ -50,15 +50,25 @@ export function HeroSection() {
       <div className="absolute bottom-0 left-0 right-0 z-20 bg-white/95 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-5">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-12">
-            <div className="hidden sm:block text-left">
-              <span className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)] mb-1.5">
+            <div className="hidden sm:flex items-center gap-3">
+              <span className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.2em] uppercase text-[var(--color-text-muted)]">
                 <HugeiconsIcon icon={Clock01Icon} size={14} strokeWidth={1.5} className="text-[var(--color-gold-dark)]" />
-                Otevírací doba
+                Otevřeno
               </span>
-              <div className="grid grid-cols-[auto_auto] gap-x-3 gap-y-0 text-sm text-[var(--color-charcoal)]">
-                <span className="font-medium">Po–Čt</span><span>11:00–22:00</span>
-                <span className="font-medium">Pá–So</span><span>11:00–23:00</span>
-                <span className="font-medium">Ne</span><span>11:00–21:00</span>
+              <div className="flex items-center gap-1.5">
+                {[
+                  { days: "Po–Čt", hours: "11–22" },
+                  { days: "Pá–So", hours: "11–23" },
+                  { days: "Ne", hours: "11–21" },
+                ].map((slot) => (
+                  <span
+                    key={slot.days}
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[var(--color-ivory)] border border-[var(--color-stone)] text-xs text-[var(--color-charcoal)]"
+                  >
+                    <span className="font-semibold">{slot.days}</span>
+                    <span className="text-[var(--color-text-muted)]">{slot.hours}</span>
+                  </span>
+                ))}
               </div>
             </div>
 
