@@ -1,4 +1,8 @@
-// Full restaurant menu data — sourced from the official printed menu PDF
+/**
+ * Full restaurant menu data — sourced from the official printed menu PDFs.
+ * Page 1 (STRANA 1): Drinks / Nápojový lístek
+ * Page 2 (STRANA 2): Food / Jídelní lístek
+ */
 
 export interface FullMenuItem {
   name: string;
@@ -9,83 +13,110 @@ export interface FullMenuItem {
   isVegetarian?: boolean;
 }
 
-export interface MenuSection {
-  title: string;
-  items: FullMenuItem[];
-}
-
-export interface SimpleItem {
+export interface DrinkItem {
   name: string;
-  price?: number;
+  volume?: string;
+  note?: string;
+  price: number;
 }
 
-export interface SimplePriceSection {
-  title: string;
-  items: SimpleItem[];
+export interface SideItem {
+  name: string;
+  price: number;
 }
 
-export const POLEVKY: FullMenuItem[] = [
-  {
-    name: "Hovězí vývar s játrovými knedlíčky",
-    description: "zeleninou a nudlemi",
-    allergens: "1,3,9",
-    price: 70,
-  },
-  {
-    name: "Zámecká cibulačka se slaninou",
-    description: "vídeňskou cibulkou a bylinkovými krutony",
-    allergens: "1,3,7",
-    price: 90,
-  },
-];
+export interface WineItem {
+  name: string;
+  classification: string;
+  taste: string;
+  price: number;
+}
+
+// ────────────────────────────────────────────────────────────────────
+//  FOOD MENU  (Jídelní lístek — page 2)
+// ────────────────────────────────────────────────────────────────────
 
 export const PREDKRMY: FullMenuItem[] = [
   {
     name: "Hovězí carpaccio",
-    description: "lanýžová majonéza, bylinkové pesto, domácí focaccia",
+    description: "Lanýžová majonéza, bylinkové pesto, domácí focaccia",
     allergens: "1,3",
     weight: "100g",
     price: 295,
   },
   {
-    name: "Vepřové krokety 3ks",
-    description: "omáčka z pečeného česneku, nakládaná zelenina, rozpečený chléb",
+    name: "Vepřové krokety 3 ks",
+    description:
+      "Omáčka z pečeného česneku, nakládaná zelenina, rozpečený chléb",
     allergens: "1,3,7",
-    price: 175,
+    price: 185,
   },
   {
     name: "Grilovaný kozí sýr ve slanině",
-    description: "rukolový salát s brusinkami, toustový chléb",
+    description: "Rukolový salát s brusinkami, domácí focaccia",
     allergens: "1,7",
-    price: 185,
+    price: 170,
+  },
+];
+
+export const POLEVKY: FullMenuItem[] = [
+  {
+    name: "Hovězí vývar s játrovými knedlíčky",
+    description: "Zelenina, nudle",
+    allergens: "1,3,9",
+    price: 70,
+  },
+  {
+    name: "Zámecká cibulačka se slaninou",
+    description: "Vídeňská cibulka, bylinkové krutony",
+    allergens: "1,3,7",
+    price: 85,
+  },
+];
+
+export const SALATY: FullMenuItem[] = [
+  {
+    name: "Caesar s grilovaným kuřecím masem",
+    description: "Krutony, slaninový chips, parmezán",
+    allergens: "1,3,7",
+    weight: "300g",
+    price: 285,
+  },
+  {
+    name: "Grilovaný kozí sýr na listovém salátu",
+    description:
+      "Zelenina, červená řepa, medovo-hořčičná emulze, opečený toast",
+    allergens: "1,3,7,10",
+    weight: "300g",
+    price: 295,
   },
 ];
 
 export const HOVEZI_MASO: FullMenuItem[] = [
   {
     name: "Steak z pravé svíčkové",
-    description: "opečené máslové grenaille s rozmarýnem, pepřová omáčka",
+    description: "Domácí hranolky, pepřová omáčka",
     allergens: "1,7",
     weight: "250g",
     price: 595,
   },
   {
     name: "Filírovaný flank steak",
-    description: "bramborová sláma a grilovaná zelenina",
+    description: "Opečené grenaile se žampiony",
     allergens: "1,11",
     weight: "250g",
     price: 425,
   },
   {
     name: "Burger z irského chuck rollu",
-    description: "čedar a slaninový dip, domácí hranolky",
+    description: "Čedar a slaninový dip, domácí hranolky",
     allergens: "1,3,7,11",
-    weight: "200g",
-    price: 325,
+    weight: "180g",
+    price: 315,
   },
   {
     name: "Tatarský biftek z pravé svíčkové",
-    description: "4ks topinky",
+    description: "Topinky 4 ks",
     allergens: "1,3,6,10",
     weight: "150g",
     price: 345,
@@ -94,79 +125,72 @@ export const HOVEZI_MASO: FullMenuItem[] = [
 
 export const VEPROVE_MASO: FullMenuItem[] = [
   {
-    name: "Steak z pečeně DUROC",
-    description: "se sázeným vejcem, slaninovým chipsem, domácí hranolky",
+    name: "Steak z pečeně Duroc",
+    description: "Sázené vejce, slaninový chips, domácí hranolky",
     allergens: "1,3",
     weight: "250g",
-    price: 355,
-  },
-  {
-    name: 'Na másle smažený řízek „tomahawk"',
-    description: "vídeňský bramborový salát",
-    allergens: "1,3,7,10",
-    weight: "300g",
     price: 345,
   },
   {
-    name: "Medailonky z vepřové panenky",
-    description: "slaninové fazolky s česnekem, omáčka z italské gorgonzoly",
-    allergens: "1,7",
-    weight: "200g",
-    price: 305,
-  },
-  {
-    name: "Vepřová líčka v hříbkové omáčce",
-    description: "restované vaječné špecle",
+    name: 'Na másle smažený řízek „Tomahawk"',
+    description: "Lehký bramborový salát",
     allergens: "1,3,7,10",
+    weight: "300g",
     price: 295,
   },
-];
-
-export const DRUBEZI_MASO: FullMenuItem[] = [
   {
-    name: "Kuřecí prso se smetanovo-liškovou omáčkou",
-    description: "domácí bramborové placky",
-    allergens: "1,3,7",
-    weight: "200g",
-    price: 315,
-  },
-  {
-    name: "Filírované kuřecí prsíčko sous-vide",
-    description: "na lanýžovém rizotu",
-    allergens: "7",
+    name: "Medailonky z vepřové panenky",
+    description:
+      "Slaninové fazolky s česnekem, omáčka z italské gorgonzoly",
+    allergens: "1,7",
     weight: "200g",
     price: 335,
   },
   {
+    name: "Vepřová líčka v hříbkové omáčce",
+    description: "Restované vaječné špecle",
+    allergens: "1,3,7,10",
+    weight: "200g",
+    price: 310,
+  },
+];
+
+export const DRUBEZI_MASO_A_RYBY: FullMenuItem[] = [
+  {
+    name: "Kuřecí prso",
+    description:
+      "Se smetanovo-liškovou omáčkou, domácí bramborové placky",
+    allergens: "1,3,7",
+    weight: "200g",
+    price: 310,
+  },
+  {
+    name: "Filírované kuřecí prsíčko sous-vide",
+    description: "Lanýžové rizoto",
+    allergens: "7",
+    weight: "200g",
+    price: 325,
+  },
+  {
     name: "Konfitované kachní stehno",
-    description: "karlovarský špalíček, červené zelí",
+    description: "Karlovarský špalíček, červené zelí",
     allergens: "1,3,7",
     weight: "300g",
     price: 345,
   },
-];
-
-export const SALATY: FullMenuItem[] = [
   {
-    name: "Caesar s grilovaným kuřecím masem",
-    description: "krutony, slaninovým chipsem a parmezánem",
-    allergens: "1,3,7",
-    weight: "300g",
-    price: 295,
-  },
-  {
-    name: "Grilovaný kozí sýr na listovém salátu",
-    description: "zelenina, červená řepa, medovo-hořčičná emulze, toustový chléb",
-    allergens: "1,3,7,10",
-    weight: "300g",
-    price: 285,
+    name: "Steak z norského lososa",
+    description: "Grilovaná zelenina",
+    allergens: "4,11",
+    weight: "200g",
+    price: 380,
   },
 ];
 
 export const VEGETARIANSKA_JIDLA: FullMenuItem[] = [
   {
     name: "Těstoviny s pestem z medvědího česneku",
-    description: "a fermentovanými ředkvičkami",
+    description: "Fermentované ředkvičky",
     allergens: "1,3,7,8",
     weight: "300g",
     price: 245,
@@ -174,116 +198,115 @@ export const VEGETARIANSKA_JIDLA: FullMenuItem[] = [
   },
   {
     name: "Bramborové noky v omáčce z italské gorgonzoly",
-    description: "se smaženou rukolou",
+    description: "Smažená rukola",
     allergens: "1,3,7",
     weight: "300g",
-    price: 369,
+    price: 265,
     isVegetarian: true,
-  },
-];
-
-export const RYBY: FullMenuItem[] = [
-  {
-    name: "Steak z norského lososa",
-    description: "grilovaná zelenina",
-    allergens: "4,11",
-    weight: "200g",
-    price: 390,
   },
 ];
 
 export const DETSKA_JIDLA: FullMenuItem[] = [
   {
-    name: "Boloňské těstoviny",
+    name: "Těstoviny s boloňskou omáčkou",
     allergens: "1,3",
     weight: "200g",
-    price: 170,
+    price: 160,
   },
   {
     name: "Kuřecí řízek",
-    description: "vařené brambory",
+    description: "Vařené brambory",
     allergens: "1,3,7",
     weight: "100g",
-    price: 180,
+    price: 165,
   },
 ];
 
-export const PRILOHY: string[] = [
-  "Vařené brambory",
-  "Šťouchané brambory",
-  "Bramborové placky",
-  "Domácí hranolky",
-  "Rýže jasmínová",
-  "Grilovaná zelenina",
-  "Fazolky se slaninou",
-  "Miska čerstvé zeleniny",
+export const PRILOHY: SideItem[] = [
+  { name: "Vařené brambory", price: 45 },
+  { name: "Šťouchané brambory", price: 50 },
+  { name: "Bramborové placky", price: 65 },
+  { name: "Domácí hranolky", price: 60 },
+  { name: "Jasmínová rýže", price: 50 },
+  { name: "Grilovaná zelenina", price: 85 },
+  { name: "Fazolky se slaninou", price: 85 },
+  { name: "Miska čerstvé zeleniny", price: 80 },
 ];
 
-export const OMACKY: string[] = [
-  "Tatarská omáčka",
-  "Slaninový dip",
-  "Kečup",
+export const OMACKY_STUDENE: SideItem[] = [
+  { name: "Tatarská omáčka", price: 45 },
+  { name: "Slaninový dip", price: 55 },
+  { name: "Kečup", price: 30 },
+];
+
+export const OMACKY_TEPLE: SideItem[] = [
+  { name: "Lišková omáčka", price: 65 },
+  { name: "Pepřová omáčka", price: 65 },
+  { name: "Demi glace", price: 55 },
+  { name: "Omáčka z modrého sýru", price: 65 },
+  { name: "Omáčka z pečeného česneku", price: 65 },
 ];
 
 export const DEZERTY: FullMenuItem[] = [
   {
     name: "Macerovaná hruška",
-    description: "s omáčkou ze slaného karamelu a mandlovým griliášem",
+    description:
+      "Omáčka ze slaného karamelu, lískoříškový griliáš",
     allergens: "7,8,12",
     price: 185,
   },
   {
     name: "Crème brûlée",
-    description: "s křehkou karamelovou krustou a čerstvým ovocem",
+    description: "Křehká karamelová krusta, čerstvé ovoce",
     allergens: "3,7",
-    price: 155,
+    price: 140,
   },
   {
     name: "Zmrzlinový pohár",
-    description: "lesní ovoce a šlehačka",
+    description: "Lesní ovoce, šlehačka",
     allergens: "7",
-    price: 145,
+    price: 170,
   },
   {
     name: "Tvarohové knedlíčky",
-    description: "s meruňkovým rozvarem",
+    description: "Meruňkový rozvar",
     allergens: "1,3,7,12",
-    price: 175,
+    price: 145,
   },
   {
-    name: "Kopeček zmrzlina",
+    name: "Kopečková zmrzlina",
     allergens: "7",
     price: 40,
   },
 ];
 
-// ---- DRINKS ----
-
-export interface DrinkItem {
-  name: string;
-  volume?: string;
-  note?: string;
-  price: number;
-}
-
-export interface DrinkSection {
-  title: string;
-  subsections?: { title: string; items: DrinkItem[] }[];
-  items?: DrinkItem[];
-}
+// ────────────────────────────────────────────────────────────────────
+//  DRINKS MENU  (Nápojový lístek — page 1)
+// ────────────────────────────────────────────────────────────────────
 
 export const NEALKO: DrinkItem[] = [
-  { name: "Mattoni", volume: "0,33 l", note: "neperlivá / jemně perlivá", price: 45 },
-  { name: "Stolní voda", volume: "1,0 l", note: "džbán, led, citron", price: 35 },
-  { name: "Stolní voda", volume: "1,0 l", note: "perlivá / neperlivá", price: 65 },
-  { name: "Domácí limonáda", price: 75 },
+  { name: "Mattoni", volume: "0,33 l", note: "Neperlivá / jemně perlivá", price: 45 },
+  { name: "Stolní voda", volume: "1,0 l", note: "Džbán, led, citron", price: 65 },
+  { name: "Stolní voda", volume: "0,5 l", note: "Neperlivá / perlivá", price: 35 },
+  { name: "Domácí limonáda", volume: "0,5 l", price: 75 },
   { name: "Poctivá kola", volume: "0,1 l", price: 10 },
-  { name: "Pepsi cola / Pepsi zero", volume: "0,25 l", price: 50 },
+  { name: "Pepsi Cola / Pepsi Zero", volume: "0,25 l", price: 50 },
   { name: "7UP", volume: "0,25 l", price: 50 },
   { name: "Mirinda", volume: "0,25 l", price: 50 },
-  { name: "Schweppes", volume: "0,25 l", note: "classic / ginger / pink", price: 50 },
-  { name: "Džus Granini", volume: "0,25 l", note: "jahoda / pomeranč / jablko / grapefruit", price: 50 },
+  { name: "Schweppes", volume: "0,25 l", note: "Classic / Ginger / Pink", price: 50 },
+  { name: "Džus Granini", volume: "0,25 l", note: "Jahoda / Pomeranč / Jablko / Grapefruit", price: 50 },
   { name: "Ledový čaj", volume: "0,25 l", price: 50 },
+];
+
+export const NEALKO_APERITIVY: DrinkItem[] = [
+  { name: "Crodino", volume: "0,1 l", price: 65 },
+];
+
+export const APERITIVY: DrinkItem[] = [
+  { name: "Cinzano Bianco", volume: "0,1 l", price: 65 },
+  { name: "Cinzano Rosso", volume: "0,1 l", price: 65 },
+  { name: "Martini Dry", volume: "0,1 l", price: 70 },
+  { name: "Campari", volume: "0,05 l", price: 65 },
 ];
 
 export const PIVO_TOCENE: DrinkItem[] = [
@@ -293,21 +316,13 @@ export const PIVO_TOCENE: DrinkItem[] = [
 
 export const PIVO_LAHVOVE: DrinkItem[] = [
   { name: "Birell – světlé", volume: "0,33 l", price: 45 },
-  { name: "Birell – pomelo & grep", volume: "0,33 l", price: 45 },
+  { name: "Birell – Pomelo & Grep", volume: "0,33 l", price: 45 },
 ];
 
 export const ROZLEVANA_VINA: DrinkItem[] = [
-  { name: "Bílé víno", volume: "0,1 l", note: "Jižní Morava", price: 50 },
-  { name: "Červené víno", volume: "0,1 l", note: "Jižní Morava", price: 50 },
+  { name: "Bílé víno", volume: "0,1 l", price: 50 },
+  { name: "Červené víno", volume: "0,1 l", price: 50 },
   { name: "Prosecco", volume: "0,1 l", price: 65 },
-];
-
-export const APERITIVY: DrinkItem[] = [
-  { name: "Crodino (nealkoholické)", volume: "0,1 l", price: 65 },
-  { name: "Cinzano bianco", volume: "0,1 l", price: 65 },
-  { name: "Cinzano rosso", volume: "0,1 l", price: 65 },
-  { name: "Martini dry", volume: "0,1 l", price: 70 },
-  { name: "Campari", volume: "0,5 l", price: 65 },
 ];
 
 export const LIKERY: DrinkItem[] = [
@@ -317,20 +332,13 @@ export const LIKERY: DrinkItem[] = [
   { name: "Medovina", volume: "0,04 l", price: 45 },
 ];
 
-export const MICHANE_NAPOJE: DrinkItem[] = [
-  { name: "Americká limonáda", note: "nealkoholické — kompotované ovoce, grenadina, pomerančový džus, soda, led", price: 80 },
-  { name: "Virgin Mojito", note: "nealkoholické — tonic ginger, máta, limety, třtinový cukr, led", price: 85 },
-  { name: "Aperol spritz", price: 120 },
-  { name: "Mojito", note: "rum Havana Club, máta, limety, třtinový cukr, led", price: 140 },
-];
-
 export const WHISKEY: DrinkItem[] = [
-  { name: "Jameson", volume: "0,04 l", price: 85 },
+  { name: "Jameson", volume: "0,04 l", price: 80 },
   { name: "Jack Daniels", volume: "0,04 l", price: 85 },
-  { name: "Jack Daniels Honey", volume: "0,04 l", price: 125 },
-  { name: "Jack Daniels Barrel", volume: "0,04 l", price: 140 },
-  { name: "Glenlivet 12yo", volume: "0,04 l", price: 155 },
-  { name: "Dalwhinie 15yo", volume: "0,04 l", price: 165 },
+  { name: "Jack Daniels Honey", volume: "0,04 l", price: 85 },
+  { name: "Jack Daniels Barell", volume: "0,04 l", price: 120 },
+  { name: "Glenlivet 12YO", volume: "0,04 l", price: 140 },
+  { name: "Dalwhinie 15YO", volume: "0,04 l", price: 165 },
 ];
 
 export const DESTILATY: DrinkItem[] = [
@@ -357,21 +365,43 @@ export const KONAKY: DrinkItem[] = [
   { name: "Armagnac VS", volume: "0,04 l", price: 195 },
 ];
 
+export const MICHANE_NAPOJE: DrinkItem[] = [
+  {
+    name: "Americká limonáda",
+    volume: "0,4 l",
+    note: "Kompotované ovoce, grenadina, pomerančový džus, soda, led (nealkoholické)",
+    price: 125,
+  },
+  {
+    name: "Virgin Mojito",
+    volume: "0,4 l",
+    note: "Tonic, ginger, máta, limety, třtinový cukr, led (nealkoholické)",
+    price: 140,
+  },
+  { name: "Aperol Spritz", volume: "0,33 l", price: 155 },
+  { name: "Mojito", volume: "0,4 l", price: 165 },
+];
+
 export const TEPLE_NAPOJE: DrinkItem[] = [
   { name: "Turecká káva", price: 55 },
   { name: "Espresso", price: 65 },
   { name: "Espresso Lungo", price: 65 },
   { name: "Espresso Macchiato", price: 70 },
+  { name: "Cappuccino", price: 79 },
+  { name: "Americano", price: 70 },
+  { name: "Caffé Latté", price: 85 },
+  { name: "Flat White", price: 75 },
+  { name: "Babyccino pro děti", price: 35 },
+  { name: "Čaj v konvičce", note: "Výběr z čajů Dallmayr, med, citron", price: 70 },
+  { name: "Čaj čerstvý", note: "Máta / zázvor", price: 90 },
+  { name: "Horká griotka", price: 70 },
+  { name: "Svařené víno", price: 80 },
+  { name: "Grog", price: 75 },
 ];
 
-// ---- WINE LIST (Vinařství Buchtovi) ----
-
-export interface WineItem {
-  name: string;
-  classification: string;
-  taste: string;
-  price: number;
-}
+// ────────────────────────────────────────────────────────────────────
+//  WINE LIST  (Vinařství Buchtovi)
+// ────────────────────────────────────────────────────────────────────
 
 export const BILA_VINA: WineItem[] = [
   { name: "Veltlínské zelené", classification: "VOC Vinice Velké Pavlovice | Vinařství Buchtovi", taste: "suché", price: 419 },
@@ -398,11 +428,15 @@ export const SUMIVA_VINA: WineItem[] = [
   { name: "Ryzlink rýnský SEKT", classification: "charmat | Vinařství Buchtovi", taste: "Brut", price: 489 },
 ];
 
-// Allergen notes
-export const ALLERGEN_LIST = "1 — obiloviny, 2 — korýši, 3 — vejce, 4 — ryby, 5 — arašídy, 6 — sója, 7 — mléko, 8 — skořápkové plody, 9 — celer, 10 — hořčice, 11 — sezam, 12 — oxid siřičitý, 13 — vlčí bob, 14 — měkkýši";
+// ────────────────────────────────────────────────────────────────────
+//  NOTES & ALLERGENS
+// ────────────────────────────────────────────────────────────────────
+
+export const ALLERGEN_LIST =
+  "1 — obiloviny, 2 — korýši, 3 — vejce, 4 — ryby, 5 — arašídy, 6 — sója, 7 — mléko, 8 — skořápkové plody, 9 — celer, 10 — hořčice, 11 — sezam, 12 — oxid siřičitý, 13 — vlčí bob, 14 — měkkýši";
 
 export const MENU_NOTES = [
   "Za poloviční porci jídla účtujeme 75 % z ceny.",
   "Při změně přílohy účtován doplatek 20 Kč.",
-  "Standartní čekací doba na jídlo je 25 min.",
+  "Standardní čekací doba na jídlo je 25 min.",
 ];

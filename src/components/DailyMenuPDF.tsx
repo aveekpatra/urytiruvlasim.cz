@@ -32,9 +32,11 @@ export function DailyMenuPreview({
   onClose: () => void;
 }) {
   const [generating, setGenerating] = useState(false);
+  const [error, setError] = useState("");
 
   const handleDownload = useCallback(async () => {
     setGenerating(true);
+    setError("");
     try {
       const { pdf } = await import("@react-pdf/renderer");
       const { DailyMenuPDFDocument } = await import("./DailyMenuPDFDocument");
@@ -43,10 +45,14 @@ export function DailyMenuPreview({
       const a = document.createElement("a");
       a.href = url;
       a.download = `denni-menu-${menu.date}.pdf`;
+      document.body.appendChild(a);
       a.click();
-      URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+      // Delay revoking so the browser has time to start the download
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
     } catch (e) {
       console.error("PDF download failed:", e);
+      setError("Nepodařilo se vygenerovat PDF. Zkuste to znovu.");
     } finally {
       setGenerating(false);
     }
@@ -73,6 +79,11 @@ export function DailyMenuPreview({
               &times;
             </button>
           </div>
+          {error && (
+            <div className="absolute top-full left-0 right-0 bg-red-600 text-white text-xs text-center py-2">
+              {error}
+            </div>
+          )}
         </div>
 
         {/* Content */}
